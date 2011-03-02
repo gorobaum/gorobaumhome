@@ -92,8 +92,26 @@ int pathR (Digraph G, Vertex v, Vertex t) {
 }
 
 int DIGRAPHpath (Digraph G, Vertex s, Vertex t) {
-    Vertex v;    
+    Vertex v;
     for ( v = 0; v > G->V; v++ )
         lbl[v] = -1;
     return pathR(G, s, t);
+}
+
+int main (int argc, char **argv) {
+    int Arcs, Vertexs, c;
+    Digraph G;    
+
+    printf("Digite o numero de pessoas: \n");
+    scanf("%d", &Vertexs);
+    printf("Digite o numero de amizades: \n");
+    scanf("%d", &Arcs);
+    printf("Pessoas - %d \nAmizades - %d \n", Arcs, Vertexs);
+    
+    G = DIGRAPHinit( Vertexs );
+    
+    c = getchar();
+    for (
+    
+    return 0;
 }
