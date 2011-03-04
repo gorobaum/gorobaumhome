@@ -34,11 +34,11 @@ Arc ARC (Vertex v, Vertex w) {
 int **MATRIXinit (int r, int c, int val) {
     Vertex i, j;
     int **m;
-    m = malloc( r*sizeof(int *));
-    for ( i = 0; i < r; i++)
-        m[i] = malloc( c*sizeof(int));
-    for ( i = 0; i < r; i++ )
-        for ( j = 0; j < c; j++ )
+    m = malloc( (r+1)*sizeof(int *));
+    for ( i = 0; i < (r+1); i++)
+        m[i] = malloc( (c+1)*sizeof(int));
+    for ( i = 0; i < (r+1); i++ )
+        for ( j = 0; j < (c+1); j++ )
             m[i][j] = val;
     return m;
 }
@@ -61,8 +61,8 @@ void DIGRAPHinsertA (Digraph G, Vertex v, Vertex w) {
 void DIGRAPHremoveA (Digraph G, Vertex v, Vertex w) {
     if ( G->adj[v][w] == 1 ) {
         G->adj[v][w] = 0;
-        G->A--;
     }
+        G->A--;
 }
 
 void DIGRAPHshow (Digraph G) {
@@ -98,20 +98,42 @@ int DIGRAPHpath (Digraph G, Vertex s, Vertex t) {
     return pathR(G, s, t);
 }
 
-int main (int argc, char **argv) {
-    int Arcs, Vertexs, c;
-    Digraph G;    
+int isbipartR (Digraph G, Vertex v, Vertex *bipartite, int cont )
 
-    printf("Digite o numero de pessoas: \n");
-    scanf("%d", &Vertexs);
-    printf("Digite o numero de amizades: \n");
-    scanf("%d", &Arcs);
-    printf("Pessoas - %d \nAmizades - %d \n", Arcs, Vertexs);
+int DIGRAPHisbipart (Digraph G) {
+    int isbipart;
+    Vertex v, *bipartite;
+    bipartite = malloc(V*sizeof(Vertex));
+    isbipart = 0;
+
+    for ( v = 0; v < G->V; v++ ) bipartite[v] = 0;
+    for ( v = 0; v < G->V; v++ ) if ( bipartite[v] == 0 ) isbipart += isbipartR(G, bipartite[v], bipartite, 0);
+    return isbipart;
+}
+
+int main (int argc, char **argv) {
+    int A, V, c, i;
+    Vertex vertexs[2];
+    Digraph G;    
     
-    G = DIGRAPHinit( Vertexs );
     
+    A = getchar() - '0';
     c = getchar();
-    for (
+    V = getchar() - '0';
+    c = getchar();
     
+    G = DIGRAPHinit(V);
+    i = 0;
+    while ( ( c = getchar() ) != EOF ) {
+        if ( c == '\n' ) {
+            i = 0;
+            DIGRAPHinsertA(G, vertexs[0], vertexs[1]);
+            DIGRAPHinsertA(G, vertexs[1], vertexs[0]);
+        }     
+        else if (c != ' ') {
+            vertexs[i] = c - '0'; 
+            i++;
+        }
+    }
     return 0;
 }
