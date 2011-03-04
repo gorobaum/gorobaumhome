@@ -99,21 +99,19 @@ int DIGRAPHpath (Digraph G, Vertex s, Vertex t) {
 }
 
 int main (int argc, char **argv) {
-    int Arcs, Vertexs, c[3], i;
+    int Arcs, Vertexs, c;
     Digraph G;    
-    for ( i = 0; i < 3; i++ ) c[i] = getchar();
-    Vertexs = c[0] - '0';
-    Arcs = c[2] - '0';
+
+    printf("Digite o numero de pessoas: \n");
+    scanf("%d", &Vertexs);
+    printf("Digite o numero de amizades: \n");
+    scanf("%d", &Arcs);
     printf("Pessoas - %d \nAmizades - %d \n", Arcs, Vertexs);
     
-    while ( c[0] != EOF ) {
-        for ( i = 0; i < 3; i++ ) { 
-            c[i] = getchar();
-            printf("%x \n", c[i]);
-            if ( c[i] == EOF ) break;
-        }
-        printf("Vertex %d-%d", c[0], c[2]);
-    }
-    G = DIGRAPHinit( Vertexs );   
+    G = DIGRAPHinit( Vertexs );
+    
+    c = getchar();
+    for (
+    
     return 0;
 }
