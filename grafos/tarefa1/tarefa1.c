@@ -98,18 +98,34 @@ int DIGRAPHpath (Digraph G, Vertex s, Vertex t) {
     return pathR(G, s, t);
 }
 
-int isbipartR (Digraph G, Vertex v, Vertex *bipartite, int cont )
+int isbipartR (Digraph G, Vertex v, Vertex *bipartite, int *cont ) {
+    Vertex w;
+    bipartite[v] = (*cont)%2 + 1;
+    (*cont)++;
+    for ( w = 0; w < G->V; w++ )
+        if ( G->adj[v][w] == 1 && bipartite[w] == 0 )
+            if ( isbipartR(G, w, bipartite, cont) == 0 )
+                return 0;
+    return 1;
+}   
 
 int DIGRAPHisbipart (Digraph G) {
-    int isbipart;
+    int *cont;
     Vertex v, *bipartite;
     bipartite = malloc(V*sizeof(Vertex));
-    isbipart = 0;
+    cont = malloc9sizeof(int));
+    (*cont) = 0;
 
     for ( v = 0; v < G->V; v++ ) bipartite[v] = 0;
-    for ( v = 0; v < G->V; v++ ) if ( bipartite[v] == 0 ) isbipart += isbipartR(G, bipartite[v], bipartite, 0);
-    return isbipart;
-}
+    for ( v = 0; v < G->V; v++ ) 
+        if ( bipartite[v] == 0 ) { 
+            if ( isbipartR(G, v, bipartite, cont) == 0 ) return 0;
+            else {
+                for ( v = 0; v < G->V; v++ ) if ( bipartite[v] == 0 ) return 0;
+                return 1;
+            }
+        }
+}   
 
 int main (int argc, char **argv) {
     int A, V, c, i;
