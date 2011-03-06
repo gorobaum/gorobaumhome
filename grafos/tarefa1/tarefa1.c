@@ -7,8 +7,8 @@
 #define Graph Digraph
 #define GRAPHinit DIGRAPHinit
 #define GRAPHshow DIGRAPHshow
-#define MAXVERTEX 100
-#define LINESIZE 4
+#define MAXVERTEX 101
+#define LINESIZE 5
 
 static int lbl[MAXVERTEX];
 
@@ -99,18 +99,40 @@ int DIGRAPHpath (Digraph G, Vertex s, Vertex t) {
     return pathR(G, s, t);
 }
 
-int GRAPHisbipart( Graph G, int bipratite ) {
-    return 0;
+int isbipartR (Graph G, Vertex s, int *bipartite, int last) {
+    Vertex w;
+    
+    if ( bipartite[s] == 0 ) bipartite[s] = (last)%2 + 1;
+    else if ( bipartite[s] != (last%2+1) ) return 0;
+  
+    for ( w = 0; w < G->V; w++ ) 
+        if ( G->adj[s][w] == 1 && bipartite[w] != bipartite[s]%2 + 1 ) {
+            if ( isbipartR(G, w, bipartite, bipartite[s] ) == 0 ) 
+                return 0;
+        }
+    return 1;
+}
+
+int GRAPHisbipart (Graph G, int *bipartite) {
+    Vertex v;
+    
+    for ( v = 0; v < G->V; v++ )
+        if ( bipartite[v] == 0 ) {
+            if ( isbipartR( G, v, bipartite, 0) == 0 ) return 0;
+        }
+    return 1;
 }
 
 int main() {
-    int NumVert, NumArcs, i, *bipratite;
+    int NumVert, NumArcs, i, *bipartite, inst;
     char *line;
     Graph G;
     
     line = malloc(LINESIZE*sizeof(char));
+    inst = 0;
     
     while ( fgets(line, 5, stdin) != NULL ) {
+        if ( inst != 0 ) printf("\n");
         line[1] = '\0';
         NumVert = atoi(line);
         NumArcs = atoi(line+2);
@@ -118,13 +140,18 @@ int main() {
         bipartite = malloc(NumVert*sizeof(int));
         for ( i = 0; i < NumVert; i++ ) bipartite[i] = 0;
         G = GRAPHinit(NumVert);
+        inst++;
         
         for ( i = 0; i < NumArcs; i++ ) {
             fgets(line, 5, stdin);
             line[1] = '\0';
-            GRAPHinsertE(G, atoi(line)-1, atoi(line+2)-1);
+            GRAPHinsertE(G, (atoi(line)-1), (atoi(line+2)-1));
         }
-        GRAPHisbipart(G, bipartite);
+        printf("Instancia %d\n", inst);
+        if ( GRAPHisbipart(G, bipartite) == 1 ) printf("sim\n");
+        else printf("nao\n");
+        free(bipartite);
+        free(G);
     }
     return 0;
 }
