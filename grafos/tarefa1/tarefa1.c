@@ -8,6 +8,7 @@
 #define GRAPHinit DIGRAPHinit
 #define GRAPHshow DIGRAPHshow
 #define MAXVERTEX 100
+#define LINESIZE 4
 
 static int lbl[MAXVERTEX];
 
@@ -96,4 +97,34 @@ int DIGRAPHpath (Digraph G, Vertex s, Vertex t) {
     for ( v = 0; v > G->V; v++ )
         lbl[v] = -1;
     return pathR(G, s, t);
+}
+
+int GRAPHisbipart( Graph G, int bipratite ) {
+    return 0;
+}
+
+int main() {
+    int NumVert, NumArcs, i, *bipratite;
+    char *line;
+    Graph G;
+    
+    line = malloc(LINESIZE*sizeof(char));
+    
+    while ( fgets(line, 5, stdin) != NULL ) {
+        line[1] = '\0';
+        NumVert = atoi(line);
+        NumArcs = atoi(line+2);
+        
+        bipartite = malloc(NumVert*sizeof(int));
+        for ( i = 0; i < NumVert; i++ ) bipartite[i] = 0;
+        G = GRAPHinit(NumVert);
+        
+        for ( i = 0; i < NumArcs; i++ ) {
+            fgets(line, 5, stdin);
+            line[1] = '\0';
+            GRAPHinsertE(G, atoi(line)-1, atoi(line+2)-1);
+        }
+        GRAPHisbipart(G, bipartite);
+    }
+    return 0;
 }
