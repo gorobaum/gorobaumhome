@@ -1,0 +1,967 @@
+M 1938725 MAP0324
+     Aluno de no. USP 1938725 foi matriculado em MAP0324.
+
+M 1938725 MAP0324
+     Aluno de no. usp 1938725 ja' esta matriculado em MAP0324.
+
+M 1938725 MAC0328
+     Aluno de no. USP 1938725 foi matriculado em MAC0328.
+
+M 1938725 MAT0213
+     Aluno de no. USP 1938725 foi matriculado em MAT0213.
+
+M 2867625 FEP0240
+     Aluno de no. USP 2867625 foi matriculado em FEP0240.
+
+M 2867625 MAT0131
+     Aluno de no. USP 2867625 foi matriculado em MAT0131.
+
+M 2867625 MAE0212
+     Aluno de no. USP 2867625 foi matriculado em MAE0212.
+
+M 2867625 MAC0122
+     Aluno de no. USP 2867625 foi matriculado em MAC0122.
+
+M 2867625 MAT0122
+     Aluno de no. USP 2867625 foi matriculado em MAT0122.
+
+D 2867625
+     FEP0240 Fisica III para o IME
+     MAC0122 Principios de Des. de Algoritmos
+     MAE0212 Int. a Prob. e a Estatistica II
+     MAT0122 Algebra Linear I
+     MAT0131 Calculo Diferencial e Integral
+
+M 1765638 MAC0312
+    Disciplina MAC0312 nao encontrada.
+
+M 1765638 MAC0420
+     Aluno de no. USP 1765638 foi matriculado em MAC0420.
+
+M 1765638 MAT0213
+     Aluno de no. USP 1765638 foi matriculado em MAT0213.
+
+M 1765638 MAC0328
+     Aluno de no. USP 1765638 foi matriculado em MAC0328.
+
+M 1765638 FEP0240
+     Aluno de no. USP 1765638 foi matriculado em FEP0240.
+
+M 1765638 MAT0428
+     Aluno de no. USP 1765638 foi matriculado em MAT0428.
+
+M 2017306 MAC0422
+     Aluno de no. USP 2017306 foi matriculado em MAC0422.
+
+M 2017306 MAC0425
+     Aluno de no. USP 2017306 foi matriculado em MAC0425.
+
+M 2017306 MAC0426
+     Aluno de no. USP 2017306 foi matriculado em MAC0426.
+
+M 2017306 PCS0216
+     Aluno de no. USP 2017306 foi matriculado em PCS0216.
+
+M 1958596 MAC0422
+     Aluno de no. USP 1958596 foi matriculado em MAC0422.
+
+M 1958596 MAP0324
+     Aluno de no. USP 1958596 foi matriculado em MAP0324.
+
+M 1958596 MAC0426
+     Aluno de no. USP 1958596 foi matriculado em MAC0426.
+
+M 1940314 PCS0216
+     Aluno de no. USP 1940314 foi matriculado em PCS0216.
+
+M 1940314 MAP0324
+     Aluno de no. USP 1940314 foi matriculado em MAP0324.
+
+M 1940314 MAC0426
+     Aluno de no. USP 1940314 foi matriculado em MAC0426.
+
+M 1940314 MAC0425
+     Aluno de no. USP 1940314 foi matriculado em MAC0425.
+
+M 1940314 MAC0422 
+     Aluno de no. USP 1940314 foi matriculado em MAC0422.
+
+M 2842016 FEP0240
+     Aluno de no. USP 2842016 foi matriculado em FEP0240.
+
+M 2842016 FLC0474
+     Aluno de no. USP 2842016 foi matriculado em FLC0474.
+
+M 2842016 MAE0228
+     Aluno de no. USP 2842016 foi matriculado em MAE0228.
+
+M 2842016 MAC0221
+     Aluno de no. USP 2842016 foi matriculado em MAC0221.
+
+M 2842016 MAT0221
+     Aluno de no. USP 2842016 foi matriculado em MAT0221.
+
+M 1773543 MAT0213
+     Aluno de no. USP 1773543 foi matriculado em MAT0213.
+
+M 1773543 MAT0422
+     Aluno de no. USP 1773543 foi matriculado em MAT0422.
+
+M 1773543 MAT0428
+     Aluno de no. USP 1773543 foi matriculado em MAT0428.
+
+M 1773543 MAC0328
+     Aluno de no. USP 1773543 foi matriculado em MAC0328.
+
+M 1773543 MAC0412
+     Aluno de no. USP 1773543 foi matriculado em MAC0412.
+
+M 1773543 MAP0324
+     Aluno de no. USP 1773543 foi matriculado em MAP0324.
+
+M 1747327 MAC0221
+     Aluno de no. USP 1747327 foi matriculado em MAC0221.
+
+M 1747327 MAE0228
+     Aluno de no. USP 1747327 foi matriculado em MAE0228.
+
+M 1747327 FEP0240
+     Aluno de no. USP 1747327 foi matriculado em FEP0240.
+
+M 1747327 FEP0248
+     Aluno de no. USP 1747327 foi matriculado em FEP0248.
+
+M 1747327 MAT0213
+     Aluno de no. USP 1747327 foi matriculado em MAT0213.
+
+M 1747327 MAT0221
+     Aluno de no. USP 1747327 foi matriculado em MAT0221.
+
+M 1747327 FLC0474
+     Aluno de no. USP 1747327 foi matriculado em FLC0474.
+
+M 2924429 MAC0122
+     Aluno de no. USP 2924429 foi matriculado em MAC0122.
+
+M 2924429 FEP0126
+     Aluno de no. USP 2924429 foi matriculado em FEP0126.
+
+M 2924429 MAT0319
+    Disciplina MAT0319 nao encontrada.
+
+M 2924429 MAT0122
+     Aluno de no. USP 2924429 foi matriculado em MAT0122.
+
+M 2924429 MAT0131
+     Aluno de no. USP 2924429 foi matriculado em MAT0131.
+
+M 1792351 FEP0126
+     Aluno de no. USP 1792351 foi matriculado em FEP0126.
+
+M 1792351 MAT0213
+     Aluno de no. USP 1792351 foi matriculado em MAT0213.
+
+M 1792351 MAC0412
+     Aluno de no. USP 1792351 foi matriculado em MAC0412.
+
+M 1792351 MAC0221
+     Aluno de no. USP 1792351 foi matriculado em MAC0221.
+
+M 2840715 MAE0228
+     Aluno de no. USP 2840715 foi matriculado em MAE0228.
+
+M 2840715 MAC0221
+     Aluno de no. USP 2840715 foi matriculado em MAC0221.
+
+M 2840715 MAT0213
+     Aluno de no. USP 2840715 foi matriculado em MAT0213.
+
+M 2840715 MAT0221
+     Aluno de no. USP 2840715 foi matriculado em MAT0221.
+
+M 2840715 FEP0240
+     Aluno de no. USP 2840715 foi matriculado em FEP0240.
+
+M 2903717 FEP0126
+     Aluno de no. USP 2903717 foi matriculado em FEP0126.
+
+M 2903717 MAC0122
+     Aluno de no. USP 2903717 foi matriculado em MAC0122.
+
+M 2903717 MAE0212
+     Aluno de no. USP 2903717 foi matriculado em MAE0212.
+
+M 2903717 MAT0122
+     Aluno de no. USP 2903717 foi matriculado em MAT0122.
+
+M 2903717 MAT0131
+     Aluno de no. USP 2903717 foi matriculado em MAT0131.
+
+A FEP0240
+      1765638 Alexandre de Oliveira Neto
+      2867625 Alexandre Valadares
+      1747327 Bernardo Toshinori Narutaki
+      2840715 Christian Marcus Ortega
+      2842016 Luciano Silva
+
+C 2840715 FEP0240
+     Matricula do aluno de no. USP 2840715 na disciplina FEP0240 foi cancelada.
+
+C 1747327 FEP0240
+     Matricula do aluno de no. USP 1747327 na disciplina FEP0240 foi cancelada.
+
+A FEP0240
+      1765638 Alexandre de Oliveira Neto
+      2867625 Alexandre Valadares
+      2842016 Luciano Silva
+
+M 1766402 MAC0422
+     Aluno de no. USP 1766402 foi matriculado em MAC0422.
+
+M 1766402 MAC0426
+     Aluno de no. USP 1766402 foi matriculado em MAC0426.
+
+M 1766402 PCS0216
+     Aluno de no. USP 1766402 foi matriculado em PCS0216.
+
+D 1773543
+     MAC0328 Introducao a Teoria dos Grafos
+     MAC0412 Organizacao de Computadores
+     MAP0324 Analise Numerica II
+     MAT0213 Algebra II
+     MAT0422 Estudo de Prob. Brasileiros II
+     MAT0428 Historia da Matematica
+
+D 1747327
+     FEP0248 Lab. de Fisica III para o IME
+     FLC0474 Lingua Portuguesa
+     MAC0221 Construcao de Montadores
+     MAE0228 Noc. de Prob. e de Proc. Estoc.
+     MAT0213 Algebra II
+     MAT0221 Calculo Diferencial e Integral IV
+
+A MAT0213
+      1765638 Alexandre de Oliveira Neto
+      1773543 Andre Goncalves Zelenkovas
+      1747327 Bernardo Toshinori Narutaki
+      1792351 Carlos Hajime Aoyama
+      2840715 Christian Marcus Ortega
+      1938725 Sergio Sussumu Mori
+
+M 3253753 MAP0324
+     Aluno de no. USP 3253753 foi matriculado em MAP0324.
+
+M 3253753 MAC0328
+     Aluno de no. USP 3253753 foi matriculado em MAC0328.
+
+M 3253753 MAC0426
+     Aluno de no. USP 3253753 foi matriculado em MAC0426.
+
+M 2837877 MAT0221
+     Aluno de no. USP 2837877 foi matriculado em MAT0221.
+
+M 2837877 MAC0221
+     Aluno de no. USP 2837877 foi matriculado em MAC0221.
+
+M 1776872 MAE0228
+     Aluno de no. USP 1776872 foi matriculado em MAE0228.
+
+M 1776872 MAC0221
+     Aluno de no. USP 1776872 foi matriculado em MAC0221.
+
+M 1776872 MAT0422
+     Aluno de no. USP 1776872 foi matriculado em MAT0422.
+
+M 1776872 FEP0240
+     Aluno de no. USP 1776872 foi matriculado em FEP0240.
+
+C 1747327 MAC0221
+     Matricula do aluno de no. USP 1747327 na disciplina MAC0221 foi cancelada.
+
+M 1950904 PCS0216
+     Aluno de no. USP 1950904 foi matriculado em PCS0216.
+
+M 1950904 MAC0422
+     Aluno de no. USP 1950904 foi matriculado em MAC0422.
+
+M 1950904 MAC0414
+    Disciplina MAC0414 nao encontrada.
+
+M 1950904 MAC0426
+     Aluno de no. USP 1950904 foi matriculado em MAC0426.
+
+M 1950904 MAT0428
+     Aluno de no. USP 1950904 foi matriculado em MAT0428.
+
+C 1950904 MAC0414
+    Disciplina MAC0414 nao encontrada.
+
+C 1950904 PCS0216
+     Matricula do aluno de no. USP 1950904 na disciplina PCS0216 foi cancelada.
+
+D 1950904
+     MAC0422 Sistemas Operacionais
+     MAC0426 Sistemas de Bancos de Dados
+     MAT0428 Historia da Matematica
+
+A MAC0221
+      1792351 Carlos Hajime Aoyama
+      2840715 Christian Marcus Ortega
+      2837877 Daniel Corch
+      1776872 Darcio Alves
+      2842016 Luciano Silva
+
+M 9398006 MAC0122
+    Aluno de no. USP 9398006 nao encontrado.
+
+A MAC0221
+      1792351 Carlos Hajime Aoyama
+      2840715 Christian Marcus Ortega
+      2837877 Daniel Corch
+      1776872 Darcio Alves
+      2842016 Luciano Silva
+
+M 2809421 FEP0126
+     Aluno de no. USP 2809421 foi matriculado em FEP0126.
+
+M 2809421 MAC0312
+    Disciplina MAC0312 nao encontrada.
+
+M 2809421 MAC0221
+     Aluno de no. USP 2809421 foi matriculado em MAC0221.
+
+M 1874190 MAC0328
+     Aluno de no. USP 1874190 foi matriculado em MAC0328.
+
+M 1874190 MAT0221
+     Aluno de no. USP 1874190 foi matriculado em MAT0221.
+
+M 1813171 MAP0324
+     Aluno de no. USP 1813171 foi matriculado em MAP0324.
+
+M 1813171 PCS0216
+     Aluno de no. USP 1813171 foi matriculado em PCS0216.
+
+M 1813171 MAT0221
+     Aluno de no. USP 1813171 foi matriculado em MAT0221.
+
+M 1980880 PCS0216
+     Aluno de no. USP 1980880 foi matriculado em PCS0216.
+
+M 1980880 MAC0425
+     Aluno de no. USP 1980880 foi matriculado em MAC0425.
+
+M 1980880 MAC0422
+     Aluno de no. USP 1980880 foi matriculado em MAC0422.
+
+M 1980880 MAC0426
+     Aluno de no. USP 1980880 foi matriculado em MAC0426.
+
+M 1990795 PCS0216
+     Aluno de no. USP 1990795 foi matriculado em PCS0216.
+
+M 1990795 MAC0426
+     Aluno de no. USP 1990795 foi matriculado em MAC0426.
+
+M 1990795 MAC0425
+     Aluno de no. USP 1990795 foi matriculado em MAC0425.
+
+M 1990795 MAC0422
+     Aluno de no. USP 1990795 foi matriculado em MAC0422.
+
+M 2906911 FEP0126
+     Aluno de no. USP 2906911 foi matriculado em FEP0126.
+
+M 2906911 MAC0122
+     Aluno de no. USP 2906911 foi matriculado em MAC0122.
+
+M 2906911 MAT0122
+     Aluno de no. USP 2906911 foi matriculado em MAT0122.
+
+M 2906911 MAT0131
+     Aluno de no. USP 2906911 foi matriculado em MAT0131.
+
+M 2906911 MAE0212
+     Aluno de no. USP 2906911 foi matriculado em MAE0212.
+
+D 2906911
+     FEP0126 Fisica I para o IME
+     MAC0122 Principios de Des. de Algoritmos
+     MAE0212 Int. a Prob. e a Estatistica II
+     MAT0122 Algebra Linear I
+     MAT0131 Calculo Diferencial e Integral
+
+M 2802815 MAT0319
+    Disciplina MAT0319 nao encontrada.
+
+M 2802815 MAT0213
+     Aluno de no. USP 2802815 foi matriculado em MAT0213.
+
+M 2802815 MAE0228
+     Aluno de no. USP 2802815 foi matriculado em MAE0228.
+
+M 2802815 MAT0221
+     Aluno de no. USP 2802815 foi matriculado em MAT0221.
+
+M 2802815 FEP0248
+     Aluno de no. USP 2802815 foi matriculado em FEP0248.
+
+M 2869819 MAE0212
+     Aluno de no. USP 2869819 foi matriculado em MAE0212.
+
+M 2869819 FEP0248
+     Aluno de no. USP 2869819 foi matriculado em FEP0248.
+
+M 2869819 FEP0240
+     Aluno de no. USP 2869819 foi matriculado em FEP0240.
+
+M 2869819 MAT0221
+     Aluno de no. USP 2869819 foi matriculado em MAT0221.
+
+M 2869819 MAC0221
+     Aluno de no. USP 2869819 foi matriculado em MAC0221.
+
+M 2869819 MAT0213
+     Aluno de no. USP 2869819 foi matriculado em MAT0213.
+
+M 1815974 MAP0324
+     Aluno de no. USP 1815974 foi matriculado em MAP0324.
+
+M 1815974 MAC0422
+     Aluno de no. USP 1815974 foi matriculado em MAC0422.
+
+M 1815974 MAC0426
+     Aluno de no. USP 1815974 foi matriculado em MAC0426.
+
+D 2869819
+     FEP0240 Fisica III para o IME
+     FEP0248 Lab. de Fisica III para o IME
+     MAC0221 Construcao de Montadores
+     MAE0212 Int. a Prob. e a Estatistica II
+     MAT0213 Algebra II
+     MAT0221 Calculo Diferencial e Integral IV
+
+C 2869819 MAT0213
+     Matricula do aluno de no. USP 2869819 na disciplina MAT0213 foi cancelada.
+
+D 2869819
+     FEP0240 Fisica III para o IME
+     FEP0248 Lab. de Fisica III para o IME
+     MAC0221 Construcao de Montadores
+     MAE0212 Int. a Prob. e a Estatistica II
+     MAT0221 Calculo Diferencial e Integral IV
+
+A MAT0213
+      1765638 Alexandre de Oliveira Neto
+      1773543 Andre Goncalves Zelenkovas
+      1747327 Bernardo Toshinori Narutaki
+      1792351 Carlos Hajime Aoyama
+      2840715 Christian Marcus Ortega
+      2802815 Marcelo Zanoni Santos
+      1938725 Sergio Sussumu Mori
+
+A MAE0228
+      1747327 Bernardo Toshinori Narutaki
+      2840715 Christian Marcus Ortega
+      1776872 Darcio Alves
+      2842016 Luciano Silva
+      2802815 Marcelo Zanoni Santos
+
+M 1521706 MAC0412
+     Aluno de no. USP 1521706 foi matriculado em MAC0412.
+
+M 1521706 MAC0420
+     Aluno de no. USP 1521706 foi matriculado em MAC0420.
+
+M 1521706 MAT0422
+     Aluno de no. USP 1521706 foi matriculado em MAT0422.
+
+M 1521706 MAE0228
+     Aluno de no. USP 1521706 foi matriculado em MAE0228.
+
+M 1521706 MAT0213
+     Aluno de no. USP 1521706 foi matriculado em MAT0213.
+
+M 1740259 MAC0422
+     Aluno de no. USP 1740259 foi matriculado em MAC0422.
+
+M 1740259 FLC0474
+     Aluno de no. USP 1740259 foi matriculado em FLC0474.
+
+M 1740259 MAC0328
+     Aluno de no. USP 1740259 foi matriculado em MAC0328.
+
+M 1740259 MAC0412
+     Aluno de no. USP 1740259 foi matriculado em MAC0412.
+
+C 1740259 MAC0422
+     Matricula do aluno de no. USP 1740259 na disciplina MAC0422 foi cancelada.
+
+M 2804688 MAC0221
+     Aluno de no. USP 2804688 foi matriculado em MAC0221.
+
+M 2804688 MAT0213
+     Aluno de no. USP 2804688 foi matriculado em MAT0213.
+
+M 1972389 MAC0422
+     Aluno de no. USP 1972389 foi matriculado em MAC0422.
+
+M 1972389 MAC0426
+     Aluno de no. USP 1972389 foi matriculado em MAC0426.
+
+M 1972389 MAT0422
+     Aluno de no. USP 1972389 foi matriculado em MAT0422.
+
+M 1972389 PCS0216
+     Aluno de no. USP 1972389 foi matriculado em PCS0216.
+
+M 1972389 MAP0324
+     Aluno de no. USP 1972389 foi matriculado em MAP0324.
+
+M 1972834 MAE0228
+     Aluno de no. USP 1972834 foi matriculado em MAE0228.
+
+M 1972834 MAC0426
+     Aluno de no. USP 1972834 foi matriculado em MAC0426.
+
+M 1972834 MAC0425
+     Aluno de no. USP 1972834 foi matriculado em MAC0425.
+
+M 1779008 MAT0221
+     Aluno de no. USP 1779008 foi matriculado em MAT0221.
+
+M 1779008 FLC0474
+     Aluno de no. USP 1779008 foi matriculado em FLC0474.
+
+M 1779008 MAE0228
+     Aluno de no. USP 1779008 foi matriculado em MAE0228.
+
+M 1779008 MAT0213
+     Aluno de no. USP 1779008 foi matriculado em MAT0213.
+
+M 1779008 FEP0240
+     Aluno de no. USP 1779008 foi matriculado em FEP0240.
+
+M 2711113 MAC0221
+     Aluno de no. USP 2711113 foi matriculado em MAC0221.
+
+M 2711113 MAC0425
+     Aluno de no. USP 2711113 foi matriculado em MAC0425.
+
+M 2711113 MAC0412
+     Aluno de no. USP 2711113 foi matriculado em MAC0412.
+
+M 2711113 MAP0324
+     Aluno de no. USP 2711113 foi matriculado em MAP0324.
+
+M 2711113 MAE0228
+     Aluno de no. USP 2711113 foi matriculado em MAE0228.
+
+M 2711113 MAT0213
+     Aluno de no. USP 2711113 foi matriculado em MAT0213.
+
+C 2711113 MAC0425
+     Matricula do aluno de no. USP 2711113 na disciplina MAC0425 foi cancelada.
+
+D 2711113
+     MAC0221 Construcao de Montadores
+     MAC0412 Organizacao de Computadores
+     MAE0228 Noc. de Prob. e de Proc. Estoc.
+     MAP0324 Analise Numerica II
+     MAT0213 Algebra II
+
+M 1778167 MAT0122
+     Aluno de no. USP 1778167 foi matriculado em MAT0122.
+
+M 1778167 FLC0474
+     Aluno de no. USP 1778167 foi matriculado em FLC0474.
+
+M 1778167 MAT0213
+     Aluno de no. USP 1778167 foi matriculado em MAT0213.
+
+M 2880117 MAC0221
+     Aluno de no. USP 2880117 foi matriculado em MAC0221.
+
+M 2880117 FEP0240
+     Aluno de no. USP 2880117 foi matriculado em FEP0240.
+
+M 2880117 FEP0248
+     Aluno de no. USP 2880117 foi matriculado em FEP0248.
+
+M 2880117 MAE0228
+     Aluno de no. USP 2880117 foi matriculado em MAE0228.
+
+M 2880117 MAT0213
+     Aluno de no. USP 2880117 foi matriculado em MAT0213.
+
+M 2880117 FLC0474
+     Aluno de no. USP 2880117 foi matriculado em FLC0474.
+
+C 2880117 FLC0474
+     Matricula do aluno de no. USP 2880117 na disciplina FLC0474 foi cancelada.
+
+M 1955416 MAP0324
+    Aluno de no. USP 1955416 nao encontrado.
+
+M 1955416 MAT0213
+    Aluno de no. USP 1955416 nao encontrado.
+
+M 1955416 MAC0420
+    Aluno de no. USP 1955416 nao encontrado.
+
+M 2821675 FEP0240
+     Aluno de no. USP 2821675 foi matriculado em FEP0240.
+
+M 2821675 MAE0228
+     Aluno de no. USP 2821675 foi matriculado em MAE0228.
+
+M 2821675 MAC0221
+     Aluno de no. USP 2821675 foi matriculado em MAC0221.
+
+M 1831252 MAC0328
+     Aluno de no. USP 1831252 foi matriculado em MAC0328.
+
+M 1831252 MAT0213
+     Aluno de no. USP 1831252 foi matriculado em MAT0213.
+
+M 1831252 MAP0324
+     Aluno de no. USP 1831252 foi matriculado em MAP0324.
+
+M 1980940 MAC0422
+     Aluno de no. USP 1980940 foi matriculado em MAC0422.
+
+M 1980940 MAC0425
+     Aluno de no. USP 1980940 foi matriculado em MAC0425.
+
+M 2845894 MAT0221
+     Aluno de no. USP 2845894 foi matriculado em MAT0221.
+
+A MAT0221
+      2869819 Alexandre Ota
+      1747327 Bernardo Toshinori Narutaki
+      2840715 Christian Marcus Ortega
+      2837877 Daniel Corch
+      1813171 Edson Kasuhiko Miamoto
+      2845894 Joao Ricardo da Silva
+      2842016 Luciano Silva
+      1779008 Luis Claudio Malheiro
+      2802815 Marcelo Zanoni Santos
+      1874190 Paulo Celso Barbosa
+
+M 2845894 MAE0228
+     Aluno de no. USP 2845894 foi matriculado em MAE0228.
+
+M 2845894 FEP0240
+     Aluno de no. USP 2845894 foi matriculado em FEP0240.
+
+C 1980940 MAC0425
+     Matricula do aluno de no. USP 1980940 na disciplina MAC0425 foi cancelada.
+
+C 2845940 FEP0240
+    Aluno de no. USP 2845940 nao encontrado.
+
+A FEP0240
+      1765638 Alexandre de Oliveira Neto
+      2869819 Alexandre Ota
+      2867625 Alexandre Valadares
+      1776872 Darcio Alves
+      2845894 Joao Ricardo da Silva
+      2821675 Julio Cesar do Nascimento
+      2880117 Katia Rossetti Mata
+      2842016 Luciano Silva
+      1779008 Luis Claudio Malheiro
+
+M 5234895 MAT0213
+     Aluno de no. USP 5234895 foi matriculado em MAT0213.
+
+M 1774985 MAC0328
+     Aluno de no. USP 1774985 foi matriculado em MAC0328.
+
+M 1774985 MAP0324
+     Aluno de no. USP 1774985 foi matriculado em MAP0324.
+
+M 1774985 MAT0422
+     Aluno de no. USP 1774985 foi matriculado em MAT0422.
+
+M 1774985 MAC0412
+     Aluno de no. USP 1774985 foi matriculado em MAC0412.
+
+M 1980940 MAC0110
+     Aluno de no. USP 1980940 foi matriculado em MAC0110.
+
+C 5234895 PCS0216
+     Aluno de no. usp 5234895 nao esta matriculado em PCS0216.
+
+D 8222243
+    Aluno nao esta matricula em disciplina alguma.
+
+M 1783406 MAE0228
+     Aluno de no. USP 1783406 foi matriculado em MAE0228.
+
+A MAE0228
+      1747327 Bernardo Toshinori Narutaki
+      2840715 Christian Marcus Ortega
+      1776872 Darcio Alves
+      1783406 Gilberto Burgert
+      2845894 Joao Ricardo da Silva
+      2821675 Julio Cesar do Nascimento
+      2880117 Katia Rossetti Mata
+      2711113 Lucia Yasue Kyono
+      2842016 Luciano Silva
+      1779008 Luis Claudio Malheiro
+      1972834 Luis Rodrigues Teixeira
+      2802815 Marcelo Zanoni Santos
+      1521706 Marcos Carvalho Rochlitz
+
+M 1783406 MAT0428
+     Aluno de no. USP 1783406 foi matriculado em MAT0428.
+
+M 2718902 MAC0221
+     Aluno de no. USP 2718902 foi matriculado em MAC0221.
+
+M 1558939 PCS0309
+    Disciplina PCS0309 nao encontrada.
+
+M 1988031 MAC0422
+     Aluno de no. USP 1988031 foi matriculado em MAC0422.
+
+M 1988031 PCS0216
+     Aluno de no. USP 1988031 foi matriculado em PCS0216.
+
+M 1988031 MAP0324
+     Aluno de no. USP 1988031 foi matriculado em MAP0324.
+
+M 1990022 MAT0213
+     Aluno de no. USP 1990022 foi matriculado em MAT0213.
+
+M 1966874 PCS0309
+    Disciplina PCS0309 nao encontrada.
+
+M 1966874 MAC0328
+     Aluno de no. USP 1966874 foi matriculado em MAC0328.
+
+C 1942810 MAC0122
+     Aluno de no. usp 1942810 nao esta matriculado em MAC0122.
+
+M 1778859 MAC0328
+     Aluno de no. USP 1778859 foi matriculado em MAC0328.
+
+M 1778859 MAC0412
+     Aluno de no. USP 1778859 foi matriculado em MAC0412.
+
+M 1778859 FLC0474
+     Aluno de no. USP 1778859 foi matriculado em FLC0474.
+
+M 2974580 MAT0131
+     Aluno de no. USP 2974580 foi matriculado em MAT0131.
+
+M 2974580 MAC0110
+     Aluno de no. USP 2974580 foi matriculado em MAC0110.
+
+M 2974580 FEP0126
+     Aluno de no. USP 2974580 foi matriculado em FEP0126.
+
+M 1776205 MAC0328
+     Aluno de no. USP 1776205 foi matriculado em MAC0328.
+
+M 1776205 MAC0412
+     Aluno de no. USP 1776205 foi matriculado em MAC0412.
+
+M 1776205 MAT0213
+     Aluno de no. USP 1776205 foi matriculado em MAT0213.
+
+M 1776205 MAC0420
+     Aluno de no. USP 1776205 foi matriculado em MAC0420.
+
+A FLC0474
+      1747327 Bernardo Toshinori Narutaki
+      1778167 Julio Seiti Tatsumi
+      2842016 Luciano Silva
+      1779008 Luis Claudio Malheiro
+      1740259 Marcelo Gomes de Queiroz
+      1778859 Marcos Hadama
+
+M 1956516 MAT0422
+     Aluno de no. USP 1956516 foi matriculado em MAT0422.
+
+M 1956516 MAC0426
+     Aluno de no. USP 1956516 foi matriculado em MAC0426.
+
+M 1956516 PCS0216
+     Aluno de no. USP 1956516 foi matriculado em PCS0216.
+
+A PCS0216
+      2017306 Alexandre Yamaji Valenca
+      1940314 Alice Lie Shimizu
+      1813171 Edson Kasuhiko Miamoto
+      1980880 Eduardo Ermel Wronowski
+      1990795 Eduardo Porta
+      1988031 Estela Maris Rodrigues
+      1972389 Marcelo Gulfier
+      1956516 Mauricio Ruiz da Silva
+      1766402 Sergio Luiz Diniz Fortuna
+
+M 3256349 FEP0126
+     Aluno de no. USP 3256349 foi matriculado em FEP0126.
+
+M 1948445 MAP0324
+     Aluno de no. USP 1948445 foi matriculado em MAP0324.
+
+C 1948445 MAP0324
+     Matricula do aluno de no. USP 1948445 na disciplina MAP0324 foi cancelada.
+
+M 1981626 MAP0324
+     Aluno de no. USP 1981626 foi matriculado em MAP0324.
+
+M 1981626 MAC0422
+     Aluno de no. USP 1981626 foi matriculado em MAC0422.
+
+A MAC0422
+      1815974 Alexandre Vernille da Silva
+      2017306 Alexandre Yamaji Valenca
+      1940314 Alice Lie Shimizu
+      1950904 Denise Iguma
+      1980880 Eduardo Ermel Wronowski
+      1990795 Eduardo Porta
+      1988031 Estela Maris Rodrigues
+      1980940 Jayne Margareth Fernandes
+      1972389 Marcelo Gulfier
+      1958596 Patricia Mantovani
+      1981626 Paulo Fernandes Hodela
+      1766402 Sergio Luiz Diniz Fortuna
+
+M 1842600 MAC0221
+     Aluno de no. USP 1842600 foi matriculado em MAC0221.
+
+A MAC0221
+      2869819 Alexandre Ota
+      1792351 Carlos Hajime Aoyama
+      2840715 Christian Marcus Ortega
+      2837877 Daniel Corch
+      1776872 Darcio Alves
+      2809421 Edna Yumi Okumura
+      2718902 Frank Meylan
+      2821675 Julio Cesar do Nascimento
+      2880117 Katia Rossetti Mata
+      2711113 Lucia Yasue Kyono
+      2842016 Luciano Silva
+      2804688 Roberta Belini Maran
+      1842600 Silvio Nakati
+
+M 1985038 MAC0426
+     Aluno de no. USP 1985038 foi matriculado em MAC0426.
+
+A MAC0426
+      1815974 Alexandre Vernille da Silva
+      2017306 Alexandre Yamaji Valenca
+      1940314 Alice Lie Shimizu
+      3253753 Cristina Maria da Silva
+      1950904 Denise Iguma
+      1980880 Eduardo Ermel Wronowski
+      1990795 Eduardo Porta
+      1972834 Luis Rodrigues Teixeira
+      1972389 Marcelo Gulfier
+      1956516 Mauricio Ruiz da Silva
+      1958596 Patricia Mantovani
+      1766402 Sergio Luiz Diniz Fortuna
+      1985038 Suzi Kiyomi Suguiyama
+
+M 1985038 MAP0324
+     Aluno de no. USP 1985038 foi matriculado em MAP0324.
+
+A MAC0110
+      2974580 Edson Lopes Monteiro
+      1980940 Jayne Margareth Fernandes
+
+M 1564093 MAC0328
+     Aluno de no. USP 1564093 foi matriculado em MAC0328.
+
+A MAC0328
+      1765638 Alexandre de Oliveira Neto
+      1773543 Andre Goncalves Zelenkovas
+      3253753 Cristina Maria da Silva
+      1776205 Edson Mitsuro Yasaka
+      1774985 Henrique Hissataka
+      1831252 Jose Roberto Shiota
+      1740259 Marcelo Gomes de Queiroz
+      1778859 Marcos Hadama
+      1874190 Paulo Celso Barbosa
+      1966874 Raissa Maria Mendes Lopes
+      1938725 Sergio Sussumu Mori
+      1564093 Walter Hildebrandi Filho
+
+M 1564093 MAT0213
+     Aluno de no. USP 1564093 foi matriculado em MAT0213.
+
+A MAT0213
+      1765638 Alexandre de Oliveira Neto
+      1773543 Andre Goncalves Zelenkovas
+      1747327 Bernardo Toshinori Narutaki
+      1792351 Carlos Hajime Aoyama
+      2840715 Christian Marcus Ortega
+      1776205 Edson Mitsuro Yasaka
+      5234895 Ismael Alves Pereira Filho
+      1831252 Jose Roberto Shiota
+      1778167 Julio Seiti Tatsumi
+      2880117 Katia Rossetti Mata
+      2711113 Lucia Yasue Kyono
+      1779008 Luis Claudio Malheiro
+      2802815 Marcelo Zanoni Santos
+      1521706 Marcos Carvalho Rochlitz
+      1990022 Ralf Senger
+      2804688 Roberta Belini Maran
+      1938725 Sergio Sussumu Mori
+      1564093 Walter Hildebrandi Filho
+
+C 1948445 MAP0324
+     Aluno de no. usp 1948445 nao esta matriculado em MAP0324.
+
+A MAP0324
+      1815974 Alexandre Vernille da Silva
+      1940314 Alice Lie Shimizu
+      1773543 Andre Goncalves Zelenkovas
+      3253753 Cristina Maria da Silva
+      1813171 Edson Kasuhiko Miamoto
+      1988031 Estela Maris Rodrigues
+      1774985 Henrique Hissataka
+      1831252 Jose Roberto Shiota
+      2711113 Lucia Yasue Kyono
+      1972389 Marcelo Gulfier
+      1958596 Patricia Mantovani
+      1981626 Paulo Fernandes Hodela
+      1938725 Sergio Sussumu Mori
+      1985038 Suzi Kiyomi Suguiyama
+
+A MAC0424
+    Nao ha aluno matriculado.
+
+A PCS0309
+    Disciplina PCS0309 nao encontrada.
+
+M 1956516 PCS0309
+    Disciplina PCS0309 nao encontrada.
+
+C 1956516 PCS0309
+    Disciplina PCS0309 nao encontrada.
+
+A PCS0309
+    Disciplina PCS0309 nao encontrada.
+
+M 1798773 BZU0999
+    Disciplina BZU0999 nao encontrada.
+
+M 3141592 OPI0000
+    Aluno de no. USP 3141592 nao encontrado.
+
+M 2017306 PCS0309
+    Disciplina PCS0309 nao encontrada.
+
+M 1456788 PCS0309
+    Disciplina PCS0309 nao encontrada.
+
+M 1765638 PCS0309
+    Disciplina PCS0309 nao encontrada.
+
+A PCS0309
+    Disciplina PCS0309 nao encontrada.
+

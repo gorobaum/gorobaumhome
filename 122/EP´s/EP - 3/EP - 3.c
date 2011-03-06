@@ -1,0 +1,30 @@
+#include <stdio.h>
+
+#define tab[7][7] = {
+		0,0,1,1,1,0,0,
+		0,0,1,1,1,0,0,
+		1,1,1,1,1,1,1,
+		1,1,1,2,1,1,1,
+		1,1,1,1,1,1,1,
+		0,0,1,1,1,0,0,
+		0,0,1,1,1,0,0 }
+#define MAX = 7;
+
+void desenha() {
+	int j, k;
+	for (j = 0; j < MAX; j++) {
+		for (k = 0; k < MAX; k++) {
+			if ( tab[j][k] == 0 ) printf(" ");
+			else if ( tab[j][k] == 1 ) printf("*");
+			if ( tab[j][k] == 2 ) printf("O");
+			printf("");
+		}
+		printf("/n");
+	}	
+}
+		
+int main()
+{
+	desenha;
+}
+	

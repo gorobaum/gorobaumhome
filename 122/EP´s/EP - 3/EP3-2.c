@@ -1,0 +1,260 @@
+#include <stdio.h>
+#include <stdlib.h>
+
+#define MAX 7
+
+typedef struct {
+		int x;
+		int y;
+		} posicao;
+		
+typedef struct {
+		posicao pos;
+		int mov;
+		} item;		
+
+static int tab[7][7] = { 
+		{0,0,1,1,1,0,0},
+		{0,0,1,1,1,0,0},
+		{1,1,1,1,1,1,1},
+		{1,1,1,2,1,1,1},
+		{1,1,1,1,1,1,1},
+		{0,0,1,1,1,0,0},
+		{0,0,1,1,1,0,0} };
+
+void desenha() {
+	int j, k;
+	printf("\n");
+	for ( j = 0; j < MAX; j++ ) {
+		for ( k = 0; k < MAX; k++ ) {
+			if ( tab[j][k] == 0 ) printf(" ");
+			else if ( tab[j][k] == 1 ) printf("*");
+			if ( tab[j][k] == 2 ) printf("O");
+			printf(" ");
+		}
+		printf("\n");
+	}
+}
+
+int podemov( item atual )
+{
+	posicao aux;
+	switch (atual.mov) {
+		case 1:
+		aux.x = atual.pos.x - 2;
+		aux.y = atual.pos.y;
+		if ( (aux.x >= 0) && (tab[aux.x][aux.y] == 1 && tab[++aux.x][aux.y] == 1) ) return 1;
+		break; 
+		case 2:
+		aux.x = atual.pos.x;
+		aux.y = atual.pos.y + 2;
+		if ( (aux.y < 7) && (tab[aux.x][aux.y] == 1 && tab[aux.x][--aux.y] == 1) ) return 1;
+		break;
+		case 3:
+		aux.x = atual.pos.x + 2;
+		aux.y = atual.pos.y;
+		if ( (aux.x < 7) && (tab[aux.x][aux.y] == 1 && tab[--aux.x][aux.y] == 1) ) return 1;
+		break;
+		case 4:
+		aux.x = atual.pos.x;
+		aux.y = atual.pos.y - 2;
+		if ( (aux.y >= 0) && (tab[aux.x][aux.y] == 1 && tab[aux.x][++aux.y] == 1) ) return 1;
+		break;
+	}
+	return 0;
+}
+
+void atualizatab( item local , item * atual )
+{
+ 	switch (local.mov) {
+ 		case 1:
+ 		tab[local.pos.x - 2][local.pos.y] = 2;
+ 		tab[local.pos.x - 1][local.pos.y] = 2;
+ 		tab[local.pos.x][local.pos.y] = 1;
+ 		(*atual).pos.x = (*atual).pos.x - 2;
+ 		break;
+ 		case 2:
+ 		tab[local.pos.x][local.pos.y + 2] = 2;
+ 		tab[local.pos.x][local.pos.y + 1] = 2;
+ 		tab[local.pos.x][local.pos.y] = 1;
+ 		(*atual).pos.y = (*atual).pos.y + 2;
+ 		break;
+ 		case 3:
+ 		tab[local.pos.x + 2][local.pos.y] = 2;
+ 		tab[local.pos.x + 1][local.pos.y] = 2;
+ 		tab[local.pos.x][local.pos.y] = 1;
+ 		(*atual).pos.x = (*atual).pos.x + 2;
+ 		break;
+ 		case 4:
+ 		tab[local.pos.x][local.pos.y - 2] = 2;
+ 		tab[local.pos.x][local.pos.y - 1] = 2;
+ 		tab[local.pos.x][local.pos.y] = 1;
+ 		(*atual).pos.y = (*atual).pos.y - 2;
+ 		break;
+ 	}
+}
+
+void desatualizatab ( item local )
+{
+	switch (local.mov) {
+ 		case 1:
+ 		tab[local.pos.x - 2][local.pos.y] = 1;
+ 		tab[local.pos.x - 1][local.pos.y] = 1;
+ 		tab[local.pos.x][local.pos.y] = 2;
+ 		break;
+ 		case 2:
+ 		tab[local.pos.x][local.pos.y + 2] = 1;
+ 		tab[local.pos.x][local.pos.y + 1] = 1;
+ 		tab[local.pos.x][local.pos.y] = 2;
+ 		break;
+ 		case 3:
+ 		tab[local.pos.x + 2][local.pos.y] = 1;
+ 		tab[local.pos.x + 1][local.pos.y] = 1;
+ 		tab[local.pos.x][local.pos.y] = 2;
+ 		break;
+ 		case 4:
+ 		tab[local.pos.x][local.pos.y - 2] = 1;
+ 		tab[local.pos.x][local.pos.y - 1] = 1;
+ 		tab[local.pos.x][local.pos.y] = 2;
+ 		break;
+ 	}
+}
+
+posicao procura( int *x, int *y )
+{
+	int achou, k, i, mov;
+	item aux;
+	achou = 0;
+	k = *x;
+	i = *y;
+	i++;
+	for( ; i < 7; i++ ) {
+		if ( tab[k][i] == 2 ) {
+				aux.pos.x = k;
+				aux.pos.y = i;
+				while ( mov <= 4 ) {
+					if ( podemov( aux ) ) { 
+						*x = k;
+						*y = i;
+						return aux;
+					}
+					else mov++;
+		}
+	}
+	k++;
+	for( ; k < 7; k++ ) {
+		for ( i = 0; i < 7; i++ ) {		
+			if ( tab[k][i] == 2 ) {
+					aux.x = k;
+					aux.y = i;
+					*x = k;
+					*y = i;
+					return aux;
+			}
+		}
+	}
+}
+
+void empilha( item pilha[], int *topo, item local )
+{
+	pilha[*topo] = local;
+	*topo = *topo + 1;
+}
+
+void desempilha( int *topo )
+{
+	(*topo)--;
+}
+
+item topodapilha(item pilha[], int topo)
+{
+	return pilha[topo-1];
+}
+
+void imprimesol( item pilha[], int topo )
+{
+	int x;
+	item aux;
+	for ( x = 0; x < topo; x++ ) {
+		aux = topodapilha( pilha, topo );
+		printf("(%d , %d)", (aux.pos.y + 'A'), aux.pos.x );
+		switch( aux.mov) {
+			case 1:
+			printf("  Para cima.\n");
+			break;
+			case 2:
+			printf("  Para a Direita.\n");
+			break;
+			case 3:
+			printf("  Para Baixo.\n");
+			break;
+			case 4:
+			printf("  Para a Esquerda.\n");
+			break;
+		}
+	}
+}
+
+void resolve()
+{
+	int mov, topo, passos, x, y;
+	item aux;
+	posicao atual;
+	item pilha[32];
+	topo = 0; passos = 1; mov = 1; x = 0; y = 0;
+	atual.x = 3; atual.y = 3;
+	while ( passos < 32 ) {
+		getchar();
+		desenha();
+		while ( mov <= 4 ) {
+			if ( podemov( &atual, mov ) ) {
+			  aux.pos.x = atual.x;
+				aux.pos.y = atual.y;
+				aux.mov = mov;
+			  printf("%d %d %d \n", atual.x, atual.y, mov);
+				printf("Empilhando uma posicao... \n");
+	  		empilha( pilha, &topo, aux );
+	  		atualizatab( aux , &atual );
+	  		x = 0; 
+	  		y = 0;
+	  		passos++;
+	  		mov = 1;
+			  break;
+			}
+			else mov++;
+		}
+	 	if ( ( x <= 6 ) && ( y <= 4 ) && ( mov > 4 ) ) {
+	 		printf("Procurando uma posicao... \n");
+	 		printf("%d %d %d \n", atual.x, atual.y, mov);
+			atual = procura( &x, &y );
+			mov = 1;
+		}
+		else if ( mov > 4 ) {
+			if ( topo == 0 ) { 
+				printf("Sem Solucao.");
+				break;
+			}
+			else {
+				printf("Desempilhando uma posicao... \n");
+				aux = topodapilha( pilha, topo );
+				desatualizatab( aux );
+				atual.x = aux.pos.x; 
+				atual.y = aux.pos.y;
+				x = aux.pos.x; 
+				y = aux.pos.y;
+				mov = aux.mov + 1;
+				passos--;
+				desempilha( &topo );
+			}
+		} 
+	}
+	desenha();
+	imprimesol( pilha, topo );
+} 	
+		
+int main()
+{
+	desenha();
+	resolve();
+	return 0;
+}
