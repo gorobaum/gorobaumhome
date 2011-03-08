@@ -1,0 +1,294 @@
+********************************************************************************
+
+MAC329 - Algebra Booleana E Aplicacoes
+IME - USP - Primeiro semestre de 2010
+Turma 45 - Prof. Nina S. T. Hirata
+
+Projeto de Cicuito: Segunda Parte
+
+Alunos:                             Numero USP:
+Wilson Kazuo Mizutani               6797230
+Thiago de Gouveia Nunes             6797289
+
+30/06/2010
+
+********************************************************************************
+(obs: os sub-circuitos aproveitados da primeira parte praticamente mantiveram
+a mesma documentacao)
+
+
+RELATORIO
+
+============== Modo de Uso =====================
+
+	Para usar a calculadora entre com o primeiro numero da operacao usando as
+entradas em Bits. Clique em Set e depois Igual para colocar o mesmo na 
+memoria. Com o numero na memoria, podemos selecionar uma operacao ou entrar
+com outro numero para realizar uma operacao. Depois e' so' clicar em Igual.
+	Um exemplo:
+Para calcular 5x2: 
+
+	Coloque 5 em binario na entrada. ( O numero 5 sera mostrado no Display
+	da entrada ).
+	Clique em Set.
+	Clique em Igual. ( O numero 5 sera mostrado no Display da memoria ).
+	Coloque 2 em binario na entrada. ( O numero 2 sera mostrado no Display
+	da entrada ).
+	Clique em Vezes.
+	Clique em Igual. ( O resultado sera' mostrado no Display da memoria ).
+		
+	O botao Zero zera a memoria, se seguido do botao igual.
+	Se a conta efetuada gerou um overflow, o sinal de overflow acende.
+
+============== Implementacao ===================
+
+addbit:
+
+    Basicamente e' uma funcao booleana de 3 variaveis e 2 saidas. As variaveis
+sao a(i), b(i) e carry(i). As saidas sao s(i) e carry(i+1). A funcao segue a
+seguinte tabela-verdade:
+
+                a(i) b(i) c(i) | s(i) c(i+1)
+                   0    0    0 |    0      0
+                   0    0    1 |    1      0
+                   0    1    0 |    1      0
+                   0    1    1 |    0      1
+                   1    0    0 |    1      0
+                   1    0    1 |    0      1
+                   1    1    0 |    0      1
+                   1    1    1 |    1      1
+   
+    Minimizando individualmente na forma SOP temos:
+    
+    s(i)(a,b,c) = !a!bc + !ab!c + abc + a!b!c
+    c(i+1) = ab + ac + bc
+    
+    Colocando !a e c e evidencia em s(i):
+    
+    s(i)(a,b,c) = !a(!bc + b!c) + a(bc + !b!c)
+    
+    Mas !bc + b!c = b ^ c e bc + !b!c = !!(bc + !b!c) que pela Lei de Morgan e':
+
+    bc + !b!c = !(!(bc)!(!b!c))) = !((!b+!c)(b+c))
+    
+    Distribuindo:
+    
+    bc + !b!c = !(!bc + b!c) = !(b ^ c)
+    
+    Logo s(i)(a,b,c) = !a(b^c) + a!(b^c) = a ^ b ^ c.
+    
+    Agora, usando distributiva c(i+1):
+    
+    c(i+1)= ab + bc + ac = ab + c(b + a)
+    
+    Buscamos a forma canonica de a + b:
+    
+    a + b = ab + a!b + ab + !ab = ab + a!b + !ab
+    
+    Voltando com isso para c(i+1) e aplicando a distributiva parcialmente:
+    
+    c(i+1) = ab + c(ab + a!b + !ab) = ab + abc + c(a!b + !ab)
+    
+    Como ab + abc = ab e a!b + !ab = a ^ b temos
+    
+    c(i+1) = ab + c(a ^ b)
+    
+    Assim usamos as portas a ^ b, (a ^ b) ^ c, ab e c(a ^ b) para minimizar
+conjuntamente a funcao addbit.
+
+checkoverflow:
+
+	O sub-circuito representa uma funcao booleana de tres variaveis: os bits
+mais significativos dos numeros a e b e do resultado da soma, que na pratica
+acabam indicando seus respectivos sinais.
+	A soma de dois numeros com sinais opostos nao tem como dar overflow, e alem
+disso, se os dois numeros tem o mesmo sinal, o resultado tambem deve ter esse
+mesmo sinal. Assim, vemos que havera' um overflow quando os sinais de a e b
+forem IGUAIS, e DIFERENTES do sinal da soma deles.
+	Um jeito simples e direto de saber se dois bits sao diferentes e atraves da
+operacao XOR, e analogamente sabemos se dois bits sao iguais com uma operacao de
+XNOR. Assim, se sig(x) e' o sinal do numero x representado binariamente (ou
+seja, seu bit mais significativo) temos que:
+
+	overflow = !(sig(a) ^ sig(b))(sig(b) ^ sig(s))
+	
+	No caso, o XOR (sig(b) ^ sig(s)) poderia ser tambem (sig(a) ^ sig(s)), pois
+a primeira condicao garante que a = b.
+
+main:
+
+	Este circuito usa o sub-circuito Calculator. O Calculator e' uma interface 
+para simplificar a visualizacao da calculadora em si.
+
+display:
+
+	O display em codigo BCD e' uma funcao booleana de 5 variaveis (os bits da
+soma de a com b representada binariamente) e 9 saidas (o sinal, a dezena, e
+mais sete valores usados na representacao em codigo BCD). Para construir esse
+sub-circuito mais complicado usamos os recursos do Logisim de passar a tabela-
+verdade e pedir para que o circuito seja construido em cima dela. Segue a
+tabela-verdade:
+
+s0	s1	s2	s3	s4	signal	one	d0	d1	d2	d3	d4	d5	d6
+0	0	0	0	0		0	0	0	1	1	1	1	1	1
+0	0	0	0	1		0	0	0	0	0	1	0	0	1
+0	0	0	1	0		0	0	1	0	1	1	1	1	0
+0	0	0	1	1		0	0	1	0	1	1	0	1	1
+0	0	1	0	0		0	0	1	1	0	1	0	0	1
+0	0	1	0	1		0	0	1	1	1	0	0	1	1
+0	0	1	1	0		0	0	1	1	1	0	1	1	1
+0	0	1	1	1		0	0	0	0	1	1	0	0	1
+0	1	0	0	0		0	0	1	1	1	1	1	1	1
+0	1	0	0	1		0	0	1	1	1	1	0	1	1
+0	1	0	1	0		0	1	0	1	1	1	1	1	1
+0	1	0	1	1		0	1	0	0	0	1	0	0	1
+0	1	1	0	0		0	1	1	0	1	1	1	1	0
+0	1	1	0	1		0	1	1	0	1	1	0	1	1
+0	1	1	1	0		0	1	1	1	0	1	0	0	1
+0	1	1	1	1		0	1	1	1	1	0	0	1	1
+1	0	0	0	0		1	1	1	1	1	0	1	1	1
+1	0	0	0	1		1	1	1	1	1	0	0	1	1
+1	0	0	1	0		1	1	1	1	0	1	0	0	1
+1	0	0	1	1		1	1	1	0	1	1	0	1	1
+1	0	1	0	0		1	1	1	0	1	1	1	1	0
+1	0	1	0	1		1	1	0	0	0	1	0	0	1
+1	0	1	1	0		1	1	0	1	1	1	1	1	1
+1	0	1	1	1		1	0	1	1	1	1	0	1	1
+1	1	0	0	0		1	0	1	1	1	1	1	1	1
+1	1	0	0	1		1	0	0	0	1	1	0	0	1
+1	1	0	1	0		1	0	1	1	1	0	1	1	1
+1	1	0	1	1		1	0	1	1	1	0	0	1	1
+1	1	1	0	0		1	0	1	1	0	1	0	0	1
+1	1	1	0	1		1	0	1	0	1	1	0	1	1
+1	1	1	1	0		1	0	1	0	1	1	1	1	0
+1	1	1	1	1		1	0	0	0	0	1	0	0	1
+
+	Mas entao vimos que ele nao fazia as funcoes minimizadas conjuntamente,
+entao usamos o espresso para gerar a minimizacao do display na forma PLA. Passa-
+mos a tabela-verdade acima como entrada e obtivemos a seguinte saida:
+
+.i 5
+.o 9
+.p 28
+10111 001100010
+-0011 000000010
+0101- 010001001
+01100 010010110
+10-0- 010000000
+011-1 010010010
+100-- 110000000
+00100 001101001
+0-00- 000001001
+-11-0 001001000
+-001- 001001000
+11-10 100010110
+0111- 011100001
+11-01 100011001
+1-1-1 100001001
+00-10 001010110
+00101 001110011
+0100- 001110010
+-1101 001001011
+10100 101011110
+10-10 110101001
+-0-11 000011001
+11-00 101101001
+-0110 000110111
+--000 000110110
+-10-0 000110110
+1000- 001110011
+1101- 101110011
+.e
+
+	Com ela montamos o circuito display na forma PLA.
+
+
+sum:
+
+	Este sub-circuito usa os sub-circuitos addbit, checkoverflow  para calcular 
+a soma de dois numeros (a e b) de 5 bits com overflow e exebi-los em codigo BCD. 
+Cada sub-circuito addbit recebe os i-esimos bits de a e b e o carry do circuito 
+addbit anterior, com excecao do primeiro que recebe 0 como carry. As saidas sao 
+a soma dos bits e o carry do proximo addbit. O ultimo carry nao e' usado.
+    O sub-circuito overflow usa os sinais dos numeros a e b e o sinal do 
+resultado para setar o overflow.
+ 
+register:
+
+	O register e' a memoria do sistema. Os bits de entrada sao armazenados na 
+subida do Clock.
+
+interface:
+
+	A interface e' um sub-circuito usado para limpar visualmenteo circuito
+principal. Ele usa o processor ( o circuito logico principal da calculadora ), a
+memory ( um register ), e dois displays.
+
+codif:
+
+	Implimentacao de um Codificador de 5 para 3. Somente alguns casos do codifi-
+cador sao usados, entao essa e' uma implementacao especifica.
+
+operation:
+
+	Este circuito e' o responsavel por ativar a operacao correta. Ele guarda na
+memoria a ultima operacao escolhida. Ela se mantem ate' que outra seja escolhida
+em seu lugar.
+
+processor:
+
+	E' a central de processamento da calculadora. As entradas estao constante-
+mente sendo jogadas para todas as possiveis operacoes, mas apenas a operacao se-
+lecionada chega na saida devido aos multiplexadores.
+
+mux5:
+
+	Um multiplexador 5 para 1.
+
+sub:
+
+	Realiza a subtracao de dois numeros a e b de 5 bits, somando -a com b com o
+auxilio do sub-circuito neg.
+
+neg:
+
+	Inverte o sinal de um numero de 5 bits, atraves do algoritmo do complemento
+de dois: nega os bits e soma 1.
+
+mul:
+
+	Realiza a multiplicacao de dois numeros a e b de 5 bits. Para isso, usa o
+sub-circuito innermul, que consegue calcular a multiplicacao e detectar correta-
+mente o overflow quando b >= 0. Quando b < 0, inverte o sinal de a e b antes de
+jogar os numeros no innermul. Assim, sempre e' possivel realizar a conta, pois
+seria o mesmo que fazer (-1)a*(-1)b = a*b.
+
+enable:
+
+	Usado pelo circuito innermul. Permite ou nao a passagem de um numero de 5
+bits. Tambem avisa se o sinal do numero recebido e' diferente do sinal especifi-
+cado quando a passagem e' permitida ou quandoele esta' 'a direita do bit mais
+significativo de b (na multiplicacao de a por b, nessa ordem).
+
+muxsignal:
+
+	Multiplexador que seleciona o sinal do numero.
+
+mux2:
+
+	Multiplexador que seleciona dois bits.
+
+innermul:
+
+	Calcula a multiplicacao de a por b, nessa ordem, quando b >= 0. A ideia e'
+somar b(i)*(a << i) para i = 0..4 onde b(i) e' o i-esimo bit de b. Para detectar
+o overflow ha' dois casos.
+	O primeiro caso e' quando essa soma da' overflow.
+	O segundo caso e' quando um dos shift-lefts deu overflow. Sabemos que isso
+aconteceu quando o resultado do shift mudou o sinal do numero, o que e' verifi-
+cado pelos sub-circuitos enable. Para saber quais shift-lefts devemos averiguar
+nesse aspecto, pegamos apenas aqueles tais que b(i) esteja 'a direita do bit
+mais significativo de b (isso e', "dentro de b"), verificando se a soma booleana
+dos bits a esquerda de b(i), incluindo ele mesmo, resulta em 1.
+
+

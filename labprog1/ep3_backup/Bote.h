@@ -1,0 +1,48 @@
+/********************************************************
+MAC 211 - Laboratorio de Programacao I
+Projeto: Naufrago
+Exercicio-Programa 2:  Primeira Fase
+Barco.h - interface do tipo Barco, uma variacao de entidade.
+          C nao e' orientado a objetos, mas implementamos um sistema de gerenciamento das entidades
+          que faz com que seja bem parecido com OO.
+          Assim, podemos dizer que um Barco e' praticamente uma derivacao do tipo basico de uma entidade.
+
+Caio Costa Salgado        #USP: 6920219
+Fernando Omar Aluani      #USP: 6797226
+Thiago de Gouveia Nunes   #USP: 6797289
+
+entrega: 10/05/2010
+Testado no Windows7 (somente compilacao) e Linux (Debian - compilando e rodando)
+Compilando com o Makefile incluido (make)
+***************************************************/
+
+#ifndef BARCO
+#define BARCO
+
+#include "Entity.h"
+
+typedef _itembote* ItemBote;
+
+/*Funcoes Principais dessa Interface.*/
+void inicializaBarcos(); /*Inicializa esse modulo.*/
+void terminaBarcos();    /*Termina esse modulo, liberando toda memoria usada por ele.*/
+
+/*Funcoes Principais sobre um Barco.*/
+
+/*Altera a direcao do vetor velocidade passado de acordo com o estado (como usado pela cadeia de Markov) passado.
+  o estado pode ser qualquer i em {0, 1, 2, 3, 4, 5, 6, 7}
+  Onde cada estado quer dizer:
+  0=Norte; 1=Sul; 2=Leste; 3=Oeste; 4=Nordeste; 5=Sudeste; 6=Noroeste; 7=Sudoeste.*/
+void setEstado(int estado, Vetor vel);
+/*Cria uma Barco (uma entidade) nova com os parametros passados.*/
+Entity criaBarco(Vetor pos, Vetor vel, int mass);
+
+/*Funcoes Auxiliares.*/
+/*Altera a probabilidade da matriz de transicao usada pelos Barcos pra mudar de direcao, indo do estado
+  antigo para o estado novo, usando a probabilidade prob (entre 0 e 1) passada.
+  Note que e' preciso cuidado ao usar essa funcao para que nao 'estrague' a matriz de transicao.*/
+void setProbDeMudancaDeEstado(int estadoAntigo, int estadoNovo, double prob);
+short isBarco(Entity ent); /*Checa se a entidade e' um Barco, retornando 1 se for, 0 caso contrario.*/
+int getNumBarcosVivos();   /*Retorna o numero de Barcos atualmente vivos.*/
+
+#endif

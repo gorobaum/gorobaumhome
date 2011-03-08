@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes" ?>
+<CodeBlocks_layout_file>
+	<ActiveTarget name="Debug" />
+	<File name="Bote.c" open="1" top="0" tabpos="1">
+		<Cursor position="7325" topLine="207" />
+	</File>
+	<File name="Desenho.h" open="1" top="0" tabpos="2">
+		<Cursor position="0" topLine="0" />
+	</File>
+	<File name="Entity.c" open="1" top="1" tabpos="3">
+		<Cursor position="3536" topLine="42" />
+	</File>
+</CodeBlocks_layout_file>

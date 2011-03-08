@@ -1,0 +1,9 @@
+BST.o : BST.c BST.h LL.c LL.h
+
+Interface.o: BST.h BST.c LL.c LL.h RPN.c RPN.h Interface.c Interface.h
+
+LL.o: LL.c LL.h
+
+main.o: main.c BST.h BST.c LL.c LL.h RPN.c RPN.h Interface.c Interface.h
+
+RPN.o: RPN.c RPN.h LL.c LL.h BST.c BST.h

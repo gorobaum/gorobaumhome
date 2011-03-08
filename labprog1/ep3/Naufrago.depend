@@ -1,0 +1,10 @@
+# depslib dependency file v1.0
+1273533558 source:c:\users\cliente\documents\faculdade\lab prog\naufrago\config.c
+	<stdio.h>
+	<stdlib.h>
+	<time.h>
+	<string.h>
+	"Config.h"
+
+1274408662 c:\users\cliente\documents\faculdade\lab prog\naufrago\config.h
+

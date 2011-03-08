@@ -1,0 +1,17 @@
+Asimov.o: Asimov.c Asimov.h Entity.h Lista.h Fisica.h Desenho.h
+Bote.o: Bote.c Lista.h Entity.h Fisica.h Desenho.h Estat.h Bote.h
+Config.o: Config.c Config.h
+Coral.o: Coral.c Coral.h Lista.h Entity.h Fisica.h Desenho.h
+Desenho.o: Desenho.c Desenho.h Fisica.h Entity.h Lista.h
+Entity.o: Entity.c Lista.h Entity.h Fisica.h
+Estat.o: Estat.c Estat.h
+Fisica.o: Fisica.c Entity.h Lista.h Fisica.h Estat.h Desenho.h
+Lista.o: Lista.c Lista.h
+Naufrago.o: Naufrago.c Entity.h Lista.h Fisica.h Desenho.h Config.h \
+ Passageiro.h Bote.h Asimov.h Estat.h
+Naufrago_teste.o: Naufrago_teste.c Entity.h Lista.h Fisica.h Desenho.h \
+ Config.h Passageiro.h Estat.h
+Naufrago_teste_velo.o: Naufrago_teste_velo.c Entity.h Lista.h Fisica.h \
+ Desenho.h Config.h Passageiro.h Estat.h
+Passageiro.o: Passageiro.c Lista.h Entity.h Fisica.h Desenho.h Estat.h \
+ Passageiro.h

@@ -1,0 +1,89 @@
+79
+FEP0126 Fisica I para o IME
+FEP0240 Fisica III para o IME
+FEP0248 Lab. de Fisica III para o IME
+FLC0474 Lingua Portuguesa
+MAC0110 Introducao a Computacao
+MAC0122 Principios de Des. de Algoritmos
+MAC0221 Construcao de Montadores
+MAC0310 Matematica Concreta 
+MAC0322 Introducao a Analise de Sistemas 
+MAC0325 Otimizacao Combinatoria 
+MAC0328 Introducao a Teoria dos Grafos
+MAC0330 Algoritmos Algebricos 
+MAC0331 Geometria Computacional
+MAC0333 Armazenamento e Recuperacao da Informacao
+MAC0334 Criptografia para Seguranca de Dados
+MAC0339 Informacao, Comunicacao e a Sociedade do Conhecimento
+MAC0411 Introducao a Compilacao 
+MAC0412 Organizacao de Computadores
+MAC0413 Topicos de Programacao Orientada a Objetos
+MAC0415 Projeto de Compiladores
+MAC0416 Topicos de Sistemas Distribuidos
+MAC0417 Visao e Processamento de Imagens 
+MAC0418 Topicos Especiais de Programacao Matematica 
+MAC0419 Metodos de Otimizacao em Financas 
+MAC0420 Introducao a Computacao Grafica 
+MAC0421 Computacao Grafica 
+MAC0422 Sistemas Operacionais
+MAC0423 Introducao a Teoria da Computabilidade 
+MAC0424 O Computador na Sociedade e na Empresa 
+MAC0425 Introducao a Inteligencia Artificial 
+MAC0426 Sistemas de Bancos de Dados
+MAC0427 Programacao nao Linear 
+MAC0430 Algoritmos e Complexidade da Computacao 
+MAC0431 Introducao ao Processamento Paralelo e Distribuido 
+MAC0432 Processamento Digital de Imagens: Conceitos e Apl. Bas. 
+MAC0433 Administracao de Sistemas UNIX 
+MAC0434 Topicos de Sistemas de Computacao 
+MAC0435 Metodos Formais para Esp. e Construcao de Programas 
+MAC0436 Topicos de Matematica Discreta 
+MAC0437 Redes de Dados 
+MAC0439 Laboratorio de Bancos de Dados
+MAC0440 Sistemas de Objetos Distribuidos 
+MAC0441 Programacao Orientada a Objetos 
+MAC0442 Analise orientada a objetos
+MAC0443 Projeto orientado a objetos
+MAC0445 Laboratorio de analise e projeto orientado a objetos
+MAC0446 Principios de Interacao Homem-Computador
+MAC0447 Analise e Reconhecimento de Formas: Teoria e Pratica
+MAC0448 Redes de Computadores: uma perspectiva de sistemas de software
+MAC0449 Sistemas Operacionais Distribuidos
+MAE0212 Int. a Prob. e a Estatistica II
+MAE0221 Probabilidade I
+MAE0228 Noc. de Prob. e de Proc. Estoc.
+MAE0311 Inferencia Estatistica
+MAE0315 Tecnologia da Amostragem
+MAE0326 Aplicacoes de Processos Estocasticos
+MAE0328 Analise de Regressao
+MAE0515 Introducao a Teoria dos Jogos
+MAE0525 Analise de Series Temporais
+MAE0532 Controle Estatistico de Qualidade
+MAP0314 Analise Numerica I
+MAP0324 Analise Numerica II
+MAP0331 Introducao as Tecnicas de Analise de Sistemas Lineares
+MAP0421 Simulacao
+MAT0122 Algebra Linear I
+MAT0131 Calculo Diferencial e Integral
+MAT0213 Algebra II
+MAT0221 Calculo Diferencial e Integral IV
+MAT0223 Introducao a Teoria dos Números
+MAT0313 Álgebra III
+MAT0330 Teoria dos Conjuntos
+MAT0359 Logica
+MAT0415 Topicos de Geometria
+MAT0422 Estudo de Prob. Brasileiros II
+MAT0428 Historia da Matematica
+PCS0210 Redes de Computadores
+PCS0216 Sistemas de Tempo Real
+PCS2305 Laboratorios Digitais I
+PCS2308 Laboratorio Digital II
+
+
+
+
+
+
+
+
+

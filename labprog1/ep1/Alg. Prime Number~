@@ -1,0 +1,14 @@
+Os números estão entre 0 e 2¹⁶ - 1 = 65535.
+Usar o Clivo de Eras. , testando os números dados com os números de 1 a raiz(65535) = 255.9 = 256.
+
+
+--Colocar todos os numeros num buffer.
+
+--Aplicar o Clivo, tirando do buffer os numeros que não passam pelo Clivo.
+	Os números que não passaram pelo Clivo serão transformados em -1.
+	
+--Copiar os numeros que sobrarão para um outro buffer.
+	Se o número for -1, não copiar para o novo buffer.
+	
+--Copiar o novo buffer para um arquivo.
+

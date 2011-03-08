@@ -1,0 +1,11 @@
+#include <stdio.h>
+#include <stdlib.h>
+#include "ITEM.h"
+
+typedef struct stack *Stack;
+
+void STACKdump(Stack);
+int STACKempty(Stack);
+void STACKput(Stack, item);
+Item STACKget(Stack);
+Stack STACKinit();
