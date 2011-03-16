@@ -1,16 +1,24 @@
+/*
+    Nome: Thiago de Gouveia Nunes
+    #USP: 6797289
+    MAC0338 - Analise de Algoritmos
+    Data - 16/03/2011
+*/
 #include <stdio.h>
 #include <stdlib.h>
 #include <time.h>
 #include <math.h>
 
-#define VETORSIZE 15
+#define VETORSIZE 5
 
+/*  Coloquei uma funcao para gerar vetores aleatorios e para imprimir os vetores
+    para que eu possa testar o algoritmo, eles nao influem no algoritmo em si. */
 int* RANDvetor( int size ) {
     int* vetor;
     int i, j, aux;
     
     vetor = malloc(size*sizeof(int));
-    for ( i = 0; i < size; i++ ) vetor[i] = i;
+    for ( i = 0; i < size; i++ ) vetor[i] = i+1;
     for ( i = 0; i < size; i++ ) {
         j = rand()%size;
         aux = vetor[j];
@@ -21,36 +29,47 @@ int* RANDvetor( int size ) {
     return vetor;
 }
 
+void PRINTvetor ( int*A ) {
+    int i;
+    for ( i = 0; i < VETORSIZE; i++ ) printf("%d ", i);
+    printf("\n");
+    for ( i = 0; i < VETORSIZE; i++ ) printf("%d ", A[i]);
+    printf("\n");
+}
+
 int CONTintercala ( int* A, int p, int q, int r) {
     int* B;
-    int i, j, c, k;
+    int i, j, c, k, l, m;
+    B = malloc((r+1)*sizeof(int));
+    for ( i = p; i <= q; i++ ) B[i] = A[i];
+    for ( j = q+1; j <= r; j++ ) B[r+q+1-j] = A[j];
 
-    B = malloc(VETORSIZE*sizeof(int));
-    for ( i = p; i < q; i++ ) B[i] = A[i];
-    for ( i = q+1; i < r; i++ ) B[r+q+1-i] = A[i];
-    
     i = p;
+    l = i;
     j = r;
+    m = j;
     c = 0;
-    
-    for ( k = p; k < r; k++ ) {
-        if ( B[i] < B[j] ) { 
+  
+    for ( k = p; k <= r; k++ ) {
+        if ( B[l] > 2*B[m] ) {
+                c += ((q-l)+1);
+                m--;
+        }
+        else l++;
+        if ( B[i] < B[j] ) {
             A[k] = B[i];
             i++;
-        }   
+        }
         else {
-            if ( B[i] > 2*B[j] ) c += 1 + j - r;
             A[k] = B[j];
-            j++;
+            j--;
         }
     }
-    free(B);  
     return c;
 }
 
 int CONTordena ( int* A, int p, int r ) {
     int c, q;    
-    
     if ( p >= r ) return 0;
     else {
         q = floor( (p+r)/2 );
@@ -61,17 +80,10 @@ int CONTordena ( int* A, int p, int r ) {
 
 int main() {
     int* vetor;
-    int i;
-
-    srand(time(NULL));    
-
+    srand(time(NULL));   
+ 
     vetor = RANDvetor( VETORSIZE );
-    for ( i = 0; i < VETORSIZE; i++ ) printf("%d  ", i);
-    printf("\n"); 
-    for ( i = 0; i < VETORSIZE; i++ ) printf("%d  ", vetor[i]);
-    printf("\n");
-    
-    printf("\n%d\n", CONTordena( vetor, 0, VETORSIZE ));    
-    free(vetor);
+    PRINTvetor(vetor);
+    printf("\n%d\n", CONTordena( vetor, 0, VETORSIZE-1 ));
     return 0;
 }
