@@ -1,0 +1,31 @@
+  {with { x { + 5 5 } } {with { y { - x 3 } } { + y y } } }
+= {with { x 10} {with { y { - x 3 } } { + y y } } }
+= { with { y { - 10 3 } } { + y y } }
+= { with { y 7 } { + y y } }
+= { + 7 7}
+= 14
+
+(define-type F1WAE
+    [num (n number?)]
+    [add (lhs F1WAE?) (rhs F1WAE?)]
+    [with (nome symbol?)(named-exp F1WAE?)(body F1WAE?)]
+    [id (nome symbol?)]
+    [app (fun-nome symbol?)(arg F1WAE?)])
+
+(define-type FunDef
+    [fundef (fun-name symbol?)
+            (arg-name symbol?)
+            (body F1WAE?)       ])
+
+;;interp:F1WAE listof(fundef) -> number
+(define(interp expx fun-defs)
+    (type-case F1wae expx
+        [num (n) n]
+        [add(l r) (+(interp l fun-defs)(interp r fun-defs)) ]
+        [with (bound-id name-expr bound-body)
+                (interp ( subst boundy-body
+                                bound-id
+                                (num (interp named-expr fun-defs)))
+                fun-defs)]
+        [app (fun-name arg-expr)
+            (local ([ define the-fun-def (lookup-fundef fun-name fun-defs)])
