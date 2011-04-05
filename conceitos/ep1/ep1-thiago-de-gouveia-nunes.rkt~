@@ -16,13 +16,17 @@
         [(number? sexp) (num sexp)]
         [(symbol? sexp) (id sexp)]
         [(list? sexp)
-            ( case (first sexp)
-                [(+) ( binop + ( parse (second sexp) ) ( parse (third sexp) ) ) ]
-                [(-) ( binop - ( parse (second sexp) ) ( parse (third sexp) ) ) ]
-                [(with) ( with ( parse (second sexp) ) ( parse (third sexp) ) ) ]
-            )
-        ]
-    )
-)
+         (if ( = (length sexp) 3 )
+            (case (first sexp)
+                [(+) ( binop +  ( parse (second sexp) ) 
+                                ( parse (third sexp) ) ) ]
+                [(-) ( binop -  ( parse (second sexp) ) 
+                                ( parse (third sexp) ) ) ]
+                [(with) ( with  ( (cons (first(second sexp) )  
+                                        (parse(second(second sexp) ) ) ) )
+                                ( parse (third sexp) ) ) ]
+                [else ( error 'parse "Esperado '+ '- ou with." ) ] )
+          (error 'parse "Operacoes binarias e with esperao 3 parametros." ) ) ]
+        [else ( error 'parse "Entrada invalida para o parser." ) ] ) )
 
-parse(read)
+(parse(read))
