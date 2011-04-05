@@ -11,13 +11,18 @@
   [with (lob (listof Binding?)) (body WAE?)]
   [id (name symbol?)])
 
+;; lobmanager : in out -> listof binding
+;; Consumes an in list of WAE and a empty list (out) and generates a list of 
+;; biding.
 (define (lobmanager in out)
         (if (= (length in) 0 ) out
-            (if (= (length (first in) ) 2 ) 
-                (if (symbol? (first (first in) ) )
-                    (lobmanager (cdr in) (cons (binding (cons (first (first in)) (parse (second (first in)))))))
-                    (error 'lobmanager "O with precisa de um simbolo no primeiro elemeneto de cada par.") )
-                (error 'lobmanager "Cada substituicao do with tem que ter duas partes, o simbolo e sua definicao."))))  
+            (if (symbol? (first in))
+                (lobmanager '() (cons (binding (first in) (parse (second in))) out))
+                (if (= (length (first in) ) 2 )
+                    (if (symbol? (first (first in) ) )
+                        (lobmanager (cdr in) (cons (binding (first (first in)) (parse (second (first in)))) out))
+                        (error 'lobmanager "O with precisa de um simbolo no primeiro elemeneto de cada par.") )
+                    (error 'lobmanager "Cada substituicao do with tem que ter duas partes, o simbolo e sua definicao.")))))
 
 ;; parse : s-exp -> WAE
 ;; Consumes an s-expression and generates the corresponding WAE
@@ -26,18 +31,19 @@
         [(number? sexp) (num sexp)]
         [(symbol? sexp) (id sexp)]
         [(list? sexp)
-            (case (first sexp)
-                [(+) ( binop +  ( parse (second sexp) ) 
-                                ( parse (third sexp) ) ) ]
-                [(-) ( binop -  ( parse (second sexp) ) 
-                                ( parse (third sexp) ) ) ]
-                [(with) ( with  ( parse (second sexp) )
-                                ( parse (third sexp) ) ) ]
-                [(id) ( lobmanager( parse (second sexp) '())
-                                ( parse (third sexp) ) ) ] 
-                [else ( error 'parse "Esperado '+ '- ou with." ) ] ) ]
+            (if (= (length sexp) 3)
+                (case (first sexp)
+                    [(+) ( binop +  ( parse (second sexp) ) 
+                                    ( parse (third sexp) ) ) ]
+                    [(-) ( binop -  ( parse (second sexp) ) 
+                                    ( parse (third sexp) ) ) ]
+                    [(with) ( with  ( lobmanager (second sexp) '() )
+                                    ( parse (third sexp) ) ) ]
+                    [else ( error 'parse "Esperado '+ '- ou with." ) ] )
+            (error 'parse "Numero dos parametros para '+ '- ou with errado.") ) ]
         [else ( error 'parse "Entrada invalida para o parser." ) ] ) )
 
 (trace parse)
+(trace lobmanager)
 
 (parse(read))
