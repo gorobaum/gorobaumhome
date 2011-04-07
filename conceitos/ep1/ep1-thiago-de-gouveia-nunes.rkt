@@ -29,20 +29,9 @@
 ;;  Definicoes das binops usadas pelo programa.
 (define table (list (list '+ + ) (list '- -) (list '* *) (list '/ /)))
 
-;;;;;;;;;;;;;;;;;;;;;;;
-;;  Lista de Testes  ;;
-;;;;;;;;;;;;;;;;;;;;;;;
-
-;; Testes para o parser.
-(define testes ( list   (list '{ + 5 5 } 10 )
-                        (list '{ - 5 5 } 0  )
-                        (list '{ * 5 5 } 25 )
-                        (list '{ / 5 5 } 1  )
-                        (list '{ with {x 5} { + x x }} 10 )))
-
-;;;;;;;;;;;;;;;;;;;;;;;;;
-;; Funcoes Auxiliares  ;;
-;;;;;;;;;;;;;;;;;;;;;;;;;
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+;; Funcoes Auxiliares do parse ;;
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 
 ;;  lobisthere : symbol lob -> boolean
 ;;  Verifica se um simbolo ja foi definido dentro de um with.
@@ -78,12 +67,15 @@
             (second (first table))
             (searchbinop op (rest table)))))
 
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+;; Funcoes Auxiliares do rinterp ;;
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 
 ;;  lookup : symbol DefrSub -> WAE
 ;;  Consome um symbol e um DefrSub e devolve uma WAE
 (define (lookup name ds)
     (type-case DefrdSub ds
-        [mtSub () (error 'lookup "no binding for identifier")]
+        [mtSub () (error 'lookup "Identificador nao encontrado.")]
         [aSub (bound-name bound-value rest-ds)
             (if (symbol=? bound-name name)
                 bound-value
@@ -138,8 +130,7 @@
                     [else ( binop   (searchbinop (first sexp) table)
                                     (parse (second sexp))
                                     (parse (third sexp)))])
-            (error 'parse "Entrada invalida para o parser.") ) ]
-        [else ( error 'parse "Entrada invalida para o parser." ) ] ) )
+            (error 'parse "Entrada invalida para o parser."))]))
 
 ;;  interp : WAE -> number
 ;;  Consome uma WAE e devolve seu valor numerico.
@@ -149,7 +140,7 @@
 ;; Testes ;;
 ;;;;;;;;;;;;
 
-;; Teste do Parse.
+;; Teste do parse.
 (test (parse '{ with {{x 5}{y 10}} {with { z { + y 42 } } { - { + { * x y } {/ 20 10 } } z } } })
                 (with (list (binding 'x (num 5)) (binding 'y (num 10)))
                     (with (list (binding 'z (binop + (id 'y) (num 42))))
@@ -176,10 +167,9 @@
 (test (searchbinop '+ table) + )
 (test/exn (searchbinop '% table) "Operacao binaria nao definida.")
 
-(trace mount-aSub)
-(trace rinterp)
-(trace searchbinop)
-(trace parse)
-(trace lobmanager)
+;; Testes do interp
+(test (interp(parse '{ with {{x 5}{y 10}} {with { z { + y 42 } } { - { + { * x y } {/ 20 10 } } z } } })) 0)
+(test/exn (interp(parse '{/ 3 0})) "Tentativa de Divisao por zero!.")
+(test/exn (interp(parse '{+ { with {x 5} {with {y 6} { + x y } } } x } )) "Identificador nao encontrado.")
 
 (interp(parse(read)))
