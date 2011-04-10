@@ -21,9 +21,14 @@ Thiago G. Nunes							6797289
 #include <stdlib.h>
 #include <string.h>
 
-typedef struct buffer* Buffer;
+/** Para maiores explicacoes das funcoes, leia os comentarios no arquivo .c 
+	respectivo. **/
 
+/* Essa funcao comprimi o arquivo Entry usando o algoritmo lz78 e escreve o re
+   sultado no arquivo Out. */
 void CompressFile( FILE* Entry, FILE* Out );
+/* Essa funcao descomprimi o arquivo Entry usando o algoritmo lz78 e escreve o 
+   resultado no arquivo Out. */
 void DecompressFile( FILE* Entry, FILE* Out );
 
 #endif

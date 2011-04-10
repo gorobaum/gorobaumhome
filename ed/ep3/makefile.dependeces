@@ -1,1 +1,0 @@
-compress.o : compress.c compress.h

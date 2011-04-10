@@ -18,11 +18,21 @@ Thiago G. Nunes							6797289
 #include <string.h>
 #include "compress.h"
 
+
+/* Essa funcao cria o nome do arquivo que sera criado dependendo da operacao
+   escolhida. Which = 0 e´ a compressao e Which = 1 e´ a descompressao. */
 void NewFileName( char *Name, char *NewName, int Which )
-{
-    strcpy( NewName, Name );
-    if ( Which == 0 ) strcat( NewName, ".cod" );
-    else if ( Which == 1 ) strcat( NewName, ".dec" );
+{	
+    if ( Which == 0 ) 
+    {
+    	strcpy( NewName, Name );
+    	strcat( NewName, ".cod" );
+   	}
+    else if ( Which == 1 ) 
+    {
+    	strncpy( NewName, Name, strlen(Name)-4 );
+    	strcat( NewName, ".dec" );
+    }
     else
    	{
 		printf("Erro na criacao do nome do arquivo! \n");
@@ -30,6 +40,11 @@ void NewFileName( char *Name, char *NewName, int Which )
 	}
 }
 
+/* O main cira dois ponteiros para arquivos, um para a entrada e outro para saida.
+   O ponteiro Entry abre o arquivo passado para o programa via os parametros rece
+   bidos e o ponteiro Out abre o arquivo com o nome recebido da funcao NewFileName.
+   Com isso o programa compacta ou descompacta o arquivo Entry, baseado no prime
+   iro ponteiro. */
 int main( int argc, char **argv )
 {
     FILE *Entry, *Out;
