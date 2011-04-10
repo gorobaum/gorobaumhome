@@ -12,10 +12,11 @@
 #define Graph Digraph
 #define GRAPHinit DIGRAPHinit
 #define GRAPHshow DIGRAPHshow
-#define MAXVERTEX 100
+#define maxV 100
 #define LINESIZE 10
 
-static int lbl[MAXVERTEX];
+static int lbl[maxV];
+static int parnt[maxV];
 
 typedef struct {
     Vertex v;
@@ -24,11 +25,25 @@ typedef struct {
 
 typedef struct digraph *Digraph;
 
+typedef struct node *link;
+
+struct node {
+    Vertex w;
+    link next;
+};
+
 struct digraph {
     int V;
     int A;
-    int **adj;
+    link *adj;
 };
+
+link NEW (Vertex w, link next) {
+    link p = malloc(sizeof(*p));
+    p->w=w;
+    p->next=next;
+    return p;
+}
 
 Arc ARC (Vertex v, Vertex w) {
     Arc e;
@@ -50,33 +65,31 @@ int **MATRIXinit (int r, int c, int val) {
 }
 
 Digraph DIGRAPHinit (int V) {
+    Vertex v;
+    
     Digraph G = malloc(sizeof(*G));
     G->V = V;
     G->A = 0;
-    G->adj = MATRIXinit( V, V, 0 );
+    G->adj = malloc(V* sizeof(link));
+    for ( v = 0; v < V; v++ ) G->adj[v] = NULL;
+    
     return G;
 }
 
 void DIGRAPHinsertA (Digraph G, Vertex v, Vertex w) {
-    if (v != w && G->adj[v][w] == 0) {
-        G->adj[v][w] = 1;
-        G->A++;
-    }
-}
-
-void DIGRAPHremoveA (Digraph G, Vertex v, Vertex w) {
-    if ( G->adj[v][w] == 1 ) {
-        G->adj[v][w] = 0;
-        G->A--;
-    }
+    link p;
+    if ( w == v ) return;
+    for ( p = G->adj[v]; p != NULL; p = p->next) if ( p->w == w) return;
+    G->adj[v] = NEW(w, G->adj[v]);
+    G->A++;
 }
 
 void DIGRAPHshow (Digraph G) {
-    Vertex v, w;
+    Vertex v;
+    link p;
     for ( v = 0; v < G->V; v++ ) {
-        printf("%2d:", v+1);
-        for ( w = 0; w < G->V; w++ )
-            if ( G->adj[v][w] == 1 ) printf(" %2d ", w+1);
+        printf("%2d:",v);
+        for ( p = G->adj[v]; p != NULL; p = p->next ) printf("%2d", p->w);
         printf("\n");
     }
 }
@@ -86,49 +99,35 @@ void GRAPHinsertE (Graph G, Vertex v, Vertex w) {
     DIGRAPHinsertA(G, w, v);
 }
 
-int pathR (Digraph G, Vertex v, Vertex t) {
-    Vertex w;
+void pathR (Digraph G, Vertex v) {
+    link p;
     lbl[v] = 0;
-    if ( v == t ) return 1;
-    for ( w = 0; w < G->V; w++ ) 
-        if ( G->adj[v][w] == 1 && lbl[w] == -1 )
-            if ( pathR(G, w, t) == 1 )
-                return 1;
-    return 0;
-}
-
-int DIGRAPHpath (Digraph G, Vertex s, Vertex t) {
-    Vertex v;    
-    for ( v = 0; v > G->V; v++ )
-        lbl[v] = -1;
-    return pathR(G, s, t);
-}
-
-int isbipartR (Graph G, Vertex s, int *bipartite, int last) {
-    Vertex w;
-    if ( bipartite[s] == 0 ) bipartite[s] = (last)%2 + 1;
-    else if ( bipartite[s] != (last%2+1) ) return 0;
-  
-    for ( w = 0; w < G->V; w++ ) 
-        if ( G->adj[s][w] == 1 && bipartite[w] != bipartite[s]%2 + 1 ) {
-            if ( isbipartR(G, w, bipartite, bipartite[s] ) == 0 ) 
-                return 0;
+    for ( p = G->adj[v]; p != NULL; p = p->next )
+        if ( lbl[p->w] == -1 ) {
+            parnt[p->w] = v;
+            pathR(G, p->w);
         }
-    return 1;
 }
 
-int GRAPHisbipart (Graph G, int *bipartite) {
-    Vertex v;
+int DIGRAPHpath ( Digraph G ) {
+    Vertex v, w;    
+    for ( w = 0; w < G->V; w++ ) {
+        for ( v = 0; v < G->V; v++ ) {
+            lbl[v] = -1;
+            parnt[v] = -1;
+        }
+        parnt[w] = w;
+        pathR(G, w);
+        for ( v = 0; v < G->V; v++ ) {
+            if ( parnt[v] == -1 ) return 0;
+        }
+    }
+    return 1;
     
-    for ( v = 0; v < G->V; v++ )
-        if ( bipartite[v] == 0 ) {
-            if ( isbipartR( G, v, bipartite, 0) == 0 ) return 0;
-        }
-    return 1;
 }
 
 int main() {
-    int NumVert, NumArcs, i, j,*bipartite, inst;
+    int NumVert, NumArcs, i, j, inst;
     char *line, *ptr;
     Graph G;
     
@@ -141,9 +140,8 @@ int main() {
         ptr = line+j*sizeof(char);
         NumVert = atoi(line);
         NumArcs = atoi(ptr);
+        if ( NumVert == 0 && NumArcs == 0 ) break;
         
-        bipartite = malloc(NumVert*sizeof(int));
-        for ( i = 0; i < NumVert; i++ ) bipartite[i] = 0;
         G = GRAPHinit(NumVert);
         inst++;
         
@@ -152,10 +150,9 @@ int main() {
             ptr = line+j*sizeof(char);
             GRAPHinsertE(G, (atoi(line)-1), (atoi(ptr)-1));
         }
-        printf("Instancia %d\n", inst);
-        if ( GRAPHisbipart(G, bipartite) == 1 ) printf("sim\n");
-        else printf("nao\n");
-        free(bipartite);
+        printf("Teste %d\n", inst);
+        if ( DIGRAPHpath( G ) == 1 ) printf("normal\n");
+        else printf("falha\n");
         free(G);
     }
     free(line);
