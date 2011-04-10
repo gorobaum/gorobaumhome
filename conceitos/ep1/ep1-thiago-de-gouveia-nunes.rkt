@@ -43,7 +43,7 @@
 ;;  lobmanager : WAE list -> binding
 ;;  Consome uma lista de WAE e uma lista vazia e gera uma lista de binding.
 (define (lobmanager in out)
-        (if (= (length in) 0 ) (reverse out)
+        (if (= (length in) 0 ) out
             (if (list? (first in))
                 (if (= (length (first in) ) 2 )
                     (if (symbol? (first (first in)))
@@ -142,7 +142,7 @@
 
 ;; Teste do parse.
 (test (parse '{ with {{x 5}{y 10}} {with { z { + y 42 } } { - { + { * x y } {/ 20 10 } } z } } })
-                (with (list (binding 'x (num 5)) (binding 'y (num 10)))
+                (with (list (binding 'y (num 10))(binding 'x (num 5)))
                     (with (list (binding 'z (binop + (id 'y) (num 42))))
                          (binop - (binop + (binop * (id 'x) (id 'y)) (binop / (num 20) (num 10))) (id 'z )))))
 (test/exn (parse '{with {x 5}}) "Entrada invalida para o parser.")
