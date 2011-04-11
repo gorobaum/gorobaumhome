@@ -1,0 +1,53 @@
+Nome : Thiago de Gouveia Nunes
+NUSP : 6797289
+Data : 29/03/2011
+Lista 2 de Analise de Algoritmo
+
+
+Exercicio 1
+
+Calcula-polinomio( A, p, r, x ) 
+    se p = r
+        então devolve Calcula-termo( A, p , x )
+    senão q <- (p+q)/2
+        devolve Calcula-termo( A, p , q, x ) + Calcula-termo( A, p+1, r, x )
+
+Calcula-termo( A, p, x )
+    b <- 0
+    para i <- 0 ate p faça
+        b <- b * x
+    devolve A[p]*b
+
+O meu algoritmo faz 1+2+...+n multiplicações e n somas.
+O algoritmo de Horner faz n multiplicações e n somas.
+
+Exercicio 6
+
+Calcula-kesima-posição( A , k, n )
+    menor <- A[1]                       = O(1)
+    maior <- A[1]                       = O(1)
+    para i <- 2 até n faça              = O(n)
+        se A[i] > maior                 < O(n)
+            maior <- A[i]               < O(n)
+        se A[i] < menor                 < O(n)
+            menor <- A[i]               < O(n)
+    c = |k-n/2| + 1                     = O(1)
+    se k >= n/2                         = O(1)
+        então                           
+            para i <- 0 até n faça      = O(n)
+                B[i] <- A[i]            = O(n)
+            para i <- 0 até c faça      = O(c)
+                B[i+n] <- maior         = O(c)
+        senão
+            para i <- 0 até n faça      = O(n)
+                B[i+c] <- A[i]          = O(n)
+            para i <- 0 até c faça      = O(c)
+                B[i] <- menor           = O(c)
+    devolve caixa_preta(B)              = O(1)
+
+Total                                   = 4*O(1) + 9*O(n) + 4*O(c)
+                                        = O(n)
+
+A função pega um vetor A e escreve outro vetor B de modo que k seja a mediana do
+vetor B, e B[k+c] = A[k], c = modulo( k - (n/2) ) + 1.
+                

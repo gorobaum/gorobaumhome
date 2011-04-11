@@ -1,0 +1,201 @@
+
+<!-- saved from url=(0070)http://www.cs.brown.edu/courses/cs173/2008/Assignments/01-rinterp.html -->
+<html><head><meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
+<title>Brown CS: CSCI 1730: Programming Languages: Rudimentary Interpreter</title>
+<style type="text/css">
+  @import "../style.css";
+</style>
+</head>
+
+<body>
+
+<center>
+<a class="noborderlink" href="http://www.cs.brown.edu/courses/csci1730/2008/"><img src="./Brown CS  CSCI 1730  Programming Languages  Rudimentary Interpreter_files/logo.jpg"><img src="./Brown CS  CSCI 1730  Programming Languages  Rudimentary Interpreter_files/icon.png"></a>
+</center>
+
+<div id="main-text">
+
+
+<p>
+<em>You must do this assignment solo.  We know that some of you are
+not yet comfortable with Scheme; for that reason, we will weight this
+assignment very, very low in the overall score.  Doing poorly on it
+will not at all damage your course grade.  But, you should exploit
+this opportunity to become familiar with the style of programming you
+will do in the rest of the semester.</em></p>
+
+
+<h3>Rudimentary Interpreter</h3>
+
+<ol>
+
+  <li>Write a parser and interpreter for the WAE language we discussed
+  in class. <strong>The textbook can be of great assistance in this part
+    of the assignment;</strong> it provides an abstract syntax datatype
+  and the beginnings of a parser and an interpreter.</li>
+
+  <li>Once you've <strong>written and tested</strong> the parser and
+  interpreter for WAE, extend it with the features described below.</li>
+
+</ol>
+
+<p>In each part of the assignment, implement the function
+<code>parse</code>, which consumes an expression in the language's
+concrete syntax and returns the abstract syntax representation of that
+expression. <code>parse</code> must accept only expressions in the
+syntax of the language.</p>
+
+<p>In addition to <code>parse</code>, you must implement the function
+<code>interp</code>, which consumes an abstract syntax expression (as
+returned by the <code>parse</code> function) and returns a Scheme
+number.
+
+</p><p><strong>You must include a contract for every function that you write
+  and include test cases that amply exercise all of the code you've
+  written.</strong> We will not give <strong>any</strong> credit to
+untested functionality, even if it is correct! (Note that DrScheme will
+tell you if any of your code is untested.) Refer to the <a href="http://www.cs.brown.edu/courses/cs173/2008/Syllabus/">syllabus</a> for style requirements.</p>
+
+<h3>Features to Implement</h3>
+
+<dl>
+
+<dt>WAE</dt>
+
+<dd><p>The WAE language has numbers, two arithmetic operators
+(<code>+</code>, <code>-</code>), identifiers and <code>with</code>
+expressions.  Of course, to handle identifiers and <code>with</code>
+expressions you'll have to implement substitution.</p></dd>
+
+<dt>Binary arithmetic operators</dt>
+
+<dd><p>In place of having separate rules for <code>+</code> and
+<code>-</code>, define a single syntactic rule for all binary arithmetic
+operators.  Parse these into a <code>binop</code> datatype variant.
+Define a table that maps operator names (symbols) to actual functions
+(Scheme procedures) that perform the corresponding operation.  Having a
+single rule like this, accompanied by a table, makes your language
+easier to extend: once you have modified your parser and interpreter
+once to support binary operators, you won't need to touch either one to
+add any number of new ones.  To demonstrate this, define multiplication
+and division (using <code>*</code> and <code>/</code> to represent them
+in the language's concrete syntax).  </p></dd>
+
+<dt>Multi-armed <code>with</code> </dt>
+
+<dd><p>Each identifier bound by
+the <code>with</code> expression is bound only in its body.  There will
+be zero or more identifiers bound by each <code>with</code> expression.
+If there are multiple bindings of the same identifier in a single
+<code>with</code> expression's bindings list, your interpreter should 
+halt with an error message.  An example:</p>
+
+<pre>{with {{x 2}
+       {y 3}}
+  {with {{z {+ x y}}}
+    {+ x z}}}
+</pre>
+
+<p>will evaluate to <code>7</code>, while</p>
+
+<pre>{with {{x 2}
+       {x 3}}
+	{+ x 2}}
+</pre>
+
+<p>will halt with an error message.</p>
+</dd>
+</dl>
+
+<h3>Syntax</h3>
+
+<p>The syntax of the language you should implement can be captured with
+the following grammar:</p>
+
+<pre>&lt;WAE&gt; ::= &lt;num&gt;
+    | {+ &lt;WAE&gt; &lt;WAE&gt;}
+    | {- &lt;WAE&gt; &lt;WAE&gt;}
+    | {* &lt;WAE&gt; &lt;WAE&gt;}
+    | {/ &lt;WAE&gt; &lt;WAE&gt;}
+    | {with {{&lt;id&gt; &lt;WAE&gt;} ...} &lt;WAE&gt;}
+    | &lt;id&gt;
+where an &lt;id&gt; is not +, -, *, /, or with.
+</pre>
+
+<p>In this grammar, the ellipsis (<code>...</code>) means that the previous
+non-terminal is present zero or more times.</p>
+
+<p>If a <code>with</code> expression has duplicate identifiers, we
+consider it a syntax error. Therefore, such errors must be detected in
+<code>parse</code>. For example, parsing the following expression must
+signal an error:
+
+</p><pre>{with {{x 10} {x 20}} 50}
+</pre>
+
+<h3>Scheme's <code>(match ...)</code> Syntax</h3> If you're pretty comfortable with Scheme, or are
+feeling particularly adventurous, check out the <code>(match ...)</code> syntax
+in the <a href="http://www.cs.brown.edu/courses/csci1730/2008/Manual/reference/match.html">
+	PLT Scheme Docs</a>.  It could make your parser prettier and easier to write.
+
+<p>Note that this a <b>power user feature</b> and is <b>not required</b>.  If
+you find yourself getting frustrated using the <code>cond/case</code> syntax to
+parse the input, take a look.  If you're still shaky on Scheme in general, skip
+it for now.
+
+</p><h3>Testing Your Code</h3>
+
+<p>Your parser and interpreter must detect errors and explicitly signal them by
+calling <code>(error ...)</code>.  We will consider an error raised internally
+by Scheme to be a bug in your code.</p>
+
+<p>For example, Scheme signals a "divide by zero" error if you attempt
+to evaluate <code>(/ 1 0)</code>.  Since we use Scheme's division
+function to implement division in this assignment, you may be tempted to
+leave it to Scheme to signal division by zero errors for you.  However,
+you must signal the error yourself by explicitly testing for division by
+zero before calling Scheme's division procedure.</p>
+
+If you are not sure if an error raised by your program constitutes a
+bug, search the DrScheme Help for <code>test/exn</code>.
+<code>test/exn</code> tests for errors, but only succeeds on errors that
+you explicitly signal.
+
+<h3>Support Code</h3>
+
+<p>
+Use the "PLAI Scheme" language.  Your code <strong>must</strong>
+adhere to the following template, without any changes:
+</p>
+
+<pre>(define-type Binding
+  [binding (name symbol?) (named-expr WAE?)])
+
+(define-type WAE
+  [num (n number?)]
+  [binop (op procedure?) (lhs WAE?) (rhs WAE?)]
+  [with (lob (listof Binding?)) (body WAE?)]
+  [id (name symbol?)])
+
+;; parse : s-exp -&gt; WAE
+;; Consumes an s-expression and generates the corresponding WAE
+(define (parse sexp)
+  ...)
+
+;; interp : WAE -&gt; number
+;; Consumes a WAE representation of an expression and computes
+;;   the corresponding numerical result
+(define (interp expr)
+  ...)
+</pre>
+
+<h3>Handin</h3>
+
+<p>Turn in a single file called <code>rinterp.ss</code>, that contains all of
+the code needed to run your parser and interpreter.</p>
+
+<p></p>
+
+</div>
+
+</body></html>
