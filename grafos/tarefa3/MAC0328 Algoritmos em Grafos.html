@@ -1,0 +1,353 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
+<!-- saved from url=(0059)http://www.ime.usp.br/~coelho/mac0328-2011/tarefas/tarefa3/ -->
+<html><head><meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
+
+  
+
+
+
+
+  <title>MAC0328 Algoritmos em Grafos</title>
+  <link rel="stylesheet" href="./MAC0328 Algoritmos em Grafos_files/eps.css" type="text/css">
+</head>
+<body>
+
+<p align="right">
+<small><b><a href="http://www.ime.usp.br/mac/">Departamento de Ciência da
+Computação</a> - <a href="http://www.ime.usp.br/">IME</a> - <a href="http://www.usp.br/">USP</a></b></small><br>
+
+
+
+</p>
+<h1>MAC0328 Algoritmos em Grafos</h1>
+
+<h2>Tarefa 3 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+Entrega: até 10 de abril de 2011</h2>
+
+
+  
+<p align="right"><small>Este projeto foi originalmente elaborado<br>
+pelo professor <a href="http://www.ime.usp.br/~reverbel/">Francisco Reverbel</a></small></p>
+
+<h1><font color="red"><b>M</b></font>ake</h1>
+
+<font color="#000040">
+<p align="center">
+ OK, let's be straight about it, <br>
+ the syntax of make is really stupid.<br>
+If you use spaces where you're supposed to use tabs or vice versa,<br>
+your makefile blows up. And the error messages are really confusing.<br>
+
+
+</p></font><p align="center"><font color="#000040">
+Fonte: Running Linux, Matt Welsh and Lar Kaufman
+</font>
+
+</p><hr>
+
+<h2>
+Objetivo
+</h2>
+
+<ol>
+  <li>Manipulação da representação de um digrafo através de <a href="http://www.ime.usp.br/~pf/algoritmos_para_grafos/aulas/adjlists.html">vetor de listas de adjacência</a>. 
+</li></ol>
+
+
+<hr>
+
+<h2>
+Descrição
+</h2>
+
+<h3>
+Introdução
+</h3>
+
+<p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+Neste exercício-programa você fará um programa em <tt>C</tt> que
+cujo fonte se chamara <tt><font color="red"><b>M</b></font>ake.c</tt>. O programa utilizará as 
+<a href="http://www.ime.usp.br/~pf/algoritmos_para_grafos/aulas/digraphdatastructs.html">estruturas de dados</a> 
+das <a href="http://www.ime.usp.br/~pf/algoritmos_para_grafos/">notas de aulas</a>  do professor <a href="http://www.ime.usp.br/~pf/">Paulo Feofiloff</a>
+para a representação de um "digrafo de
+dependência" através de  <a href="http://www.ime.usp.br/~pf/algoritmos_para_grafos/aulas/adjlists.html">vetor de listas de adjacência</a>, como descrito mais adiante.
+</p>
+
+
+<p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 
+O seu programa deverá chamar-se <tt><font color="red"><b>M</b></font>ake</tt>. O '<font color="red"><b>M</b></font>' maiúsculo em
+<tt><font color="red"><b>M</b></font>ake</tt> é para diferenciar o seu programa do utilitário
+<a href="http://www.gnu.org/software/make/"><tt>make</tt></a>
+do <tt>UNIX</tt>. De maneira semelhante que o <tt>make</tt>, o seu <tt><font color="red"><b>M</b></font>ake</tt>,
+ao ser chamado na linha de comando sem opção alguma, lerá um arquivo de
+nome <tt><font color="red"><b>M</b></font>ake<font color="red"><b>F</b></font>ile</tt> contendo informações de
+dependência e comandos para reconstrução (<i>rebuilding commands</i>) de
+objetos. O <tt><font color="red"><b>F</b></font></tt> maiúsculo
+em <tt><font color="red"><b>M</b></font>ake<font color="red"><b>F</b></font>ile</tt> server para não
+confundirmos a entrada do <tt>Make</tt> com o arquivo <tt>Makefile</tt>;
+que vocês muito provavelmente estarão utilizando.  </p>
+
+<p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+A propósito, no dia 6 de abril teremos aqui no IME uma palestra de <a href="http://en.wikipedia.org/wiki/Stuart_Feldman">Stuart Feldman</a>, criador do <tt>make</tt>.
+
+</p><p> </p>
+<h3>
+Formato de um <tt><font color="red"><b>M</b></font>ake<font color="red">F</font>ile</tt>
+</h3>
+
+Um <tt><font color="red"><b>M</b></font>ake<font color="red"><b>F</b></font>ile</tt> consiste de
+uma seqüência de "regras" com o seguinte formato:
+
+<pre class="saida">  &lt;target&gt; :  &lt;dependências&gt;
+         &lt;comando<sub>1</sub>&gt;
+         &lt;comando<sub>2</sub>&gt;
+         ...
+</pre>
+
+<p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+Um <tt>target</tt> é usualmente o nome de um arquivo que é
+gerado por um programa; exemplos de targets são arquivos
+executáveis (bin ou .o). Um target também pode ser o nome
+de uma ação, tal como "<tt>clean</tt>".
+
+</p><p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+Uma <tt>dependência</tt> é um arquivo que é usado
+para criar o <tt>target</tt>. Um
+<tt>target</tt> pode depender de vários arquivos.
+
+</p><p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+Um <tt>comando</tt> é uma ação que <tt><font color="red"><b>M</b></font>ake</tt>
+pode mandar que seja executada. Um regra pode ter mais que um comando,
+cada um em uma linha.
+<font color="red"><b>Deve existir</b></font> um caractere <tt>TAB ('\t')</tt> no início de cada
+linha que possui um comando.
+
+
+</p><h3>
+Exemplo de um <tt><font color="red"><b>M</b></font>ake<font color="red">F</font>ile</tt>
+</h3>
+
+<p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+A seguir está um exemplo típico de um arquivo <tt><font color="red"><b>M</b></font>ake<font color="red"><b>F</b></font>ile</tt> que seu
+programa <tt><font color="red"><b>M</b></font>ake</tt> deve ser capaz de tratar (os números das
+linhas foram colocada apenas para efeito de referência, eles não fazem
+parte do <tt><font color="red"><b>M</b></font>ake<font color="red"><b>F</b></font>ile</tt>):
+</p>
+
+<pre class="saida">1   meuprog: meuprog.o  fila.o  etc.o
+2         gcc meuprog.o fila.o etc.o -o meuprog 
+3
+4   meuprog.o:  meuprog.c  minhasdefs.h  fila.h   etc.h
+5         gcc -c meuprog.c
+6
+7   fila.o:  fila.c minhasdefs.h  fila.h
+8         gcc -c fila.c
+9
+10  etc.o: etc.c  minhasdefs.h  etc.h
+11        gcc -c etc.c
+12
+13  clean:
+14        rm -f meuprog.o fila.o etc.o
+15        cp meuprog.c ../ultimo/meuprog-salvo.c
+16        cp fila.c  ../ultimo/fila-sava.c
+</pre>
+
+Este exemplo ilustra o formato do arquivo 
+<tt><font color="red"><b>M</b></font>ake<font color="red"><b>F</b></font>ile</tt> que o seu
+programa deve tratar:
+
+<p>
+</p><dt>
+ Linhas 1, 4, 7, 10 e 13 fornecem informações de dependência. Em
+  uma linha de dependência o nome de um <tt>target file</tt> aparece
+  primeiro, seguido por dois pontos (':'). Depois dos dois pontos
+  segue-se uma lista (possivelmente vazia) de arquivos dos quais o
+  <tt>target</tt> depende. A Linha 7, por exemplo, diz que o <tt>target</tt> file
+  <tt>fila.o</tt> depende dos arquivos <tt>fila.c, minhasdefs.h</tt> e
+  <tt>fila.h</tt>.
+</dt><dd>
+
+<p>
+</p></dd><dt>    
+Uma linha de dependência é seguida por uma ou mais linhas com
+   comandos (<tt>rebuild commands</tt>) que criam ou atualizam o target
+   file especificado na linha de dependência. O primeiro caractere de um
+   linha contendo um comando <font color="red"><b>deve</b></font>
+   ser um <tt>TAB</tt>
+   (<tt>`\t'</tt>); uma, aparentemente idêntica, seqüência de espaços
+   <font color="red"><b>não</b></font> pode ser usada no lugar do <tt>TAB</tt>. Li    nhas 2, 5, 8, 11 e 14
+   contêm comandos. A Linha 8, por exemplo, diz que o comando <br>
+</dt><dd>
+    
+<pre class="saida">meu_prompt&gt; gcc -c fila.c
+</pre> 
+    
+       deverá ser executado para reconstruir o target <tt>fila.o</tt> a
+       partir dos arquivos <tt>fila.c, minhasdefs.h</tt> e
+       <tt>fila.h</tt>. Neste particular <tt><font color="red"><b>M</b></font>ake<font color="red"><b>F</b></font>ile</tt>, cada linha
+       de dependência é seguida por apenas uma linha de comando. Seu
+       programa, entretanto, deve ser capaz de tratar o caso em que
+       várias linhas de comando seguem uma linha de dependência.
+</dd><dd>
+
+<p>
+</p></dd><dt>
+    As linhas em branco (linhas 3, 6, 9 e 12) são ignoradas. Estas
+   linhas podem estar presentes apenas para facilitar a
+   legibilidade do <tt><font color="red"><b>M</b></font>ake<font color="red"><b>F</b></font>ile</tt>, mas elas não são necessária. Um
+   <tt><font color="red"><b>M</b></font>akefile</tt> similar, mas sem linhas em branco, também deve ser
+   aceito pelo seu <tt><font color="red"><b>M</b></font>ake</tt>.
+</dt><dd>
+
+<a name="grafo"></a>
+<h3>
+Digrafo de dependências
+</h3>       
+
+<p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; As linhas de dependências em
+um <tt><font color="red"><b>M</b></font>ake<font color="red"><b>F</b></font>ile</tt> (ou
+<tt><font color="red"><b>M</b></font>akefile</tt>) definem um <font color="red"><i>digrafo de dependências</i></font>: um digrafo
+onde os vértices correspondem a <tt>targets</tt> e arquivos e os 
+arcos representam a dependência entre estes
+<tt>targets</tt> e arquivos. Sempre que um arquivo <tt>arquivo<sub>1</sub></tt>
+depende de um arquivo <tt>arquivo<sub>2</sub></tt> o correspondente digrafo de
+dependências deve conter um arco do vértice de nome <tt>arquivo<sub>1</sub></tt>
+ao vértice de nome <tt>arquivo<sub>2</sub></tt>. A Linha 7 do nosso exemplo
+de <tt><font color="red"><b>M</b></font>ake<font color="red"><b>F</b></font>ile</tt> acima diz que o respectivo digrafo de dependências
+contém arcos do vértice de nome <tt>fila.o</tt> ao vértice de nome
+<tt>fila.c</tt>, ao vértice de nome <tt>minhasdefs.h</tt>, e ao
+vértice <tt>fila.h</tt>.
+</p>
+
+<a name="ciclo"></a>
+<p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; Um <a href="http://www.ime.usp.br/~pf/algoritmos_para_grafos/aulas/cycles.html"><font color="red"><i>ciclo</i></font></a> em um digrafo é caminho fechado. 
+Mais precisamente, um
+ciclo é uma seqüência de vértices
+<tt> v<sub>1</sub>-v<sub>2</sub>-...-v<sub>k</sub></tt> tal que
+
+</p><blockquote>
+ existe um arco de <tt>v<sub>i</sub></tt> a <tt>v<sub>i+1</sub></tt>
+ (<tt>i=0,1,...,k-1</tt>)  e 
+ <tt>v<sub>0</sub></tt>=<tt>v<sub>k</sub></tt>.
+</blockquote>
+     
+<p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+Um digrafo de depêndencias <font color="red"><b>não</b></font>
+deve conter ciclos. Isto,
+entretanto, não é obstáculo para que um digrafo correspondente a um arquivo <tt><font color="red"><b>M</b></font>ake<font color="red"><b>F</b></font>ile</tt> tenha ciclos. Isto
+apenas significa que o <tt><font color="red"><b>M</b></font>ake</tt> deverá ser capaz de verificar a 
+presença ou
+não de ciclos no digrafo. A existência de ciclos  deve
+ser considerada pelo <tt><font color="red"><b>M</b></font>ake</tt> como um erro na especificação do
+<tt><font color="red"><b>M</b></font>ake<font color="red"><b>F</b></font>ile</tt>. Detecção de ciclos é um dos objetos de estudo da Tarefa 4. Por enquanto não se preocupe com isto.
+</p>
+       
+
+
+<a name="representacao"></a>
+<h3>
+Representação do digrafo
+</h3>
+
+O seu programa deve usar 
+a 
+<a href="http://www.ime.usp.br/~pf/algoritmos_para_grafos/aulas/digraphdatastructs.html">estruturas de dados</a> e <a href="http://www.ime.usp.br/~pf/algoritmos_para_grafos/aulas/adjlists.html">vetor de listas de adjacência</a>
+das <a href="http://www.ime.usp.br/~pf/algoritmos_para_grafos/">notas de aulas</a> do professor <a href="http://www.ime.usp.br/~pf/">Paulo Feofiloff</a>
+para a representação do digrafo de dependências.
+
+Considere, além de outras estrutura comuns aos programas que temos visto,
+as seguintes declarações:
+<pre class="prog">static char  *nome[maxV], *comandos[maxV];
+</pre>
+
+<p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 
+Para cada vértice <tt>v</tt> o seu programa deve manter em:
+
+</p><ul>
+  <li> <tt>nome[v]</tt>&nbsp; um apontador para  um string  que contém 
+  o nome do vértice. Exemplos de nomes de vértices do digrafo
+  de dependências correspondente ao <tt><font color="red"><b>M</b></font>ake<font color="red"><b>F</b></font>ile</tt> do exemplo anterior
+  "<tt>meuprog.c</tt>", "<tt>fila.h</tt>" e "<tt>clean</tt>".
+
+  </li><li> <tt>G-&gt;adj[v]</tt>&nbsp; um apontador para 
+  uma estrutura do tipo  <tt>link</tt> que é o início 
+  da lista ligada de vértices que são ponta final de algum arco com 
+   ponta inicial em <tt>v</tt>. Há um arco <tt>v-w</tt> para cada arquivo <tt>nome[w]</tt> do qual <tt>nome[v]</tt> depende.
+
+  </li><li><tt>comandos[v]</tt>&nbsp; é um apontador
+  para um string.  Este string deverá conter todos os comandos associados ao
+  <tt>target</tt> <tt>nome[v]</tt>, uma após o outro, separados por um
+  um ';' (ponto-e-vírgula).
+
+</li></ul>
+Por enquanto acho que é só isto que precisamos de um <tt>Vertex</tt>. No
+Tarefa 4 precisaremos  guardar mais informações associadas a cada vértice.
+
+
+
+<h3>
+Comportamento do <tt><font color="red"><b>M</b></font>ake</tt>
+</h3>
+
+O programa <tt><font color="red"><b>M</b></font>ake</tt> será chamado em uma linha
+de comando do shell da seguinte maneira:
+
+<pre class="saida">meu_prompt&gt; <font color="red"><b>M</b></font>ake 
+</pre>
+
+Chamado desta maneira <tt><font color="red"><b>M</b></font>ake</tt> deverá procura
+no diretório corrente um arquivo de nome <tt><font color="red"><b>M</b></font>ake<font color="red"><b>F</b></font>ile</tt> e     processá-lo da seguinte forma:
+   
+      
+    <ol>
+       <li> (Contrói o digrafo de dependências) <tt><font color="red"><b>M</b></font>ake</tt>
+       lê o arquivo <tt><font color="red"><b>M</b></font>ake<font color="red"><b>F</b></font>ile</tt>, que tem
+       o formato descrito acima, e contrói uma representação do digrafo
+       de dependência através de vetor de listas de adjacência
+
+       </li><li> (Salva o digrafo) Após a criação do digrafo de dependência na
+       representação descrita, <tt><font color="red"><b>M</b></font>ake</tt> percorre o digrafo
+       e cria no diretório corrente um arquivo de nome
+       <tt><font color="red"><b>M</b></font>ake<font color="red"><b>F</b></font>ile.dg</tt>. Este arquivo <tt><font color="red"><b>M</b></font>ake<font color="red"><b>F</b></font>ile.dg</tt> é parecido
+       com o exemplo de <tt><font color="red"><b>M</b></font>ake<font color="red"><b>F</b></font>ile</tt>,
+      possivelmente sem as linhas em branco ou
+       trocando alguma das regras de lugar; esta ordem é irrelevante, ela
+       depende de como
+       o seu <tt><font color="red"><b>M</b></font>ake</tt> gerou o grafo.
+    </li></ol>
+	
+
+<hr>
+
+<h2>
+Entrega
+</h2>
+
+<ol>
+  <li> Junto com o seu programa você deve entregar um Makefile de tal forma
+      que 
+<pre class="saida">meu_prompt&gt; make <font color="red"><b>M</b></font>ake
+</pre>
+      produza o executável de nome <tt><font color="red"><b>M</b></font>ake</tt>
+      correspondente a sua Tarefa 3. <br>
+  
+      
+  </li><li> O Paca não costuma aceitar a entrega de vários arquivos. Por isto,
+      você deve depositar um arquivo <tt>tarefa3.tgz</tt> com todo o seu trabalho.
+      Espera-se que
+      <pre class="saida">meu_prompt&gt;tar -xvf tarefa3.tgz </pre>
+      crie um diretório que tenha o seu <tt>login</tt> na rede Linux como
+      nome. Neste diretório devem estar todos os arquivos da sua Tarefa 3,
+      inclusive o Makefile que você usou. Se você achar necessário
+      coloque junto um arquivo <tt>00-leia-me</tt>, onde você descreve algo
+      que achar necessário: como limitações e bugs no seu programa<br>
+      
+</li></ol>
+
+<hr>
+
+<!-- hhmts start -->
+Last modified: Mon Mar 31 08:56:08 BRT 2011
+<!-- hhmts end -->
+ 
+</dd></body></html>
