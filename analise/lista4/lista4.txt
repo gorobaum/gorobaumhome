@@ -1,0 +1,55 @@
+Nome : Thiago de Gouveia Nunes
+NUSP : 6797289
+Data : 15/04/2011
+Lista 4 de Analise de Algoritmo
+
+Exercicio 2
+
+    Para responder essa pergunta vamos pensar no melhor caso possivel para um
+algoritmo baseado em comparações. O melhor caso é um vetor ordenado. Esse caso
+é representado na árvore pelos ramos da esquerda, que são os que as comparações 
+A[i] é menor ou igual que A[i+1] são verdade. Assim, a altura dessa folha será o
+numero de elementos do vetor, que será N.
+
+Exercicio 8
+
+CountingSort(A, n)
+    para i ← 1 até k faça
+        C[i] ← 0
+    para j ← 1 até n faça
+        C[A[j]] ← C[A[j]] + 1
+    para i ← 2 até k faça
+        C[i] ← C[i] + C[i − 1]
+    devolva C
+
+CountingAB(A, n, a, b)
+    C = CountingSort(A, n)
+    se a = 0 então
+        devolve C[b]
+    senão devolve C[b] - C[a]
+
+Exercicio 10
+
+CountingSort(A, n, p)
+    para i ← 1 até k faça
+        C[i] ← 0
+    se 0 = 1 então
+        para j ← 1 até n faça
+            C[A[j]%n] ← C[A[j]%n] + 1
+    senão
+        para j ← 1 até n faça
+            C[A[j]/n] ← C[A[j]/n] + 1
+    para i ← 2 até k faça
+        C[i] ← C[i] + C[i − 1]
+    para j ← n decrescendo até 1 faça
+        B[C[A[j]]] ← A[j]
+        C[A[j]] ← C[A[j]] - j
+    devolve B
+
+RadixSort(A ,n)
+    B = CountingSort(A, n, 1)
+    A = CountingSort(B, n, 2)
+    devolve A
+
+    Esse algoritmo usa o resto e o quociente da divisão dos números por N para
+ordená-los usando o CountingSort.
