@@ -1,0 +1,19 @@
+x -> Posicao no vetor animation.
+y -> FrameNumber
+label1 : [x] <y> { alpha ; color ; offset ; rotation ; mirror ; size }
+         [x] <y> { alpha ; color ; offset ; rotation ; mirror ; size }
+ 	 .
+	 .
+	 .
+
+label2 : [x] <y> { alpha ; color ; offset ; rotation ; mirror ; size }
+	.
+	.
+	.
+
+alpha = float
+color = Hexadecimal
+offset = (float,float)
+rotation = float
+mirror = {00,01,10,11}
+size = (float,float)
