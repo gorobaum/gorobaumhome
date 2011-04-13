@@ -5,15 +5,7 @@
 
 #include <stdio.h>
 #include <stdlib.h>
-
-#define Vertex int
-#define Edge Arc
-#define graph digraph
-#define Graph Digraph
-#define GRAPHinit DIGRAPHinit
-#define GRAPHshow DIGRAPHshow
-#define maxV 100
-#define LINESIZE 10
+#include "grafo.h"
 
 static int lbl[maxV];
 static int parnt[maxV];

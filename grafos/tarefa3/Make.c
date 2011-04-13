@@ -5,44 +5,86 @@
 
 #include <stdio.h>
 #include <stdlib.h>
-#include "grafos.h"
+#include <string.h>
+#include "grafo.h"
 
+/* Tam. de uma linha */
+#define MAXLN 1000
+/* Tam. de uma palavra */
+#define MAXP 50
 #define maxV 100
 #define Vertex int
 
-#static char *nome[maxV], *comandos[maxV];
+static char *nome[maxV], *comandos[maxV];
+static int posnome, poscomandos;
 
-int main() {
-    int NumVert, NumArcs, i, j,*bipartite, inst;
-    char *line, *ptr;
-    Graph G;
-    
-    line = malloc(LINESIZE*sizeof(char));
-    inst = 0;
-    
-    while ( fgets(line, 10, stdin) != NULL ) {
-        if ( inst != 0 ) printf("\n");
-        for ( j = 0; j < LINESIZE && line[j] != ' '; j++);
-        ptr = line+j*sizeof(char);
-        NumVert = atoi(line);
-        NumArcs = atoi(ptr);
-        
-        bipartite = malloc(NumVert*sizeof(int));
-        for ( i = 0; i < NumVert; i++ ) bipartite[i] = 0;
-        G = GRAPHinit(NumVert);
-        inst++;
-        
-        for ( i = 0; i < NumArcs && fgets(line, 10, stdin) != NULL; i++ ) {
-            for ( j = 0; j < LINESIZE && line[j] != ' '; j++);
-            ptr = line+j*sizeof(char);
-            GRAPHinsertE(G, (atoi(line)-1), (atoi(ptr)-1));
+
+void readTargets(FILE * MakeFile){
+    char line[MAXLN];
+    int terminou = 0;
+    char *comandosaux;
+
+    if (fgets(line, MAXLN, MakeFile) == NULL)
+        terminou = 1;
+    while (terminou == 0){
+        int tam;
+        int posLine;
+        char target[MAXP];
+        char dep[MAXP];
+        char com[MAXP];
+
+        if (strlen(line) == 1) {
+            if (fgets(line, MAXLN, MakeFile) == NULL)
+            terminou = 1;
+            continue;
         }
-        printf("Instancia %d\n", inst);
-        if ( GRAPHisbipart(G, bipartite) == 1 ) printf("sim\n");
-        else printf("nao\n");
-        free(bipartite);
-        free(G);
+
+        sscanf(line, "%s %n", target, &tam);
+        if (target[strlen(target)-1] != ':'){
+            printf("ERRO: Target inválida %s \n", target);
+            exit(1);
+        }  
+        target[strlen(target)-1] = '\0';
+        nome[posnome] = malloc(strlen(target)*sizeof(char));
+        strcpy( nome[posnome++], target );
+        /*printf("%s \n", nome[--posnome]);*/
+        posLine = tam;
+
+        while (sscanf(line+posLine, "%s %n", dep, &tam) == 1){
+            /*printf("Adicionar a aresta %s->%s\n", target, dep);*/
+            posLine += tam;
+        }
+        
+        comandosaux = malloc(MAXLN*sizeof(char));
+        if (fgets(line, MAXLN, MakeFile) == NULL)
+            break;
+        while (line[0] == '\t'){
+            strcpy(com, line+1);
+            com[strlen(com)-1] = ';';
+            strcat(comandosaux, com);
+            /*printf("%s \n", comandosaux);*/
+            /*printf("Adicionar \"%s\" à lista de comandos para %s\n", com, target);*/
+            if (fgets(line, MAXLN, MakeFile) == NULL){
+                terminou = 1;
+                free(comandosaux);
+                break;
+            }
+        }
     }
-    free(line);
+}
+
+int main(){
+    FILE * MakeFile;
+  
+    MakeFile = fopen("MakeFile", "r");
+    posnome = 0;
+    poscomandos = 0;
+
+    if (MakeFile == NULL){
+        printf("ERRO: Arquivo MakeFile não encontrado\n");
+        return 1;
+    }
+    readTargets(MakeFile);
+
     return 0;
 }

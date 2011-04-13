@@ -1,14 +1,13 @@
-CFLAGS = -Wall -ansi -pedantic -g -lm
-OBJECTS = main.o grafo.o hash.o
+CFLAGS = -Wall -ansi -pedantic
+OBJECTS = Make.o grafo.o
 
 CC = gcc
 
 Make: $(OBJECTS)
-	gcc $(CFLAGS) $(OBJECTS) -o ep3
+	gcc $(CFLAGS) $(OBJECTS) -o Make
 
-grafo.o: grafo.c grafo.h hash.h
-Make.o: Make.c grafo.h
-hash.o: hash.c hash.h
+Make.o: Make.c grafo.o
+grafo.o: grafo.c grafo.h
 
 .PHONY: clean
 clean:

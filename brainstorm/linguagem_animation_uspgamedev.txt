@@ -1,19 +1,30 @@
-x -> Posicao no vetor animation.
+================================================================================
+
+Definições
+
 y -> FrameNumber
-label1 : [x] <y> { alpha ; color ; offset ; rotation ; mirror ; size }
-         [x] <y> { alpha ; color ; offset ; rotation ; mirror ; size }
- 	 .
-	 .
-	 .
-
-label2 : [x] <y> { alpha ; color ; offset ; rotation ; mirror ; size }
-	.
-	.
-	.
-
 alpha = float
 color = Hexadecimal
 offset = (float,float)
 rotation = float
-mirror = {00,01,10,11}
+mirror = { 0, 1, 2, 3}
 size = (float,float)
+# = Comenta o resto da lista.
+
+default : { 1.0 ; 0xffffff ; ( 0.0 , 0.0) ; 0.0 ; 0 ; ( 1.0, 1.0 ) }
+    Default implicito.
+
+================================================================================
+
+default : { alpha ; color ; offset ; rotation ; mirror ; size }
+
+label1 : y { alpha ; color ; offset ; rotation ; mirror ; size },
+         y { alpha ; color ; offset ; rotation ; mirror ; size }
+ 	 .
+	 .
+	 .
+
+label2 : y { alpha ; color ; offset ; rotation ; mirror ; size },
+	.
+	.
+	.

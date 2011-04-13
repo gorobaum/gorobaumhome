@@ -28,7 +28,7 @@ void readTargets(FILE * MakeFile){
 
     sscanf(line, "%s %n", target, &tam);
     if (target[strlen(target)-1] != ':'){
-      printf("ERRO: Target inválida\n");
+      printf("ERRO: Target inválida %s \n", target);
       exit(1);
     }  
     target[strlen(target)-1] = '\0';
@@ -41,13 +41,14 @@ void readTargets(FILE * MakeFile){
 
     if (fgets(line, MAXLN, MakeFile) == NULL)
       break;
+    /*printf("%s \n%cmacaco\n",line, line[0]);*/
     while (line[0] == '\t'){
       strcpy(com, line+1);
       com[strlen(com)-1] = '\0';
       printf("Adicionar \"%s\" à lista de comandos para %s\n", com, target);
       if (fgets(line, MAXLN, MakeFile) == NULL){
-	terminou = 1;
-	break;
+        terminou = 1;
+	    break;
       }
     }
   }

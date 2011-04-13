@@ -6,7 +6,15 @@
 
 #include <stdio.h>
 #include <stdlib.h>
-#include "grafos.c"
+
+#define Vertex int
+#define Edge Arc
+#define graph digraph
+#define Graph Digraph
+#define GRAPHinit DIGRAPHinit
+#define GRAPHshow DIGRAPHshow
+#define maxV 100
+#define LINESIZE 10
 
 typedef struct digraph *Digraph;
 
