@@ -18,8 +18,18 @@
 static char *nome[maxV], *comandos[maxV];
 static int posnome, poscomandos;
 
+int lookfornome(char *target) {
+    int i;
+    printf("%s \n", target);
+    for ( i = 0; i < maxV; i++) {
+        if ( i == 5 ) printf("%s %d\n", nome[i], i);
+        if ( nome[i] == NULL ) return 0;
+        else if ( strcmp(nome[i], target) == 0 ) return i;
+    }
+    return 0;
+}
 
-void readTargets(FILE * MakeFile){
+void readTargets(FILE * MakeFile, Digraph G){
     char line[MAXLN];
     int terminou = 0;
     char *comandosaux;
@@ -45,13 +55,21 @@ void readTargets(FILE * MakeFile){
             exit(1);
         }  
         target[strlen(target)-1] = '\0';
-        nome[posnome] = malloc(strlen(target)*sizeof(char));
-        strcpy( nome[posnome++], target );
-        /*printf("%s \n", nome[--posnome]);*/
+        if ( lookfornome(target) == 0 ) {
+            nome[posnome] = malloc(strlen(target)*sizeof(char));
+            strcpy( nome[posnome++], target );
+            /*printf("%s - %d\n", nome[posnome-1], posnome-1);*/
+        }
         posLine = tam;
 
         while (sscanf(line+posLine, "%s %n", dep, &tam) == 1){
-            /*printf("Adicionar a aresta %s->%s\n", target, dep);*/
+            if ( lookfornome(dep) == 0 ) {
+                nome[posnome] = malloc(strlen(dep)*sizeof(char));
+                strcpy( nome[posnome++], dep );
+                /*printf("%s - %d\n", nome[posnome-1], posnome-1);*/
+            }
+            DIGRAPHinsertA(G, lookfornome(dep), lookfornome(target));
+            printf("Adicionar a aresta %d->%d\n", lookfornome(target), lookfornome(dep));
             posLine += tam;
         }
         
@@ -75,16 +93,21 @@ void readTargets(FILE * MakeFile){
 
 int main(){
     FILE * MakeFile;
-  
+    Digraph G;
+    int i;    
+
+    G = DIGRAPHinit(maxV);
     MakeFile = fopen("MakeFile", "r");
     posnome = 0;
     poscomandos = 0;
+    
+    for ( i = 0; i < maxV; i ++ ) nome[i] = NULL;
 
     if (MakeFile == NULL){
         printf("ERRO: Arquivo MakeFile não encontrado\n");
         return 1;
     }
-    readTargets(MakeFile);
+    readTargets(MakeFile, G);
 
     return 0;
 }
