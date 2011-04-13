@@ -33,7 +33,7 @@ Exercicio 10
 CountingSort(A, n, p)
     para i ← 1 até k faça
         C[i] ← 0
-    se 0 = 1 então
+    se p = 1 então
         para j ← 1 até n faça
             C[A[j]%n] ← C[A[j]%n] + 1
     senão
@@ -43,7 +43,10 @@ CountingSort(A, n, p)
         C[i] ← C[i] + C[i − 1]
     para j ← n decrescendo até 1 faça
         B[C[A[j]]] ← A[j]
-        C[A[j]] ← C[A[j]] - j
+    se p = 1 então
+        C[A[j]%n] ← C[A[j]%n] - j
+    senão
+        C[A[j]/n] ← C[A[j]/n] - j
     devolve B
 
 RadixSort(A ,n)

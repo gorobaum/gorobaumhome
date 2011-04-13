@@ -7,6 +7,11 @@
 #include <stdlib.h>
 #include "grafos.h"
 
+#define maxV 100
+#define Vertex int
+
+#static char *nome[maxV], *comandos[maxV];
+
 int main() {
     int NumVert, NumArcs, i, j,*bipartite, inst;
     char *line, *ptr;
