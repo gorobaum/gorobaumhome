@@ -126,4 +126,4 @@ Definição da 4FN
             X é superchave
 
 Teorema: R = R1 U R2 DM F
-         R1 ->-> R ou R2 ->-> R <=> Decomposição sem perdas.x'x
+         R1 ->-> R ou R2 ->-> R <=> Decomposição sem perdas.x'xx
