@@ -1,5 +1,5 @@
 meuprog: meuprog.o  fila.o  etc.o
-	gcc meuprog.o fila.o etc.o -o meuprog 
+	gcc meuprog.o fila.o etc.o -o meuprog
 
 meuprog.o:  meuprog.c  minhasdefs.h  fila.h   etc.h
 	gcc -c meuprog.c
