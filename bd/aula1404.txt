@@ -1,0 +1,129 @@
+Definição da BCNF
+
+    Uma relação R com DFs F está no BCNF se toda DF
+        X -> F (pertence) F^+ é tal que
+            X é superchave
+        =================================
+        =   ou A é atributo primario    = na 3FN
+        =================================
+
+Def: Decomposição sem perdas por junção.
+    R | com DFs F é decomposta em R1 e R2 sem perdas (por junção) se
+    a) R = R1 U R2
+    b) Para toda instância r de R,
+        r1 = (pi)R1(r), r2 = (pi)R2(r)
+            r = r1 |><| r2
+
+Teorema: Seja R com DFs F decomposta em R1, R2.
+    Se R1 -> R2 ou R2 -> R1 então a decomposição é sem perdas(por junção)
+
+Algoritmo de Decomposição na BCNF :
+    Entrada -> R:esquema, F: conjunto de DFs
+    Saída   -> C={R1,...,Rk}, Ri na BCNF
+
+    C = {R}
+    Enquanto houver Ri (pertencente) C que viola a BCNF
+        Seja X -> A (pertencente) F^+ uma DF tal que X não é superchave, X,A 
+            (está contido) Ri [Escolhida aleatoriamente]
+        Seja Ri^1 = X,A
+             Ri^2 = Ri - A
+        C = C - {Ri} U {Ri^1,Ri^2}
+    Se nenhuma Ri possui uma chave de R
+        C = C U {K}, onde K -> R
+
+Obs: O algoritmo é sem perdas porem não garante preservação de DFs.
+
+================================================================================
+Defs de Ri^1 e Ri^2
+
+A1,...,An -> A
+                        Ri1 = A1,..,An -> A
+Ri = A1,...,An,B1,..,Bm 
+                        Ri2 = A1,...,An,B1,...,Bm
+================================================================================
+
+Def: Decomposição de DFs
+    Seja R com DFs F decompostas em R1 e R2.
+    A decomposição das DFs é dada por 
+        Fi associada a Ri
+        Fi = { X -> Y ( pertence ) F^+ | X, Y ( está contido ) Ri }
+    A decomposição preserva DFs se
+        F^+ = ( F1 U F2)^+
+
+==================
+==  EXERCICIOS  ==
+==================
+
+(1)
+
+a)
+    Vamos eliminar as redundancias.
+
+    H   ->  AZ(H)
+    HP  ->  R(P)
+    HR  ->  (R)P
+    C(E)->  Z ( inutil )
+    C   ->  E(H)
+    E   ->  H(Z)
+
+    Ficamos com essas DFs:
+    
+    C   ->  E
+    E   ->  H
+    H   ->  AZ
+    HP  ->  R
+    HR  ->  P
+    
+    Chave primária  CPT ou CRT
+    CEHAZRPT { C_E, E_H, H_AZ, HP_R, CPT }Está na 3FN
+
+    C0 = { CEHAZRPT }
+    C1 = { CE, CHAZRPT }
+    C2 = { CE, HAZ, CHRPT }
+    C3 = { CE, HAZ, HPR, CHPT }
+    C4 = { CE, CH, HAZ, HPR, CPT }
+
+================================================================================
+
+Dependências Multivaloradas.
+
+    X ->-> Y em R
+
+       ==============================
+       =   X   =   Y   =    R-X-Y   =
+       ==============================
+t1     =   X   =   Y1  =    Z1      =
+       ==============================
+t2     =   X   =   Y2  =    Z2      =
+       ==============================
+t3     =   X   =   Y1  =    Z2      =
+       ==============================
+t4     =   X   =   Y2  =    Z1      =
+       ==============================
+
+    (para toda ) t1 e t2 com t1[x] = t2[x] existe t3 e t4 com 
+        a) t3[x] = t4[x] = t1[x] = t2[x]
+        b) t3[y] = t1[y] e t3[R-X-Y] = t2[R-X-Y]
+        c) t4[y] = t2[y] e t4[R-X-Y] = t1[R-X-Y]
+
+    Ex: ABC, A ->-> B
+
+      ================   
+      = A  = B  = C  =
+      ================
+      = a  = b1 = c1 =
+      ================
+      = a  = b2 = c2 =
+      ================
+      = a  = b1 = c2 =
+      ================
+      = a  = b2 = c1 =
+      ================
+
+Definição da 4FN
+    Uma relação R com DMs F está no BCNF se toda DM
+        X ->-> Y (pertence) F^+ é tal que
+            X é superchave
+
+Teorema: R = R1 U R2 DM F
+         R1 ->-> R ou R2 ->-> R <=> Decomposição sem perdas.x'x
