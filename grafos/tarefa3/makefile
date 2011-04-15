@@ -1,4 +1,4 @@
-CFLAGS = -Wall -ansi -pedantic
+CFLAGS = -Wall -ansi -pedantic -g
 OBJECTS = Make.o grafo.o
 
 CC = gcc

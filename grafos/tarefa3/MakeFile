@@ -2,13 +2,13 @@ meuprog: meuprog.o  fila.o  etc.o
 	gcc meuprog.o fila.o etc.o -o meuprog
 
 meuprog.o:  meuprog.c  minhasdefs.h  fila.h   etc.h
-	gcc -c meuprog.c
+	gcc -c -g meuprog.c
 
 fila.o:  fila.c minhasdefs.h  fila.h
-	gcc -c fila.c
+	gcc -c -g fila.c
 
 etc.o: etc.c  minhasdefs.h  etc.h
-	gcc -c etc.c
+	gcc -c -g etc.c
 
 clean:
 	rm -f meuprog.o fila.o etc.o

@@ -16,11 +16,10 @@
 #define Vertex int
 
 static char *nome[maxV], *comandos[maxV];
-static int posnome, poscomandos;
+static int posnome;
 
 int lookfornome(char *target) {
     int i;
-    /*printf("%s \n", target);*/
     for ( i = 0; i < maxV; i++) {
         if ( nome[i] == NULL ) return 0;
         else if ( strcmp(nome[i], target) == 0 ) return i;
@@ -30,8 +29,8 @@ int lookfornome(char *target) {
 
 void readTargets(FILE * MakeFile, Digraph G){
     char line[MAXLN];
-    int terminou = 0;
-    char *comandosaux;
+    int terminou = 0, poscom = 0;
+    char comandosaux[MAXLN];
 
     if (fgets(line, MAXLN, MakeFile) == NULL)
         terminou = 1;
@@ -54,63 +53,68 @@ void readTargets(FILE * MakeFile, Digraph G){
             exit(1);
         }  
         target[strlen(target)-1] = '\0';
+        poscom = lookfornome(target);
         if ( lookfornome(target) == 0 ) {
             nome[posnome] = malloc(tam*sizeof(char));
+            poscom = posnome;
             strcpy( nome[posnome++], target );
-            /*printf("%s - %d\n", nome[posnome-1], posnome-1);*/
         }
         posLine = tam;
-
+        
         while (sscanf(line+posLine, "%s %n", dep, &tam) == 1){
             if ( lookfornome(dep) == 0 ) {
                 nome[posnome] = malloc(tam*sizeof(char));
                 strcpy( nome[posnome++], dep );
-                /*printf("%s - %d\n", nome[posnome-1], posnome-1);*/
             }
             DIGRAPHinsertA(G, lookfornome(target), lookfornome(dep));
-            printf("Adicionar a aresta %d->%d\n", lookfornome(target), lookfornome(dep));
             posLine += tam;
         }
         
-        comandosaux = malloc(MAXLN*sizeof(char));
         if (fgets(line, MAXLN, MakeFile) == NULL)
             break;
         while (line[0] == '\t'){
             strcpy(com, line+1);
             com[strlen(com)-1] = ';';
             strcat(comandosaux, com);
-            printf("%s \n", comandosaux);
-            /*printf("Adicionar \"%s\" à lista de comandos para %s\n", com, target);*/
             if (fgets(line, MAXLN, MakeFile) == NULL){
                 terminou = 1;
                 break;
             }
         }
-        comandos[poscomandos] = malloc(strlen(comandosaux)*sizeof(char));
-        strcpy(comandos[poscomandos++], comandosaux );
-        free(comandosaux);
+        comandos[poscom] = malloc(strlen(comandosaux)*sizeof(char));
+        strcpy(comandos[poscom], comandosaux );
     }
 }
 
 void writeMake(FILE * MakeFiledg, Digraph G){
     int i, j;
     int *Arcs;
-    
+    char * aux, * last;    
 
     for ( i = 0; i < DIGRAPHGetNumVet( G ); i++ ) {
-        printf("%d \n", i);
         Arcs = DIGRAPHVertexArcs( i, G );
         if ( Arcs != NULL ) {
             fputs(nome[i], MakeFiledg);
             fputc(':', MakeFiledg);
-            printf("%d %d\n", i, DIGRAPHNumArcs( i, G ));
             for ( j = 0; j < DIGRAPHNumArcs( i, G ); j++ ) {
                 fputc(' ', MakeFiledg);
                 fputs(nome[Arcs[j]], MakeFiledg);
                 fputc(' ', MakeFiledg);
             }
             fputc('\n', MakeFiledg);
-        }   
+        }
+        /*if ( comandos[i] != NULL ) {
+            aux = comandos[i];
+            last = comandos[i];
+            while ( last != '\0' ) {
+                if( aux[0] == ';' ) {
+                    aux[1] = '\0';
+                    fputs(last, MakeFiledg);
+                    last = aux + 2*sizeof(char);
+                }
+                aux += sizeof(char);
+            }
+        }*/
     }
 }
 
@@ -123,9 +127,9 @@ int main(){
     MakeFile = fopen("MakeFile", "r");
     MakeFiledg = fopen("MakeFile.dg", "w+");
     posnome = 0;
-    poscomandos = 0;
 
     for(i = 0; i < maxV; i++ ) nome[i] = NULL;
+    for(i = 0; i < maxV; i++ ) comandos[i] = NULL;
 
     if (MakeFile == NULL){
         printf("ERRO: Arquivo MakeFile não encontrado\n");
