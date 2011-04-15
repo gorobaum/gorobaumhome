@@ -70,6 +70,7 @@ void readTargets(FILE * MakeFile, Digraph G){
             posLine += tam;
         }
         
+		comandosaux[0] = '\0';
         if (fgets(line, MAXLN, MakeFile) == NULL)
             break;
         while (line[0] == '\t'){
@@ -93,7 +94,7 @@ void writeMake(FILE * MakeFiledg, Digraph G){
 
     for ( i = 0; i < DIGRAPHGetNumVet( G ); i++ ) {
         Arcs = DIGRAPHVertexArcs( i, G );
-        if ( Arcs != NULL ) {
+        if ( comandos[i] != NULL ) {
             fputs(nome[i], MakeFiledg);
             fputc(':', MakeFiledg);
             for ( j = 0; j < DIGRAPHNumArcs( i, G ); j++ ) {
@@ -102,19 +103,20 @@ void writeMake(FILE * MakeFiledg, Digraph G){
                 fputc(' ', MakeFiledg);
             }
             fputc('\n', MakeFiledg);
-        }
-        /*if ( comandos[i] != NULL ) {
             aux = comandos[i];
             last = comandos[i];
-            while ( last != '\0' ) {
+            while ( last[0] != '\0' ) {
                 if( aux[0] == ';' ) {
-                    aux[1] = '\0';
+					fputc('\t', MakeFiledg);
+                    aux[0] = '\0';
                     fputs(last, MakeFiledg);
+					fputc('\n', MakeFiledg);
                     last = aux + 2*sizeof(char);
                 }
                 aux += sizeof(char);
             }
-        }*/
+			fputc('\n', MakeFiledg);
+        }
     }
 }
 
