@@ -2,13 +2,13 @@
 ## Grafos ##
 ############
 
--> Tarefa 3 para o dia 17/04
+-> Tarefa 3 para o dia 17/04 ( Feita! )
 
 #############
 ## Analise ##
 #############
 
--> Lista 4 para o dia 15/04
+-> Lista 4 para o dia 15/04 ( Fetia! )
 
 ####################
 ## Banco de Dados ##
@@ -16,12 +16,13 @@
 
 -> Prova dia 25
 -> EP para o dia 25
+-> Passar a limpo e mandar a aula do dia 14/04 para o Finger.
 
 ###############
 ## Conceitos ##
 ###############
 
--> Bolinha
+-> EP2 para o dia 03/05
 
 ###############
 ## Portugues ##
