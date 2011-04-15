@@ -89,6 +89,29 @@ void GRAPHinsertE (Graph G, Vertex v, Vertex w) {
     DIGRAPHinsertA(G, w, v);
 }
 
+int DIGRAPHNumArcs( Vertex w, Digraph G ) {
+    int i;
+    link p;
+    for ( p = G->adj[w], i = 0; p != NULL; p = p->next, i++ );
+    return i;
+}
+
+int* DIGRAPHVertexArcs( Vertex w, Digraph G ) {
+    int *Arcs;
+    int i;
+    link p;
+    
+    Arcs = malloc(DIGRAPHNumArcs( w, G)*sizeof(int));
+    if ( G->adj[w] == NULL ) return NULL;
+    for ( p = G->adj[w], i = 0; p != NULL; p = p->next, i++ ) Arcs[i] = p->w;
+
+    return Arcs;
+}
+
+int DIGRAPHGetNumVet( Digraph G ) {
+    return G->V;
+}
+
 void pathR (Digraph G, Vertex v) {
     link p;
     lbl[v] = 0;

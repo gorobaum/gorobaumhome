@@ -67,7 +67,7 @@ void readTargets(FILE * MakeFile, Digraph G){
                 strcpy( nome[posnome++], dep );
                 /*printf("%s - %d\n", nome[posnome-1], posnome-1);*/
             }
-            DIGRAPHinsertA(G, lookfornome(dep), lookfornome(target));
+            DIGRAPHinsertA(G, lookfornome(target), lookfornome(dep));
             printf("Adicionar a aresta %d->%d\n", lookfornome(target), lookfornome(dep));
             posLine += tam;
         }
@@ -92,13 +92,36 @@ void readTargets(FILE * MakeFile, Digraph G){
     }
 }
 
+void writeMake(FILE * MakeFiledg, Digraph G){
+    int i, j;
+    int *Arcs;
+    
+
+    for ( i = 0; i < DIGRAPHGetNumVet( G ); i++ ) {
+        printf("%d \n", i);
+        Arcs = DIGRAPHVertexArcs( i, G );
+        if ( Arcs != NULL ) {
+            fputs(nome[i], MakeFiledg);
+            fputc(':', MakeFiledg);
+            printf("%d %d\n", i, DIGRAPHNumArcs( i, G ));
+            for ( j = 0; j < DIGRAPHNumArcs( i, G ); j++ ) {
+                fputc(' ', MakeFiledg);
+                fputs(nome[Arcs[j]], MakeFiledg);
+                fputc(' ', MakeFiledg);
+            }
+            fputc('\n', MakeFiledg);
+        }   
+    }
+}
+
 int main(){
-    FILE * MakeFile;
+    FILE * MakeFile, * MakeFiledg;
     Digraph G;
     int i;    
 
     G = DIGRAPHinit(maxV);
     MakeFile = fopen("MakeFile", "r");
+    MakeFiledg = fopen("MakeFile.dg", "w+");
     posnome = 0;
     poscomandos = 0;
 
@@ -109,6 +132,7 @@ int main(){
         return 1;
     }
     readTargets(MakeFile, G);
+    writeMake(MakeFiledg, G);
 
     return 0;
 }
