@@ -1,0 +1,43 @@
+%---------------------------------------------------------------------------------------------------------------------------------------------------%
+qSelectCursoA :=
+  { IDministrante | (exists OCcodigo, IDaluno, CCcodigo)
+                      (cursandocurso(CCcodigo,_,_,IDaluno,_)  and oferecimentocurso(OCcodigo,_,_,IDministrante) and OCcodigo=CCcodigo and IDministrante=IDaluno)};
+
+qQuestaoA :=
+  { Nnome | (exists IDministrante, Id)
+                  (qSelectCursoA(IDministrante) and pessoa(Id,Nnome) and IDministrante=Id)};
+%---------------------------------------------------------------------------------------------------------------------------------------------------%
+qMinistranteB :=
+ { Codigo, ID | 
+	oferecimentocurso(Codigo,_,_,ID)};
+
+qAlunoB :=
+ { Codigo, ID | 
+	cursandocurso(Codigo,_,_,ID,_)};
+
+qDiff1B :=
+ { ID |  (exists Codigo)
+	(qMinistranteB(Codigo,ID) and not qAlunoB(Codigo,ID))};
+
+qDiff2B :=
+ { ID |  (exists Codigo)
+	(qAlunoB(Codigo,ID) and not qMinistranteB(Codigo,ID))};
+
+qQuestaoB :=
+ { Nome | (exists ID)
+	(pessoa(ID,Nome) and not qDiff1B(ID) and not qDiff2B(ID))};
+%---------------------------------------------------------------------------------------------------------------------------------------------------%
+qDiffC :=
+ { Codigo | (exists Ano, Semestre, IDm, Cod1,Ano1,Sem1,IDm1 )
+	(oferecimentocurso(Codigo, Ano, Semestre, IDm) and oferecimentocurso(Cod1,Ano1,Sem1, IDm1) and Codigo=Cod1 and ( Ano<>Ano1 or Semestre<>Sem1 or IDm<>IDm1))};
+
+qQuestaoC :=
+ { Codigo | oferecimentocurso(Codigo,_,_,_) and not qDiffC(Codigo) };
+%---------------------------------------------------------------------------------------------------------------------------------------------------%
+qQuestaoD :=
+ { Codigo | (exists Ano, Semestre, IDm, Cod1,Ano1,Sem1,IDm1 )
+	(oferecimentocurso(Codigo, Ano, Semestre, IDm) and oferecimentocurso(Cod1,Ano1,Sem1, IDm1) and Codigo=Cod1 and  IDm=IDm1 and ( Ano<>Ano1 or Semestre<>Sem1))};
+%---------------------------------------------------------------------------------------------------------------------------------------------------%
+qQuestaoE :=
+ {Nome, Codigo, Ano, Semestre | (exists ID)
+	(pessoa(ID,Nome) and oferecimentocurso(Codigo, Ano, Semestre, ID ) and cursandocurso(Codigo, Ano, Semestre, ID,_))};

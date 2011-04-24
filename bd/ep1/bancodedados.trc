@@ -1,0 +1,28 @@
+%---------------------------------------------------------------------------------------------------------------------------------------------------%
+qQuestaoA :=
+  { P.nome | pessoa(P) and (exists CC, OC) (cursandocurso(CC) and oferecimentocurso(OC) and OC.idministrante=CC.idaluno and CC.codigo2=OC.codigo1 and CC.idaluno=P.id)};
+%---------------------------------------------------------------------------------------------------------------------------------------------------%
+qProject1B :=
+ {CC.codigo2, CC.idaluno| cursandocurso(CC)};
+
+qProject2B :=
+ {OC.codigo1, OC.idministrante| oferecimentocurso(OC)}; 
+
+qDiff1 :=
+ { B1.idaluno | qProject1B(B1) and  not (exists B2) ( qProject2B(B2) and B1.idaluno=B2.idministrante and B2.codigo1=B1.codigo2)};
+
+
+qDiff2 :=
+ { B2.idministrante | qProject2B(B2) and  not (exists B1) ( qProject1B(B1) and B2.idministrante=B1.idaluno and B2.codigo1=B1.codigo2)};
+
+qQuestaoB :=
+ { P.nome | pessoa(P) and not (exists D1, D2) ( qDiff1(D1) and qDiff2(D2) and ( D1.idaluno=P.id or D2.idministrante=P.id) ) };
+%---------------------------------------------------------------------------------------------------------------------------------------------------%
+qQuestaoC :=
+ {OC1.codigo1 | oferecimentocurso(OC1) and not (exists OC2) (oferecimentocurso(OC2) and OC1.codigo1=OC2.codigo1 and ( OC1.ano1<>OC2.ano1 or OC1.semestre1<>OC2.semestre1 or OC1.idministrante<>OC2.idministrante))};
+%---------------------------------------------------------------------------------------------------------------------------------------------------%
+qQuestao :=
+ {OC1.codigo1 | oferecimentocurso(OC1) and (exists OC2) (oferecimentocurso(OC2) and OC1.codigo1=OC2.codigo1 and OC1.idministrante=OC2.idministrante and ( OC1.ano1<>OC2.ano1 or OC1.semestre1<>OC2.semestre1))};
+%---------------------------------------------------------------------------------------------------------------------------------------------------%
+qQuestaoE :=
+ {P.nome, OC.codigo1, CC.ano2, CC.semestre2 | pessoa(P) and oferecimentocurso(OC) and cursandocurso(CC) and P.id=CC.idaluno and CC.idaluno=OC.idministrante and CC.semestre2=OC.semestre1 and CC.ano2=OC.ano1 and CC.codigo2=OC.codigo1 };

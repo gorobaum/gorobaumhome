@@ -1,0 +1,17 @@
+meuprog: etc.o  fila.o  meuprog.o 
+	gcc meuprog.o fila.o etc.o -o meuprog
+
+meuprog.o: etc.h  fila.h  minhasdefs.h  meuprog.c 
+	gcc -c -g meuprog.c
+
+fila.o: fila.h  minhasdefs.h  fila.c 
+	gcc -c -g fila.c
+
+etc.o: etc.h  minhasdefs.h  etc.c 
+	gcc -c -g etc.c
+
+clean:
+	rm -f meuprog.o fila.o etc.o
+	p meuprog.c ../ultimo/meuprog-salvo.c
+	p fila.c  ../ultimo/fila-sava.c
+

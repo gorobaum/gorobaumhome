@@ -1,0 +1,10 @@
+@Pessoa(id/numeric,nome/char):id
+02,Joao
+01,Jose
+
+@Oferecimento-Curso(codigo/numeric,ano/numeric,semestre/numeric,id-ministrante/char):codigo,ano,semestre
+01,2002,1,01
+
+@Cursando-Curso(codigo/numeric,ano/numeric,semestre/numeric,id-aluno/numeric,nota/char):codigo,ano,semestre
+01,2000,1,01,10
+
