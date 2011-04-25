@@ -1,0 +1,691 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
+<!-- saved from url=(0059)http://www.ime.usp.br/~coelho/mac0328-2011/tarefas/tarefa4/ -->
+<html><head><meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
+
+  
+
+
+
+
+  <title>MAC0328 Algoritmos em Grafos</title>
+  <link rel="stylesheet" href="./MAC0328 Algoritmos em Grafos_files/eps.css" type="text/css">
+</head>
+<body>
+
+<p align="right">
+<small><b><a href="http://www.ime.usp.br/mac/">Departamento de Ciência da
+Computação</a> - <a href="http://www.ime.usp.br/">IME</a> - <a href="http://www.usp.br/">USP</a></b></small><br>
+
+   
+
+</p>
+<h1>MAC0328 Algoritmos em Grafos</h1>
+
+<h2>Tarefa 4 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+Entrega: até 08 de maio de 2011</h2>
+
+
+  
+<p align="right"><small>Este projeto foi originalmente elaborado<br>
+pelo professor <a href="http://www.ime.usp.br/~reverbel/">Francisco Reverbel</a></small></p>
+
+<h1><font color="red"><b>M</b></font>ake II</h1>
+
+<font color="#000040">
+<p align="center">
+ OK, let's be straight about it, <br>
+ the syntax of make is really stupid.<br>
+If you use spaces where you're supposed to use tabs or vice versa,<br>
+your makefile blows up. And the error messages are really confusing.<br>
+
+
+</p></font><p align="center"><font color="#000040">
+Fonte: Running Linux, Matt Welsh and Lar Kaufman
+</font>
+
+</p><hr>
+
+<h2>
+Objetivos
+</h2>
+
+<ol>
+  <li>Manipulação da representação de um digrafo através de <a href="http://www.ime.usp.br/~pf/algoritmos_para_grafos/aulas/adjlists.html">vetor de listas de adjacência</a>. 
+      
+  </li><li>Implementar um algoritmo que percorre um digrafo através de <a href="http://www.ime.usp.br/~pf/algoritmos_para_grafos/aulas/dfs1.html">busca em profundidade</a>.
+
+  </li><li>Uso de busca em profundidade para
+     procurar 
+<a href="http://www.ime.usp.br/~pf/algoritmos_para_grafos/aulas/cycles.html">ciclos   em digrafos</a>
+  ou obter uma <a href="http://www.ime.usp.br/~pf/algoritmos_para_grafos/aulas/toposorting.html">ordenação topológica</a> de um <a href="http://www.ime.usp.br/~pf/algoritmos_para_grafos/aulas/dags.html">digrafo acíclico</a>.
+
+</li></ol>
+
+
+<hr>
+
+<h2>
+Descrição
+</h2>
+
+<h3>
+Introdução
+</h3>
+
+<p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+Neste tarefa você estenderá o programa <tt><font color="red"><b>M</b></font>ake.c</tt> feito na  <a href="http://www.ime.usp.br/~coelho/mac0328-2011/tarefas/tarefa3/">Tarefa 3</a>. 
+O programa utilizará as 
+<a href="http://www.ime.usp.br/~pf/algoritmos_para_grafos/aulas/digraphdatastructs.html">estruturas de dados</a> 
+das <a href="http://www.ime.usp.br/~pf/algoritmos_para_grafos/">notas de aulas</a> do professor <a href="http://www.ime.usp.br/~pf/">Paulo Feofiloff</a>
+para a representação de um "digrafo de
+dependência".
+</p>
+
+
+<p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 
+O seu programa deverá chamar-se <tt><font color="red"><b>M</b></font>ake</tt>. O '<font color="red"><b>M</b></font>' maiúsculo em
+<tt><font color="red"><b>M</b></font>ake</tt> é para diferenciar o seu programa do utilitário
+<a href="http://www.gnu.org/software/make/"><tt>make</tt></a>
+do <tt>UNIX</tt>. Da mesma maneira que o <tt>make</tt>, o seu programa,
+ao ser chamado na linha de comando sem opção alguma, lerá um arquivo de
+nome <tt><font color="red"><b>M</b></font>ake<font color="red"><b>F</b></font>ile</tt> contendo informações de
+dependência e comandos para reconstrução (<i>rebuilding commands</i>) de
+objetos. O <tt><font color="red"><b>F</b></font></tt> maiúsculo
+em <tt><font color="red"><b>M</b></font>ake<font color="red"><b>F</b></font>ile</tt> server para não
+confundirmos a entrada do <tt><font color="red"><b>M</b></font>ake</tt> com o arquivo <tt><font color="red"><b>M</b></font>akefile</tt>;
+que vocês muito provavelmente estarão utilizando.  </p>
+
+<p> </p>
+<h3>
+Formato de um <tt><font color="red"><b>M</b></font>ake<font color="red"><b>F</b></font>ile</tt>
+</h3>
+
+Um <tt><font color="red"><b>M</b></font>ake<font color="red"><b>F</b></font>ile</tt> consiste de
+uma seqüência de "regras" com o seguinte formato:
+
+<pre class="saida">  &lt;target&gt; :  &lt;dependências&gt;
+         &lt;comando<sub>1</sub>&gt;
+         &lt;comando<sub>2</sub>&gt;
+         ...
+</pre>
+
+<p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+Um <tt>target</tt> é usualmente o nome de um arquivo que é
+gerado por um programa; exemplos de targets são arquivos
+executáveis (bin ou .o). Um target também pode ser o nome
+de uma ação, tal como "<tt>clean</tt>".
+
+</p><p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+Uma <tt>dependência</tt> é um arquivo que é usado
+para criar o <tt>target</tt>. Um
+<tt>target</tt> pode depender de vários arquivos.
+
+</p><p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+Um <tt>comando</tt> é uma ação que <tt><font color="red"><b>M</b></font>ake</tt>
+pode mandar que seja executada. Um regra pode ter mais que um comando,
+cada um em uma linha.
+<b>Deve existir</b> um caractere <tt>TAB ('\t')</tt> no início de cada
+linha que possui um comando.
+
+
+</p><h3>
+Exemplo de um <tt><font color="red"><b>M</b></font>ake<font color="red"><b>F</b></font>ile</tt>
+</h3>
+
+<p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+A seguir está um exemplo típico de um arquivo <tt><font color="red"><b>M</b></font>ake<font color="red"><b>F</b></font>ile</tt> que seu
+programa <tt><font color="red"><b>M</b></font>ake</tt> deve ser capaz de tratar (os números das
+linhas foram colocada apenas para efeito de referência, eles não fazem
+parte do <tt><font color="red"><b>M</b></font>ake<font color="red"><b>F</b></font>ile</tt>):
+</p>
+
+<pre class="saida">1   meuprog: meuprog.o  fila.o  etc.o
+2         gcc meuprog.o fila.o etc.o -o meuprog 
+3
+4   meuprog.o:  meuprog.c  minhasdefs.h  fila.h   etc.h
+5         gcc -c meuprog.c
+6
+7   fila.o:  fila.c minhasdefs.h  fila.h
+8         gcc -c fila.c
+9
+10  etc.o: etc.c  minhasdefs.h  etc.h
+11        gcc -c etc.c
+12
+13  clean:
+14        rm -f meuprog.o fila.o etc.o
+15        cp meuprog.c ../ultimo/meuprog-salvo.c
+16        cp fila.c  ../ultimo/fila-sava.c
+</pre>
+
+Este exemplo ilustra o formato do arquivo 
+<tt><font color="red"><b>M</b></font>ake<font color="red"><b>F</b></font>ile</tt> que o seu
+programa deve tratar:
+
+<p>
+</p><dt>
+   Linhas 1, 4, 7, 10 e 13 fornecem informações de dependência. Em
+  uma linha de dependência o nome de um <tt>target file</tt> aparece
+  primeiro, seguido por dois pontos (':'). Depois dos dois pontos
+  segue-se uma lista (possivelmente vazia) de arquivos dos quais o
+  <tt>target</tt> depende. A Linha 7, por exemplo, diz que o <tt>target</tt> file
+  <tt>fila.o</tt> depende dos arquivos <tt>fila.c, minhasdefs.h</tt> e
+  <tt>fila.h</tt>.
+</dt><dd>
+
+<p>
+</p></dd><dt>    
+Uma linha de dependência é seguida por uma ou mais linhas com
+   comandos (<tt>rebuild commands</tt>) que criam ou atualizam o target
+   file especificado na linha de dependência. O primeiro caractere de um
+   linha contendo um comando <font color="red"><b>deve</b></font>
+   ser um <tt>TAB</tt>
+   (<tt>`\t'</tt>); uma, aparentemente idêntica, seqüência de espaços
+   <font color="red"><b>não</b></font> pode ser usada no lugar do <tt>TAB</tt>. Linhas 2, 5, 8, 11 e 14
+   contêm comandos. A Linha 8, por exemplo, diz que o comando <br>
+</dt><dd>
+    
+<pre class="saida">meu_prompt&gt; gcc -c fila.c
+</pre> 
+    
+       deverá ser executado para reconstruir o target <tt>fila.o</tt> a
+       partir dos arquivos <tt>fila.c, minhasdefs.h</tt> e
+       <tt>fila.h</tt>.  Seu
+       programa, entretanto, deve ser capaz de tratar o caso em que
+       várias linhas de comando seguem uma linha de dependência.
+</dd><dd>
+
+<p>
+</p></dd><dt>
+   As linhas em branco (linhas 3, 6, 9 e 12) são ignoradas. Estas
+   linhas podem estar presente apenas para facilitar a
+   legibilidade do <tt><font color="red"><b>M</b></font>ake<font color="red"><b>F</b></font>ile</tt>, mas elas não são necessária. Um
+   <tt><font color="red"><b>M</b></font>akefile</tt> similar, mas sem linhas em branco, também deve ser
+   aceito pelo seu <tt><font color="red"><b>M</b></font>ake</tt>.
+</dt><dd>
+
+<a name="grafo"></a>
+<h3>
+Digrafo de dependências
+</h3>       
+
+<p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; As linhas de dependências em
+um <tt><font color="red"><b>M</b></font>ake<font color="red"><b>F</b></font>ile</tt> (ou
+ <tt><font color="red"><b>M</b></font>akefile</tt>) definem um <font color="red"><i>digrafo de dependências</i></font>: um digrafo
+onde os vértices correspondem a <tt>targets</tt> e arquivos de
+dependências, e os arcos representam a dependência entre estes
+<tt>targets</tt> e arquivos. Sempre que um arquivo <tt>arquivo<sub>1</sub></tt>
+depende de um arquivo <tt>arquivo<sub>2</sub></tt> o correspondente digrafo de
+dependências deve conter um arco do vértice de nome <tt>arquivo<sub>1</sub></tt>
+ao vértice de nome <tt>arquivo<sub>2</sub></tt>. A Linha 7 do nosso exemplo
+de <tt><font color="red"><b>M</b></font>ake<font color="red"><b>F</b></font>ile</tt> acima diz que o respectivo digrafo de dependências
+contém arcos do vértice de nome <tt>fila.o</tt> ao vértice de nome
+<tt>fila.c</tt>, ao vértice de nome <tt>minhasdefs.h</tt>, e ao
+vértice <tt>fila.h</tt>.
+</p>
+
+<a name="ciclo"></a>
+<p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; Um <a href="http://www.ime.usp.br/~pf/algoritmos_para_grafos/aulas/cycles.html"><font color="red"><i>ciclo</i></font></a> em um digrafo é caminho "fechado". 
+Mais precisamente, um
+ciclo é uma seqüência de vértices
+<tt>  v<sub>0</sub>-v<sub>1</sub>-v<sub>2</sub>-...-v<sub>k</sub></tt> tal que
+
+</p><blockquote>
+ existe um arco de <tt>v<sub>i</sub></tt> a <tt>v<sub>i+1</sub></tt>
+ (<tt>i=0,1,...,k-1</tt>)  e 
+ <tt>v<sub>0</sub></tt>=<tt>v<sub>k</sub></tt>.
+</blockquote>
+    
+<p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+Um digrafo de depêndencias <font color="red"><b>não</b></font>
+deve conter ciclos. Isto,
+entretanto, não é obstácute para que um digrafo correspondente a um arquivo <tt><font color="red"><b>M</b></font>ake<font color="red"><b>F</b></font>ile</tt> tenha circuitos. Isto
+apenas significa que o <tt><font color="red"><b>M</b></font>ake</tt> deverá ser capaz de verificar a 
+presença ou
+não de ciclos no digrafo. A existência de ciclos  deve
+ser considerada pelo <tt><font color="red"><b>M</b></font>ake</tt> como um erro na especificação do
+<tt><font color="red"><b>M</b></font>ake<font color="red"><b>F</b></font>ile</tt>. <b><font color="red">Detecção de ciclos é um dos objetos desta da tarefa.</font></b>
+</p>
+       
+
+
+<a name="representacao"></a>
+<h3>
+Representação do digrafo
+</h3>
+
+O seu programa deve usar 
+a 
+<a href="http://www.ime.usp.br/~pf/algoritmos_para_grafos/aulas/digraphdatastructs.html">estruturas de dados</a> e <a href="http://www.ime.usp.br/~pf/algoritmos_para_grafos/aulas/adjlists.html">vetor de listas de adjacência</a>
+das <a href="http://www.ime.usp.br/~pf/algoritmos_para_grafos/">notas de aulas</a> do professor <a href="http://www.ime.usp.br/~pf/">Paulo Feofiloff</a>
+para a representação do digrafo de dependências.
+
+Considere, além de outras estrutura comuns aos programa que temos visto,
+as seguintes declarações:
+<pre class="prog">typedef enum {FALSE,TRUE} Boolean;
+static char  *nome[maxV];
+static char  *comandos[maxV];
+int           mod_time[maxV];
+Boolean       up_to_date[maxV];
+</pre>
+
+<p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 
+Para cada vértice <tt>v</tt> o seu programa deve manter em:
+
+</p><ul>
+  <li> <tt>nome[v]</tt>&nbsp; um apontador para  um string  que contém 
+  o nome do vértice. Exemplos de nomes de vértices do digrafo
+  de dependências correspondente ao <tt><font color="red"><b>M</b></font>ake<font color="red"><b>F</b></font>ile</tt> do exemplo anterior
+  "<tt>meuprog.c</tt>", "<tt>fila.h</tt>" e "<tt>clean</tt>".
+
+  </li><li> <tt>G-&gt;adj[v]</tt>&nbsp; um apontador para 
+  uma estrutura do tipo  <tt>link</tt> que é o início 
+  da lista ligada de arcos que têm ponta inicial em <tt>v</tt>. 
+  Há um arco <tt>v-w</tt> para cada arquivo <tt>nome[w]</tt> 
+  do qual <tt>nome[v]</tt> depende.
+
+  </li><li><tt>comandos[v]</tt>&nbsp; é um apontador
+  para um string.  Este string deverá conter todos os comandos associados ao
+  <tt>target</tt> de nome <tt>nome[v]</tt>, uma após o outro, separados por um
+  um ';' (ponto-e-vírgula).
+
+</li><li><tt>mod_time[v]</tt> é o instante da última modificação do 
+     arquivo correspondente ao vértice <tt>v</tt>. 
+      Deverá conter -1 caso o arquivo não exista.
+
+</li><li><tt>up_to_date[v]</tt> é uma variável booleana que é <tt>TRUE</tt>
+    se o arquivo correspondente ao vértice v está atualizado.
+</li></ul>
+
+Acho que é só. De resto, sugestões são bem-vindas.
+
+<h3>
+Comportamento do <tt><font color="red"><b>M</b></font>ake</tt>
+</h3>
+
+O programa <tt><font color="red"><b>M</b></font>ake</tt> poderá ser chamado em uma linha
+de comando do shell de duas maneiras diferentes:
+
+<pre class="saida">meu_prompt&gt; <font color="red"><b>M</b></font>ake [-s | &lt;goals&gt;] 
+</pre>
+
+Inicialmente,  <tt><font color="red"><b>M</b></font>ake</tt> deverá procura
+no diretório corrente um arquivo de nome 
+<tt><font color="red"><b>M</b></font>ake<font color="red"><b>F</b></font>ile</tt> e
+
+<ol>
+     <li> (Contrói o digrafo de dependências) <tt><font color="red"><b>M</b></font>ake</tt>
+       lê o arquivo <tt><font color="red"><b>M</b></font>ake<font color="red"><b>F</b></font>ile</tt>, que tem
+       o formato descrito acima, e contrói uma representação do digrafo
+       de dependência através de vetor de listas de adjacência
+</li></ol>
+
+Chamado com a opção <tt>-s</tt>, <tt><font color="red"><b>M</b></font>ake</tt> deverá procura
+no diretório corrente um arquivo de nome 
+<tt><font color="red"><b>M</b></font>ake<font color="red"><b>F</b></font>ile</tt> e
+processá-lo da seguinte forma:
+   
+    <ol start="2">
+       <li> (Salva o digrafo) Após a criação do digrafo de dependência na
+       representação descrita, <tt><font color="red"><b>M</b></font>ake</tt> percorre o digrafo
+       e cria no diretório corrente um arquivo de nome
+       <tt><font color="red"><b>M</b></font>ake<font color="red"><b>F</b></font>ile.dg</tt>. Este arquivo <tt><font color="red"><b>M</b></font>ake<font color="red"><b>F</b></font>ile.dg</tt> é parecido
+       com o exemplo de <tt><font color="red"><b>M</b></font>ake<font color="red"><b>F</b></font>ile</tt>,
+      possivelmente sem as linhas em branco ou
+       trocando alguma das regras de lugar; esta ordem é irrelevante, ela
+       depende de como
+       o seu <tt><font color="red"><b>M</b></font>ake</tt> gerou o grafo.
+       
+       <p>
+       <font color="red"><b>Observação</b></font>. Isto já foi feito na Tarefa 3.
+    </p></li></ol>
+	
+
+
+Um objetivo (= <font color="red">goal</font>) é o nome de um target
+que <tt><font color="red"><b>M</b></font>ake</tt> deve atualizar. 
+Objetivos serão especificados como argumentos para o <tt><font color="red"><b>M</b></font>ake</tt>, assim 
+<tt>&lt;goals&gt;</tt> pode conter o nome de qualquer target
+do <tt><font color="red"><b>M</b></font>ake<font color="red"><b>F</b></font>ile</tt> que originou o grafo de
+dependências.  Se <tt>&lt;goals&gt;</tt>
+ não for especificado, então 'by default' o
+primeiro target do <tt><font color="red"><b>M</b></font>ake<font color="red"><b>F</b></font>ile</tt> será o
+objetivo.  Se vários objetivos forem especificados,
+então <tt><font color="red"><b>M</b></font>ake</tt> processa um após o outro, na ordem que eles
+aparecem como argumentos.
+
+<p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+Para atualizar um objetivo <tt><font color="red"><b>M</b></font>ake</tt> deve percorrer o digrafo de
+dependências, a partir de um vértice que corresponde a um objetivo que
+foi especificado ou ao primeiro target em <font color="red"><b>M</b></font>akefile (caso nenhum
+objetivo (goal) seja especificado como argumento). Ao percorrer o
+digrafo, <font color="red"><b>M</b></font>ake deve:
+</p><ol start="3">
+  <li> verificar a <a href="http://www.ime.usp.br/~pf/algoritmos_para_grafos/aulas/cycles.html">existência de ciclos</a> nesta parte do digrafo; e
+  </li><li> executar os comandos (rebuilding commands) associados com cada vértice, 
+       caso o correspondente arquivo não exista ou se este for mais 
+       velho do que algum dos arquivos do qual ele depende. 
+
+       <font color="red"><b>Sugestão</b></font>. Isto pode ser feito adaptando-se a função <tt>DIGRAPHcycle</tt> da <a href="http://www.ime.usp.br/~coelho/mac0328-2011/aulas/aula08.pdf">AULA 8</a>.
+</li></ol>
+
+Se um ciclo é encontrado então o reconstrução do correspondente objetivo 
+deve ser interrompida e uma mensagem de erro deve ser enviada para a 
+saída padrão de erro (<tt>stderr</tt>).
+
+<p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+Antes de executar os comandos (rebuilding commands) para criar ou 
+atualizar um target, <tt><font color="red"><b>M</b></font>ake</tt> deve certificar-se que todos os 
+arquivos dos quais este target depende existam e estejam atualizados 
+(<i>up to date</i>). 
+Logo, <tt><font color="red"><b>M</b></font>ake</tt> deve executar comandos de uma maneira, digamos, 'bottom-up'. 
+Para este fim, <tt><font color="red"><b>M</b></font>ake</tt> deve percorrer em pós-ordem o digrafo de dependências através de uma <a href="http://www.ime.usp.br/~pf/algoritmos_para_grafos/aulas/dfs1.html">busca em profundidade</a>. 
+
+</p><h3>
+Execução de comandos do shell
+</h3>
+
+<tt><font color="red"><b>M</b></font>ake</tt> executa comandos para reconstruir um targets que não existem 
+ou estão desatualizado. Logo <tt><font color="red"><b>M</b></font>ake</tt>
+ deve ser capaz de executar comandos de um shell, como por exemplo o comando
+
+<pre class="saida">gcc -g -Wall -ansi -pedantic -O2 -lgb -c <font color="red"><b>M</b></font>ake.c
+</pre>
+
+A função
+<pre class="prog">int system(const char *string)
+</pre>
+da biblioteca padrão do C, executa os comandos contidos na cadeia de
+caracteres <tt>string</tt> e depois continua a execução do programa
+corrente. Tudo se passa como se <tt>string</tt> tivesse sido digitada e
+executada como um comando de um shell.  O header da função system está
+em &lt;stdlib.h&gt;.
+
+<p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+O conteúdo de string depende muito do sistema operacional local, que no 
+caso de vocês é Linux. Como exemplo trivial o comando
+</p><pre class="prog">system("date");
+</pre>
+faz com que o programa <tt>date</tt> seja executado; ele devolve a
+ data e hora correntes na saída-padrão. <tt>system</tt> retorna um valor de
+ estado, dependente do sistema, a partir do comando executado. No
+ sistema UNIX é o valor indicado por <tt>exit</tt> ou <tt>return</tt>.
+
+<p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+O seu <font color="red"><b>M</b></font>ake fará freqüentemente a chamada
+
+</p><pre class="prog">  if (system(comandos[v]) != 0)
+    {
+      fprintf(sterr,"%s: erro na reconstrução do target %s.\n", argv[0], nome[v]);
+    }
+</pre>
+Um exemplo simples do uso de system está em <a href="http://www.ime.usp.br/~coelho/mac0328-2011/tarefas/tarefa4/system.c">system.c</a>.
+
+
+<h3>
+Instante da última modificação de um arquivo
+</h3>
+
+<p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+O sistema operacional UNIX fornece seus
+serviços por meio de um conjunto de <i>chamadas do sistema</i> (<i>system calls</i>), que são
+funções dentro do sistema operacional que podem ser chamadas por programas
+usuários.
+
+</p><p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 
+O instante da última modificação de um arquivo (<i>file modification
+time</i>), expresso como o número de segundos desde a zero horas de
+1o. de janeiro de 1970 GMT (<i>Greenwich Mean Time</i>) atá o momento da
+modificação pode ser obtida através da função (<i>system call</i>)
+<tt>stat</tt> (Hmmm, acho que este negócio vai estourar alguma
+hora... Vocês já ouviram falar do bug do ano 2037 ou coisa do
+tipo?). Usando esta chamada do sistema não é difícil implementar a
+função
+
+</p><pre class="prog">long mtime (const char *filename); 
+</pre>
+
+que retorna o instante da última modificação do arquivo
+<tt>filename</tt> ou <tt>-1</tt> se o arquivo não existe.
+
+<p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+A função 
+
+</p><pre class="prog">int stat(const char *filename, struct stat *stbuf);
+</pre>
+
+recebe um nome-de-arquivo através de um apontador <tt>filename</tt>  e retorna toda a
+informação contida no <i>inode</i> para esse arquivo, ou -1 se houver um
+erro. O <i>inode</i> para um arquivo é onde toda a informação sobre o arquivo
+(exceto seu nome) é mantida. Um entrada em um diretório geralmente consiste em
+somente dois itens, o nome do arquivo e um número de <i>inode</i>s.)
+Assim,
+
+<pre class="prog">struct stat stbuf;
+Vertex v;
+[...]
+stat (nome[v], &amp;stbuf);
+[...]
+</pre>
+
+preenche a estrutura <tt>stbuf</tt> com a informação do <i>inode</i> para o
+nome-de-arquivo <tt>nome[v]</tt>. A estrutura descrevendo o valor retornado
+por <tt>stat</tt> está em &lt;sys/stat.h&gt;, e  se "parece" com
+
+(veja <a href="http://www.ime.usp.br/~coelho/mac0328-2011/tarefas/tarefa4/stat.h"><tt>/usr/include/bits/stat.h</tt></a>)
+
+<pre class="prog">/* Expanded stat structure */
+ 
+struct  stat {
+        dev_t   st_dev;       /* dispositivo do inode */
+        long    st_pad1[3];   /* reserve for dev expansion, */
+                              /* sysid definition */
+        ino_t   st_ino;       /* número do inode */
+        mode_t  st_mode;      /* bits de modo */
+        nlink_t st_nlink;     /* número de ligações do arquivo */
+        uid_t   st_uid;       /* id. do usuário dono */
+        gid_t   st_gid;       /* id. do grupo do dono   */
+        dev_t   st_rdev;      /* para arquivos especiais */ 
+        long    st_pad2[2];  
+        off_t   st_size;      /* tamanho arq. em caracteres */
+        long    st_pad3;      /* reserve pad for future off_t expansion */
+        timestruc_t st_atime; /* instante do último acesso */
+       <b><font color="red"> timestruc_t st_mtime; /* instante da última modificação */</font></b>
+        timestruc_t st_ctime; /* instante da criação */
+        long    st_blksize;
+        long    st_blocks;
+        char    st_fstype[_ST_FSTYPSZ];
+        long    st_pad4[8];     /* expansion area */
+};
+</pre>
+
+Os tipos como <tt>dev_t</tt> e <tt>ino_t</tt> são definidos em <tt>
+&lt;sys/types.h&gt;</tt>, que também deve ser incluído em seu programa.
+Veja um exemplo besta do uso desta função em
+<a href="http://www.ime.usp.br/~coelho/mac0328-2011/tarefas/tarefa4/statsys.c">statsys.c</a>.
+
+<p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+Assim, a função <tt>mtime</tt> pode ser implementada da seguinte maneira:
+
+</p><pre class="prog">long
+mtime (const char *filename)
+{
+   struct stat bufst;
+
+   if (stat(filename, &amp;bufst) == -1) return -1;
+   return bufst.st_mtime;
+}
+</pre>
+
+
+<h3>
+Busca por um vértice
+</h3>
+
+O seu programa fará várias vezes a busca por um vértice, dado o seu nome. As seguintes rotinas podem ser usadas para isto. 
+Elas fazem parte do módulo <a href="http://www.ime.usp.br/~coelho/grafos/sgb/src/gb_graph.ps"><tt>GB_GRAPH</tt></a> do <a href="http://www.ime.usp.br/~coelho/grafos/sgb/src/">SGB</a>.
+
+<ul>
+  <li> <tt>void hash_setup(Digraph G)</tt>&nbsp; prepara uma tabela de hash
+  para todos os vértices do grafo <tt>g</tt>&nbsp;;
+
+  </li><li> <tt>void hash_in (Vertex v, Digraph G)</tt>&nbsp; coloca o nome do vértice
+  <tt>v</tt>, ou seja, <tt>nomes[v]</tt>, na tabela de hash.
+
+  </li><li> <tt>Vertex hash_out(char *s, Digraph G)</tt>&nbsp; encontra o vértice de nome
+  <tt>s</tt>, se este estiver presente na tabela de hash do digrafo.
+   Se o vértice não for encontrado a função devolve   <tt>-1</tt>;
+
+  </li><li> <tt>Vertex hash_lookup(char s, Digraph G)</tt> procura um vértice
+  de nome <tt>s</tt> na tabela de hash do digrafo <tt>G</tt>.
+</li></ul>  
+
+<p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+Este esquema é usado pelo SGB:
+</p><blockquote>
+The lookup scheme is quite simple. We compute a more-or-less random
+value <tt>h</tt> based on the vertex name, where <tt>|0 &lt;= h &lt; n|</tt>, 
+assuming that the graph has n vertices. 
+There is a list of all vertices whose hash
+address is <tt>h</tt>, starting at <tt>hash_head[h]</tt> and linked
+together in the <tt>hash_link</tt> fields.
+
+<p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+The hash code for a string <tt>c[1..k]</tt> of lenght <tt>k</tt> is a
+nonlinear function of the characters; this function appears to produce
+reasonably random results between 0 and the number of vertices in the
+current graph. Simpler approaches were noticeable poorer in the author's
+tests.
+
+</p><p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+<b>Caution:</b> This hash coding scheme is system-dependent, because it
+uses the system's character codes. If you create a graph on a
+machine with ASCII code and save it with <tt>GB_SAVE</tt>, and if you
+subsequently ship the
+resulting text file to some friend whose machine does not use ASCII code,
+your friend will have to rebuild the hash structure with <tt>hash_setup</tt>
+before being able to use <tt>hash_lookup</tt> successfully.
+
+</p></blockquote>
+
+<p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; O código a seguir é uma adaptação do código do Knuth usando o SGB para a
+estrutura de dados do Sedgewick que está nas <a href="http://www.ime.usp.br/~pf/algoritmos_para_grafos/">notas de aulas</a> do
+professor <a href="http://www.ime.usp.br/~pf/">Paulo Feofiloff</a>.
+
+
+</p><pre class="prog">#define HASH_MULT  314159 /* random multiplier */
+#define HASH_PRIME 516595003 /* the 27182818th prime; it's less than $2^{29}$ */
+
+static Vertex hash_head[maxV];
+static Vertex hash_link[maxV];
+
+void
+hash_setup(Digraph G)
+{
+   if (G &amp;&amp; G-&gt;V &gt; 0) 
+     {
+        register Vertex v;
+        for (v = 0; v &lt; G-&gt;V; v++) hash_head[v] = -1;
+        for (v = 0; v &lt; G-&gt;V; v++) hash_in(v,G);
+     }
+}
+
+void
+hash_in(Vertex v, Digraph G)
+{
+  register char *t=nome[v];
+  register Vertex u;
+  register long h;
+  
+  /*Find vertex u, whose location is the hash code for string t;*/
+  for (h = 0; *t; t++) 
+    {
+      h += (h^(h&gt;&gt;1)) + HASH_MULT*(unsigned char)*t;
+      while (h &gt;= HASH_PRIME) h-=HASH_PRIME;
+    }
+  u = h % G-&gt;V;
+
+  hash_link[v]=hash_head[u];
+  hash_head[u]=v;
+}
+
+
+Vertex
+hash_out(char *s, Digraph G)
+{
+   register char*t= s;
+   register Vertex  u;
+   register long h;
+
+   /*Find vertex u, whose location is the hash code for string t;*/
+   for (h = 0; *t; t++)
+     {
+        h += (h^(h&gt;&gt;1)) + HASH_MULT*(unsigned char)*t;
+        while (h &gt;= HASH_PRIME) h-= HASH_PRIME;
+     }
+   u = h%G-&gt;V;
+
+   for (u = hash_head[u]; u != -1; u = hash_link[u])
+     if (strcmp(s,nome[u]) == 0) return u;
+
+   return -1;
+}
+
+
+Vertex
+hash_lookup(char *s, Digraph G)
+{
+   if (G &amp;&amp; G-&gt;V &gt; 0)
+     {
+        register Vertex v;
+        v = hash_out(s,G);
+        return v;
+     }
+   else return -1;
+}
+</pre>
+
+<p>
+
+</p><h3>
+Problema com alocação dinâmica de vértices
+</h3>
+
+<p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; Como devemos alocar o digrafo já que o número de vértices não é fixado logo
+de cara? Uma possibilidade é fazermos um <tt>realloc</tt>. Outras sugestões?
+
+
+</p><hr>
+
+<h2>
+Entrega
+</h2>
+
+<ol>
+      
+  <li> Junto com o seu programa você deve entregar um <font color="red"><b>M</b></font>akefile de tal forma
+      que 
+<pre class="saida">meu_prompt&gt; make <font color="red"><b>M</b></font>ake
+</pre>
+      produza o executável de nome <tt><font color="red"><b>M</b></font>ake</tt>
+      correspondente a sua Tarefa 4. <br>
+  
+      
+  </li><li> O Paca não costuma aceitar a entrega de vários arquivos. Por isto,
+      você deve depositar um arquivo <tt>tarefa4.tgz</tt> com todo o seu trabalho.
+      Espera-se que
+    <pre class="saida">meu_prompt&gt;tar -xvf tarefa4.tgz </pre>
+      crie um diretório que tenha o seu <tt>login</tt> na rede Linux como
+      nome. Neste diretório devem estar todos os arquivos da sua Tarefa 4,
+      inclusive o Makefile que você usou. Se você achar necessário
+      coloque junto um arquivo <tt>00-leia-me</tt>, onde você descreve algo
+      que achar necessário: como limitações e bugs no seu programa<br>
+      
+</li></ol>
+
+<hr>
+<address></address>
+<!-- hhmts start -->
+Last modified: Mon Mar 31 07:58:55 BRT 2011
+<!-- hhmts end -->
+ 
+</dd></body></html>

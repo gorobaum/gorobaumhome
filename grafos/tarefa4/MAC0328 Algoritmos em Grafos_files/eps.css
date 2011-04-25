@@ -1,0 +1,111 @@
+BODY {
+    background: #ffffff;
+    /* font-size: 14px;*/
+    color: #000000; 
+    margin-left:  9%;
+    margin-right: 6%;
+}
+
+
+a:link {
+   color: #554499;
+   /* text-decoration: none; */
+}
+
+a:visited {
+   color: #004080;
+   /* text-decoration: none; */
+}
+
+a:hover { /* Must come after :link and :visited */
+   color: red;
+}
+
+a:active {
+   color: red;
+}
+
+a.name {
+   color: #000000;
+   text-decoration: none;
+}
+
+h1 {
+   color: navy;
+   margin-left: -5%; /* body margin-left is 9% */
+   margin-top: 1.5em;
+   margin-bottom: 0.7em;
+   text-align: center;
+}
+
+h2 { 
+    margin-left: -5%; /* body margin-left is 9% */
+    margin-bottom: 0.6em;
+    color: red;
+    text-align: center;
+}
+
+h2.titulo { 
+    color: red;
+    margin-left: -5%; /* body margin-left is 9% */
+    margin-bottom: 0.6em;
+    color: red;
+    text-align: center;
+}
+
+h3.center { 
+    margin-left: -5%; /* body margin-left is 9% */
+    margin-bottom: 1em;
+    color: navy;
+    text-align: center;
+}
+
+
+h3 { 
+    margin-left: -5%; /* body margin-left is 9% */
+    margin-bottom: 1em;
+    color: navy;
+    text-align: left;
+}
+
+
+div { 
+    align: center 
+}
+
+a {
+    font-family: Arial, Helvetica, sans-serif;
+    font-weight: bold;
+    color: #0000EE;
+    text-decoration: none; 
+}
+
+div.gray {
+   color: gray; /* gray é mais escuro que #999999; */
+}
+
+pre.prog { /* yellow background */
+   background-color: #ffffd6;
+   font-size: 13px;
+   white-space: pre;
+   padding: 8px;
+   margin-top: 1.5em;
+   margin-bottom: 1.5em;
+   margin-left: 2.5em;
+   margin-right: 5em;
+}
+
+
+pre.saida { /* yellow background */
+   background-color: #aaaaaa;
+   font-size: 13px;
+   white-space: pre;
+   padding: 8px;
+   margin-top: 1.5em;
+   margin-bottom: 1.5em;
+   margin-left: 2.5em;
+   margin-right: 5em;
+}
+
+TT              { font-size : larger   }
+
