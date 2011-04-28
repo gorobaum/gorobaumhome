@@ -120,6 +120,28 @@ void writeMake(FILE * MakeFiledg, Digraph G){
     }
 }
 
+void writeMake(FILE * MakeFiledg, Digraph G){
+    int i, j;
+    int *Arcs;
+    
+
+    for ( i = 0; i < DIGRAPHGetNumVet( G ); i++ ) {
+        printf("%d \n", i);
+        Arcs = DIGRAPHVertexArcs( i, G );
+        if ( Arcs != NULL ) {
+            fputs(nome[i], MakeFiledg);
+            fputc(':', MakeFiledg);
+            printf("%d %d\n", i, DIGRAPHNumArcs( i, G ));
+            for ( j = 0; j < DIGRAPHNumArcs( i, G ); j++ ) {
+                fputc(' ', MakeFiledg);
+                fputs(nome[Arcs[j]], MakeFiledg);
+                fputc(' ', MakeFiledg);
+            }
+            fputc('\n', MakeFiledg);
+        }   
+    }
+}
+
 int main(){
     FILE * MakeFile, * MakeFiledg;
     Digraph G;
