@@ -2,21 +2,20 @@
 ## Grafos ##
 ############
 
--> Tarefa 3 para o dia 17/04 ( Feita! )
+-> Tarefa 4 para o dia 15/05
 
 #############
 ## Analise ##
 #############
 
--> Lista 4 para o dia 15/04 ( Fetia! )
+-> Lista 5 para o dia 29/04
 
 ####################
 ## Banco de Dados ##
 ####################
 
 -> Prova dia 25
--> EP para o dia 25
--> Passar a limpo e mandar a aula do dia 14/04 para o Finger.
+-> EP para o dia 25 ( Falta fazer SQL )
 
 ###############
 ## Conceitos ##
@@ -34,4 +33,4 @@
 ## Outros ##
 ############
 
--> Ler o Pro Git.
+-> Ler o Pro Git. ( Lendo cara lendo! )
