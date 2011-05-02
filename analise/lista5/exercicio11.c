@@ -14,24 +14,24 @@ int min(int a, int b) {
     else return b;
 }
 
-int Mem-CalcMinCuts(int *cutstodo, int numcut, int length, int *cuts){
-    
-}
-
 int CalcMinCuts(int *cutstodo, int numcut, int length){
-    int *cuts, i, j, cost;
-    
-    cuts = malloc(numcut*sizeof(int));
-    for( i = 0; i < numcuts; i++ ) cuts[i] = 0;
+    int c[100][100], i, j, k, l;
 
-    return Mem-CalcMinCuts(cutstodo, numcut, length, cuts);         
+    for( i = 1; i < numcut; i++ ) c[i][i-1] = 0;
+
+    for( l = 1; l < numcut; l++ ) {
+        for( i = 1; i < numcut-l+1; i++ ) {
+            j = i+l-1;
+            c[i][j] = c[i+1][j];
+            for( k = i+1; k < j; k++ ) {
+                if (c[i][k-1] + c[k+1][j] < c[i][j] )
+                    c[i][j] = 
+    
 }
 
 int main() {
-    int length, numcut, *cuts, i;
-    char *line, *aux;
-    
-    line = malloc(LINESIZE*sizeof(char));
+    int length, numcut, cuts[1000], i;
+    char line[1000], *aux;
     
     while ( (fgets(line, 100, stdin) != NULL) && line[0] != '0') {
         length = atoi(line);
@@ -40,13 +40,14 @@ int main() {
         cuts = malloc(numcut*sizeof(int));
         fgets(line, 100, stdin);
         aux = strtok(line, " ");
-        i = 0;
+        i = 1;
         while( aux != NULL ){
             cuts[i] = atoi(aux);
             aux = strtok(NULL, " ");
             i++;
         }
-        
+        cuts[0] = 0;
+        cuts[i+1] = length;
     }
     return 0;
 }
