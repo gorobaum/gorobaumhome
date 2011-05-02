@@ -38,21 +38,12 @@
 ;; Funcoes Auxiliares do parse ;;
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 
-;;  listsyisthere : symbol list -> boolean
-;;  Verifica se um simbolo ja foi definido.
-(define (listsyisthere id listsy)
-        (if (empty? listsy ) 
-            #f
-            (if (equal? (first listsy) id ) 
-                #t
-                (listsyisthere id (rest listsy)))))
-
 ;;  listsymanager : symbol list -> symbol
 ;;  Recebe uma lista de simbolos e verifica se ela é correta.
 ( define (listsymanager in out)
         (if (= (length in) 0) 
             (reverse out)
-            (if (listsyisthere (first in) out)
+            (if (isthere (first in) out)
                 (error 'listsymanager "Simbolo ja em uso.")
                 (listsymanager (cdr in) (cons (first in) out)))))
 
@@ -107,7 +98,13 @@
             (if (= (length in) 2)                
                 (lists '() (cons (parse (second in)) out))
                 (error 'lists "Definicao do simbolo do With errada.")))))
-            
+
+;;  applist
+;;
+(define (applist in out)
+    (if (= (length in) 0)
+        out
+        (applist (cdr in) (cons (parse (first in)) out))))
 
 ;;;;;;;;;;;;
 ;; Parser ;;
@@ -120,26 +117,31 @@
         [(number? sexp) (num sexp)]
         [(symbol? sexp) (id sexp)]
         [(list? sexp)
-            (if (= (length sexp) 4)
-                (case (first sexp)
-                    [(if0) (if0 (parse (second sexp))
-								(parse (third sexp))
-								(parse (last sexp)))]
-					[else (error 'parse "Estrutura do if0 errada.")])
-				(if (= (length sexp) 3)
-                    (case (first sexp)
-                        [(fun)(fun  (listsymanager (second sexp) '())
-                                    (parse (last sexp)))]
-                        [(with) (app (fun (listf (second sexp) '()) 
+            (case (first sexp)
+                [(if0)  (if (= (length sexp) 4)
+                            (if0 (parse (second sexp))
+						        (parse (third sexp))
+						        (parse (last sexp)))
+                            (error 'parse "if0 faltando coisa."))]
+                [(fun)  (if (= (length sexp) 3) 
+                            (fun (listsymanager (second sexp) '())
+                                 (parse (last sexp)))
+                            (error 'parse "fun faltando coisa."))]     
+                [(with) (if (= (length sexp) 3)
+                                (app (fun (listf (second sexp) '()) 
                                           (parse (third sexp)))   
-                                     (lists (second sexp) '()))]
-                        [else   (binop  (searchbinop (first sexp) table)
-                                        (parse (second sexp))
-                                        (parse (third sexp)))])
-                    (error 'parse "Entrada invalida para o parser.")))]))
-;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
-;; Funcoes Auxiliares do rinterp ;;
-;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+                                     (lists (second sexp) '()))
+                                (error 'parse "with faltando coisa."))]
+                [(isthere((first sexp) table)) 
+                    (if (= (length sexp) 3)
+                            (error 'parse "binop faltando coisa.")
+                            (binop (searchbinop (first sexp) table)
+                                   (parse (second sexp))
+                                   (parse (third sexp))))]
+                [else (app (parse (first sexp)) (applist (rest sexp) '()))])]))
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+;; Funcoes Auxiliares do Interp ;;
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 
 ;;  binoperation : binop number number -> number
 ;;  Consome uma operacao binaria e dois numeros e devolve o resultado da operacao
@@ -151,12 +153,39 @@
             ( op l r ))
         ( op l r )))
 
-;;;;;;;;;;;;;;;;;;;;;
-;; Parse e Interp  ;;
-;;;;;;;;;;;;;;;;;;;;;
+;;  lookup : symbol env -> CFAE-value
+;;  Consome um symbol e um env e devolve um CFAE-value
+(define (lookup id envir)
+    (if (equal? (anEnv-env envir) mtEnv)
+        (error 'lookup "Nao definido")
+        (if (equal? id (anEnv-name envir))
+            (anEnv-value envir)
+            (lookup id (anEnv-env envir)))))
+
+;;  rinterp : WAE DefrdSub -> number
+;;  Consome uma WAE e um DerfdSub e devolve seu valor numerico.
+(define (rinterp expr env)
+    (type-case CFAE expr
+        [num (n) n]
+        [binop (op l r) (binoperation op (rinterp l env) (rinterp r env))]
+        [id (v) (lookup v env)]
+        [if0 (c t e) (if (= c 0) t e)]
+        [fun (fun-arg fun-body) (closureV fun-arg fun-body env)]
+        [app (app-f app-args)
+            (local ([define fun-val (rinterp app-f env)])
+                (interp (closureV-body fun-val)
+                    (anEnv (closureV-params fun-val)
+                    (interp app-args env)
+                    (closureV-env fun-val) )))]))
+
+
+;;;;;;;;;;;;;
+;; Interp  ;;
+;;;;;;;;;;;;;
 
 ;;  interp : WAE -> number
 ;;  Consome uma WAE e devolve seu valor numerico.
+(define (interp expr ) (rinterp expr (mtEnv)))
 
 ;;;;;;;;;;;;
 ;; Testes ;;
@@ -165,5 +194,8 @@
 (trace parse)
 (trace listf)
 (trace isthere)
+(trace interp)
+(trace rinterp)
+(trace isthere)
 
-(parse(read))
+(interp (parse(read)))
