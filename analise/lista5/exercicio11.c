@@ -7,52 +7,44 @@
 #include <stdlib.h>
 #include <string.h>
 
-void printmatrix(int m[100][100], int i, int j ) {
-    int x,y;
-    for ( x = 0; x < i; x++ ) {
-        for ( y = 0; y < j; y++ ) printf("%d ", m[x][y]);
-        printf("\n");
-    }
-}
+#define LINESIZE 1000
 
 int CalcMinCuts(int cuts[], int numcut, int length){
-    int c[100][100], i, j, k, l;
+    int c[LINESIZE][LINESIZE], i, j, k, l;
 
-    for( i = 0; i < numcut+1; i++ ) c[i][i-1] = 0;
+    for( i = 1; i <= numcut+1; i++ ) c[i][i-1] = 0;
 
     for( l = 1; l <= numcut; l++ ) {
         for( i = 1; i <= numcut-l+1; i++ ) {
             j = i+l-1;
             c[i][j] = c[i+1][j];
-            printf("c[%d][%d] = %d \n", i, j, c[i][j]);
             for( k = i+1; k <= j; k++ )
                 if (c[i][k-1] + c[k+1][j] < c[i][j] ) c[i][j] = c[i][k-1] + c[k+1][j];
-            c[i][j] = c[i][j] + 
+            c[i][j] = c[i][j] + cuts[j+1] - cuts[i-1];
         }
     }
-    /*printmatrix(c, numcut, numcut);*/
     return c[1][numcut];
 }
 
 int main() {
-    int length, numcut, cuts[1000], i;
-    char line[1000], *aux;
+    int length, numcut, cuts[LINESIZE], i, aux, tam;
+    char line[LINESIZE], str[LINESIZE];
     
-    while ( (fgets(line, 100, stdin) != NULL) && line[0] != '0') {
+    while ( (fgets(line, LINESIZE, stdin) != NULL) && line[0] != '0') {
         length = atoi(line);
-        fgets(line, 100, stdin);
+        fgets(line, LINESIZE, stdin);
         numcut = atoi(line);
-        fgets(line, 100, stdin);
-        aux = strtok(line, " ");
+        fgets(line, LINESIZE, stdin);
+        aux = 0;
         i = 1;
-        while( aux != NULL ){
-            cuts[i] = atoi(aux);
-            aux = strtok(NULL, " ");
+        while (sscanf(line+aux, "%s %n", str, &tam) == 1){
+            cuts[i] = atoi(str);
             i++;
+            aux += tam;
         }
         cuts[0] = 0;
-        cuts[i+1] = length;
-        printf("%d \n", CalcMinCuts(cuts, numcut, length));
+        cuts[i] = length;
+        printf("The minimum cutting is %d.\n", CalcMinCuts(cuts, numcut, length));
     }
     return 0;
 }
