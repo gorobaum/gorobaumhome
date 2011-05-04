@@ -132,12 +132,12 @@
                                           (parse (third sexp)))   
                                      (lists (second sexp) '()))
                                 (error 'parse "with faltando coisa."))]
-                [(isthere((first sexp) table)) 
+                [(+ - * /)
                     (if (= (length sexp) 3)
-                            (error 'parse "binop faltando coisa.")
                             (binop (searchbinop (first sexp) table)
                                    (parse (second sexp))
-                                   (parse (third sexp))))]
+                                   (parse (third sexp)))
+                            (error 'parse "Erro na binop."))]
                 [else (app (parse (first sexp)) (applist (rest sexp) '()))])]))
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;; Funcoes Auxiliares do Interp ;;
@@ -148,35 +148,50 @@
 ;;  aplicada aos dois numeros.
 (define (binoperation op l r )
     (if (equal? op /)
-        (if (= r 0)
+        (if (= (numV-n r) 0)
             (error 'binoperation "Tentativa de Divisao por zero!.")
-            ( op l r ))
-        ( op l r )))
+            ( op (numV-n l) (numV-n r) ))
+        ( op (numV-n l) (numV-n r) )))
 
 ;;  lookup : symbol env -> CFAE-value
 ;;  Consome um symbol e um env e devolve um CFAE-value
 (define (lookup id envir)
-    (if (equal? (anEnv-env envir) mtEnv)
-        (error 'lookup "Nao definido")
-        (if (equal? id (anEnv-name envir))
-            (anEnv-value envir)
-            (lookup id (anEnv-env envir)))))
+    (type-case Env envir
+        [mtEnv () (error 'lookup "Nao definido")]
+        [anEnv (name value env) (if (equal? id name)
+                        (anEnv-value envir)
+                        (lookup id (anEnv-env envir)))]))
 
+;;  envmanager  :   symbol CFAE envin envout-> Env
+;;  Recebe uma lista de symbols e CFAE e devolve o Env deles.
+(define (envmanager symbols CFAEs envin)
+    (if (empty? symbols)
+        (if (empty? CFAEs)
+            envin
+            (error 'envmanager "Entrada errada em alguma funcao. Te vira ai pra acha qual."))
+        (if (empty? CFAEs)
+            (error 'envmanager "Entrada errada em alguma funcao. Te vira ai pra acha qual.")
+            (anEnv  (car symbols)
+                    (rinterp (car CFAEs) envin)
+                    (envmanager (cdr symbols) 
+                                (cdr CFAEs) 
+                                 envin))))) 
+    
 ;;  rinterp : WAE DefrdSub -> number
 ;;  Consome uma WAE e um DerfdSub e devolve seu valor numerico.
 (define (rinterp expr env)
     (type-case CFAE expr
-        [num (n) n]
+        [num (n) (numV n)]
         [binop (op l r) (binoperation op (rinterp l env) (rinterp r env))]
         [id (v) (lookup v env)]
-        [if0 (c t e) (if (= c 0) t e)]
+        [if0 (c t e) (if (= (rinterp c env) 0) (rinterp t env) (rinterp e env))]
         [fun (fun-arg fun-body) (closureV fun-arg fun-body env)]
         [app (app-f app-args)
             (local ([define fun-val (rinterp app-f env)])
-                (interp (closureV-body fun-val)
-                    (anEnv (closureV-params fun-val)
-                    (interp app-args env)
-                    (closureV-env fun-val) )))]))
+                (rinterp    (closureV-body fun-val)
+                            (envmanager (closureV-params fun-val)
+                                        app-args 
+                                        (closureV-env fun-val))))]))
 
 
 ;;;;;;;;;;;;;
@@ -197,5 +212,8 @@
 (trace interp)
 (trace rinterp)
 (trace isthere)
+(trace envmanager)
+(trace binoperation)
+(trace lookup)
 
 (interp (parse(read)))
