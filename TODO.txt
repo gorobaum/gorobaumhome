@@ -3,34 +3,36 @@
 ############
 
 -> Tarefa 4 para o dia 15/05
+-> P2 dia 11/05
 
 #############
 ## Analise ##
 #############
 
--> Lista 5 para o dia 29/04
+-> Lista 5 para o dia 08/05
+-> P2 dia 13/05
 
 ####################
 ## Banco de Dados ##
 ####################
 
--> Prova dia 25
--> EP para o dia 25 ( Falta fazer SQL )
+-> FESTA DURO
 
 ###############
 ## Conceitos ##
 ###############
 
--> EP2 para o dia 03/05
+-> EP2 para o dia 08/05 ( Falta fazer lazyness )
 
 ###############
 ## Portugues ##
 ###############
 
--> Bolinha
+-> Redação pra algum dia.
 
 ############
 ## Outros ##
 ############
 
 -> Ler o Pro Git. ( Lendo cara lendo! )
+-> Ler o CLRS. ( Agora leia )
