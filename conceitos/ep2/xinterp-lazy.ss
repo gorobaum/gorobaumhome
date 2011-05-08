@@ -30,7 +30,7 @@
   [closureV (params (listof symbol?))
             (body CFAE?)
             (env Env?)]
-  [exprV (expr CFAE?) (env Env?)]))
+  [exprV (expr CFAE?) (env Env?)])
 
 ;;  Definicoes das binops usadas pelo programa.
 (define table (list (list '+ + ) (list '- -) (list '* *) (list '/ /)))
@@ -138,7 +138,7 @@
 
 ;; strict : CFAE/L-Value → CFAE/L-Value [excluding exprV]
 (define (strict e)
-    (type-case CFAE/L-Value e
+    (type-case CFAE-Value e
         [exprV (expr env)
             (strict (interp expr env))]
         [else e]))
@@ -151,7 +151,7 @@
     (if (equal? op /)
         (if (= (numV-n r) 0)
             (error 'binoperation "Tentativa de Divisao por zero!.")
-            (numV (op (numV-n l) (numV-n r) )))
+            (numV (op (numV-n (strict l)) (numV-n (strict r)) )))
         (numV (op (numV-n l) (numV-n r) ))))
 
 ;;  lookup : symbol env -> CFAE-value
@@ -173,21 +173,23 @@
         (if (empty? CFAEs)
             (error 'envmanager "Entrada errada de funcao.")
             (anEnv  (car symbols)
-                    (rinterp (car CFAEs) envin)
+                    (rinterp (exprV-expr (car CFAEs)) envin)
                     (envmanager (cdr symbols) 
                                 (cdr CFAEs) 
                                  envin))))) 
 
 ;;  argmanager
 ;;
-(define (argmanager args out)
-    
+(define (argmanager args env out)
+    (if(empty? args)
+        (reverse out)
+        (argmanager (cdr args) env (cons (exprV (car args) env) out))))
 
 ;;  if0manager : c t e env -> CFAE
 ;;  Recebe uma condicao a ser comparada com zero e dois valores, que serao devol
 ;;  vidos dependendo do resultado da comparacao,
 (define (if0manager c t e env)
-    (if (equal? (numV-n (rinterp c env)) 0)
+    (if (equal? (numV-n (strict (rinterp c env))) 0)
         (rinterp t env)
         (rinterp e env)))
         
@@ -205,7 +207,7 @@
             (local ([define fun-val (strict (rinterp app-f env))])
                 (rinterp    (closureV-body fun-val)
                             (envmanager (closureV-params fun-val)
-                                        (argmanager app-args '()) 
+                                        (argmanager app-args env '()) 
                                         (closureV-env fun-val))))]))
 
 
@@ -220,7 +222,6 @@
 ;;;;;;;;;;;;;
 ;; Testes  ;;
 ;;;;;;;;;;;;;
-
 ( test (interp (parse '{ with {{x 5}{y 10}} {with { z { + y 42 } } { - { + { * x y } {/ 20 10 } } z } } })) (numV 0))
 ( test (interp (parse '{if0 0 10 20})) (numV 10))
 ( test (interp (parse '{{fun {x y} {* x y}} 2 3})) (numV 6))
@@ -242,5 +243,6 @@
 (test/exn (parse '{with {{0}{y 3}} 3}) "Cada substituicao do with tem que ter duas partes, o simbolo e sua definicao")
 (test/exn (parse '{with {{0}{y 3 4}} 3}) "Cada substituicao do with tem que ter duas partes, o simbolo e sua definicao")
 (test/exn (parse '{with {{x 3}{x 5}} {+ x x}}) "Identificador repitido dentro de with")
+
 
 (interp (parse(read)))
