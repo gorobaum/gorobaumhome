@@ -139,32 +139,27 @@ int runComandos( Vertex v ) {
     int numcom, i;
     
     if ( comandos[v] == NULL ) return 1;
-    
     for ( numcom = 0, aux = comandos[v]; aux[0] != '\0'; aux += sizeof(char) )
     	if ( aux[0] == ';' ) numcom++;  
-    
+    	
     coms = malloc(numcom*sizeof(char*));
     for ( i = 0; i < numcom; i++ ) {
     	coms[i] = malloc(MAXP*sizeof(char));
-    	coms[i] = '\0';
 	}
-    
     i = 0;
-    aux = comandos[i];
-    last = comandos[i];
+    aux = comandos[v];
+    last = comandos[v];
  	while ( last[0] != '\0' ) {
 		aux += sizeof(char);
 		if( aux[0] == ';' ) {
 			aux[0] = '\0';
-			strcat(coms[i], last);
-			printf("%s \n", coms[i]);
+			strcpy(coms[i], last);
 			i++;
 			aux[0] = ';';
 			aux += 1*sizeof(char);
 			last = aux;
 		}
 	}
-	
 	for ( i = 0; i < numcom; i++ )
 		if (system(coms[i]) != 0) {
 			printf("Erro na reconstrução do target %s.\n",nome[v]);
@@ -174,37 +169,28 @@ int runComandos( Vertex v ) {
 	return 1;
 }
 
-int rebuildTarget(Digraph G, Vertex v ) {
+void rebuildTarget(Digraph G, Vertex v ) {
 	int i, sop[maxV];
-	printf("Rebuild de %d \n", v);
-	getchar();
+
 	for ( i = 0; i < maxV; i++ ) sop[i] = -1;
 	
 	if ( up_to_date[v] == FALSE) {
 		if ( DIGRAPHcycle(G, v) == 0 ) {
-			printf("Nao tem ciclo a partir de %d \n", v);
 			DIGRAPHdfs(G, v, sop);
 			for ( i = 0; sop[i] != -1; i++ ) {
-				printf("sop[%d]=%d \n",i, sop[i]);
-				if ( rebuildTarget(G, sop[i]) == 0 ) return 0;
-			}
-			for ( i = 0; sop[i] != -1; i++ ) {
-				if ( mtime(nome[v]) < mtime(nome[sop[i]]) ) {
-					if ( runComandos(v) == 1 ) {
-						up_to_date[v] = TRUE;
-						return 1;
-					}
-					else return 0;
+				if ( up_to_date[sop[i]] == FALSE ) {
+					if ( runComandos( sop[i] ) == 1 ) up_to_date[sop[i]] = TRUE;
+					else return;
 				}
+			}
+			if ( runComandos(v) == 1 ) {
+				up_to_date[v] = TRUE;
 			}
 		}
 		else {
-			printf("Ciclo detectado partindo de %s.\n", nome[v]);
 			fprintf(stderr,"Ciclo detectado partindo de %s.\n", nome[v]);
-			return 0;
 		}
 	}
-	return 1;
 }
 
 void rebuildMakeFile(Digraph G, char* goals[], int numgoals ) {
@@ -247,10 +233,8 @@ int main( int argc, char **argv ) {
 		else {
 			for ( i = 2; i < argc; i++ ) {
 				strcpy(goals[i-2], argv[i] );
-				printf("%s \n", goals[i-2]);
 			}
 		}
-		DIGRAPHshow(G);
 		rebuildMakeFile(G, goals, numgoals);
 	 	MakeFiledg = fopen("MakeFile.dg", "w+");
 		writeMake(MakeFiledg, G);
