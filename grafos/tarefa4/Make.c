@@ -21,6 +21,8 @@ int           mod_time[maxV];
 Boolean       up_to_date[maxV];
 static int posnome;
 
+/*	Funcao que procura target no vetor name. Se o acha, devolve a sua posicao no
+	vetor, se nao devolve 0.*/
 int lookfornome(char *target) {
     int i;
     for ( i = 1; i < maxV; i++) {
@@ -30,6 +32,7 @@ int lookfornome(char *target) {
     return 0;
 }
 
+/*	Funcao que ve o instante da ultima modificacao de filename.*/
 long mtime(const char *filename) {
    struct stat bufst;
 
@@ -37,6 +40,7 @@ long mtime(const char *filename) {
    return bufst.st_mtime;
 }
 
+/*	Funcao que le um MakeFile e cria o grafo correspondente.*/
 void readTargets(FILE * MakeFile, Digraph G){
     char line[MAXLN];
     int terminou = 0, poscom = 0;
@@ -99,6 +103,7 @@ void readTargets(FILE * MakeFile, Digraph G){
     }
 }
 
+/*	Funcao que cria o MakeFile.dg se -s foi passado para o Make.*/
 void writeMake(FILE * MakeFiledg, Digraph G){
     int i, j;
     int *Arcs;
@@ -134,6 +139,8 @@ void writeMake(FILE * MakeFiledg, Digraph G){
     }
 }
 
+/*	Essa funcao roda os comandos associados a um vertice, e retorna 1 se essa
+	acao foi concluida com sucesso. Retorna 0 caso contrario.*/
 int runComandos( Vertex v ) {
     char * aux, * last, **coms;
     int numcom, i;
@@ -160,14 +167,13 @@ int runComandos( Vertex v ) {
 			last = aux;
 		}
 	}
-	for ( i = 0; i < numcom; i++ )
-		if (system(coms[i]) != 0) {
- 		 	fprintf(stderr,"Erro na reconstrução do target %s.\n",nome[v]);
- 		 	return 0;
-    	}
+	for ( i = 0; i < numcom; i++ ) if (system(coms[i]) != 0) return 0;
 	return 1;
 }
-
+/* 	Funcao que cuida da atualizacao das dependencias dos goals e dos goals.
+   	Ela cria uma ordenacao pos-ordem das dependencias do goal passado e com isso
+   	vai atualizando-as conforme elas aparecem na ordenacao pos. Assim garantimos
+   	que nenhuma dependencia sera atualizada antes de suas proprias dependencias. */
 void rebuildTarget(Digraph G, Vertex v ) {
 	int i, sop[maxV];
 
@@ -179,7 +185,7 @@ void rebuildTarget(Digraph G, Vertex v ) {
 			for ( i = 0; sop[i] != -1; i++ ) {
 				if ( up_to_date[sop[i]] == FALSE ) {
 					if ( runComandos( sop[i] ) == 1 ) up_to_date[sop[i]] = TRUE;
-					else return;
+					else fprintf(stderr,"Erro na reconstrução do target %s.\n",nome[v]);
 				}
 			}
 			if ( runComandos(v) == 1 ) {
@@ -192,6 +198,7 @@ void rebuildTarget(Digraph G, Vertex v ) {
 	}
 }
 
+/* Funcao que cuida do rebuild dos goals passados pelo usuario. */
 void rebuildMakeFile(Digraph G, char* goals[], int numgoals ) {
 	int i;
 	Vertex s;
@@ -208,7 +215,8 @@ int main( int argc, char **argv ) {
     Digraph G;
     int i, numgoals, write;
     char* goals[maxV];
-
+	
+	/*	Inicializacao das variaveis globais e locais.*/
     G = DIGRAPHinit(maxV);
     MakeFile = fopen("MakeFile", "r");
     posnome = 1;
@@ -227,8 +235,10 @@ int main( int argc, char **argv ) {
         return 1;
     }
     
+    /*	Final da inicializacao.*/
     readTargets(MakeFile, G);
     
+    /*	Leitura dos parametros de entrada.*/
     if ( argc > 1 ) {
     	for ( i = 1; i < argc; i++ ) {
     		if ( strcmp( argv[i], "-s" ) == 0 ) {
@@ -242,6 +252,7 @@ int main( int argc, char **argv ) {
 		strcpy( goals[0], nome[1] );
 		numgoals++;
 	}
+	/*	Final da leitura*/
 	rebuildMakeFile(G, goals, numgoals);
 	
 	if ( write ) {
