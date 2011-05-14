@@ -162,7 +162,6 @@ int runComandos( Vertex v ) {
 	}
 	for ( i = 0; i < numcom; i++ )
 		if (system(coms[i]) != 0) {
-			printf("Erro na reconstrução do target %s.\n",nome[v]);
  		 	fprintf(stderr,"Erro na reconstrução do target %s.\n",nome[v]);
  		 	return 0;
     	}
@@ -196,7 +195,7 @@ void rebuildTarget(Digraph G, Vertex v ) {
 void rebuildMakeFile(Digraph G, char* goals[], int numgoals ) {
 	int i;
 	Vertex s;
-
+	
 	for ( i = 0; i < numgoals; i++ ) {
 		s = lookfornome(goals[i]);
 		if ( s == 0 ) fprintf(stderr,"%s: goal nao encontrado.\n", goals[i]);
@@ -207,13 +206,14 @@ void rebuildMakeFile(Digraph G, char* goals[], int numgoals ) {
 int main( int argc, char **argv ) {
     FILE * MakeFile, * MakeFiledg;
     Digraph G;
-    int i, numgoals;
+    int i, numgoals, write;
     char* goals[maxV];
 
     G = DIGRAPHinit(maxV);
     MakeFile = fopen("MakeFile", "r");
     posnome = 1;
     numgoals = argc-1;
+    write = 0;
     for(i = 0; i < maxV; i++ ) {
     	nome[i] = NULL;
     	comandos[i] = NULL;
@@ -228,14 +228,23 @@ int main( int argc, char **argv ) {
     }
     
     readTargets(MakeFile, G);
-    if ( argc > 1 && strcmp( argv[1], "-s" ) == 0) {
-    	if ( argc == 2 ) strcpy( goals[0], nome[1] );
-		else {
-			for ( i = 2; i < argc; i++ ) {
-				strcpy(goals[i-2], argv[i] );
+    
+    if ( argc > 1 ) {
+    	for ( i = 1; i < argc; i++ ) {
+    		if ( strcmp( argv[i], "-s" ) == 0 ) {
+    			write = 1;
+    			numgoals--;
 			}
+    		else strcpy(goals[i-1-write], argv[i] );
 		}
-		rebuildMakeFile(G, goals, numgoals);
+	}
+	if ( numgoals == 0 ) {
+		strcpy( goals[0], nome[1] );
+		numgoals++;
+	}
+	rebuildMakeFile(G, goals, numgoals);
+	
+	if ( write ) {
 	 	MakeFiledg = fopen("MakeFile.dg", "w+");
 		writeMake(MakeFiledg, G);
 	}
