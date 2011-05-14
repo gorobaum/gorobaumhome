@@ -5,8 +5,8 @@
 #include <stdlib.h>
 #include "grafo.h"
 
-static int lbl[maxV];
-static int parnt[maxV];
+static int cnt, time, conta;
+static int f[maxV], d[maxV], lbl[maxV], parnt[maxV], pos[maxV]; 
 
 typedef struct {
     Vertex v;
@@ -76,8 +76,8 @@ void DIGRAPHshow (Digraph G) {
     Vertex v;
     link p;
     for ( v = 0; v < G->V; v++ ) {
-        printf("%2d:",v);
-        for ( p = G->adj[v]; p != NULL; p = p->next ) printf("%2d", p->w);
+        printf("%3d:",v);
+        for ( p = G->adj[v]; p != NULL; p = p->next ) printf("%3d", p->w);
         printf("\n");
     }
 }
@@ -128,10 +128,59 @@ int DIGRAPHpath ( Digraph G ) {
             parnt[v] = -1;
         }
         parnt[w] = w;
-        pathR(G, w);
+		pathR(G, w);
         for ( v = 0; v < G->V; v++ ) {
             if ( parnt[v] == -1 ) return 0;
         }
     }
     return 1;   
+}
+
+int cycleR (Digraph G,Vertex v,Vertex ts[]) {
+	Vertex w;
+	link p;
+	d[v] = time++;
+	
+	for (p = G->adj[v]; p != NULL; p= p->next) {
+		if (d[w=p->w] == -1) {
+			parnt[w] = v;
+			if(cycleR(G,w,ts)==1) return 1;
+		}
+		else if (f[w] == -1) return 1;
+	}	
+	f[v] = time++; 
+	ts[cnt--] = v;
+	return 0;
+}
+
+int DIGRAPHcycle (Digraph G, Vertex s) {
+	Vertex v;
+	int *ts;
+	time = 0; 
+	cnt = G->V-1;
+	
+	ts = malloc((G->V)*sizeof(int));
+	
+	for (v = 0; v < G->V; v++) ts[v] = d[v] = f[v] = parnt[v] = -1;
+	parnt[s] = s;
+	if (cycleR(G,s,ts) == 1) return 1;
+	return 0;
+}
+
+void dfsR (Digraph G, Vertex v, int *sop) { 
+	link p;
+	lbl[v] = 1;
+	for (p = G->adj[v]; p != NULL; p = p->next)
+	  	if (lbl[p->w] == -1) dfsR(G, p->w, sop);
+ 	if ( pos[v] == -1 ) {
+	 	pos[v] = conta;
+		sop[conta++] = v;
+ 	}
+}
+
+void DIGRAPHdfs (Digraph G, Vertex s, int *sop) { 
+   	Vertex v;
+   	conta = -1;
+   	for (v = 0; v < G->V; v++) lbl[v] = pos[v] = -1; 
+ 	dfsR(G, s, sop);
 }
