@@ -1,5 +1,3 @@
-/*username Gorobaum */
-/*password rajimema123 */
 /*Nome Thiago de Gouveia Nunes */
 /*nusp 6797289 */
 
@@ -8,10 +6,11 @@
 #include <string.h>
 #include "grafo.h"
 
-/* Tam. de uma linha */
-#define MAXLN 1000
-/* Tam. de uma palavra */
-#define MAXP 50
+
+#define HASH_MULT  314159 /* random multiplier */
+#define HASH_PRIME 516595003 /* the 27182818th prime; it's less than $2^{29}$ */
+#define MAXLN 1000 /* Tam. de uma linha */
+#define MAXP 50 /* Tam. de uma palavra */
 #define maxV 100
 #define Vertex int
 
@@ -21,6 +20,71 @@ static char  *comandos[maxV];
 int           mod_time[maxV];
 Boolean       up_to_date[maxV];
 static int posnome;
+static Vertex hash_head[maxV];
+static Vertex hash_link[maxV];
+
+/*  HASH        
+
+void hash_setup(Digraph G) {
+    Vertex v;
+    
+    if (G != NULL && G->V > 0) 
+    {
+        register Vertex v;
+        for (v = 0; v < G->V; v++) hash_head[v] = -1;
+        for (v = 0; v < G->V; v++) hash_in(v,G);
+    }
+}
+
+void hash_in(Vertex v, Digraph G) {
+    register char *t=nome[v];
+    register Vertex u;
+    register long h;
+  
+    Find vertex u, whose location is the hash code for string t;
+    for (h = 0; *t; t++) 
+    {
+        h += (h^(h>>1)) + HASH_MULT*(unsigned char)*t;
+        while (h >= HASH_PRIME) h-=HASH_PRIME;
+    }
+    u = h % G->V;
+
+    hash_link[v]=hash_head[u];
+    hash_head[u]=v;
+}
+
+
+Vertex hash_out(char *s, Digraph G) {
+    register char*t= s;
+    register Vertex  u;
+    register long h;
+
+    Find vertex u, whose location is the hash code for string t;
+    for (h = 0; *t; t++)
+    {
+        h += (h^(h>>1)) + HASH_MULT*(unsigned char)*t;
+        while (h >= HASH_PRIME) h-= HASH_PRIME;
+    }
+    u = h%G->V;
+
+    for (u = hash_head[u]; u != -1; u = hash_link[u])
+    if (strcmp(s,nome[u]) == 0) return u;
+
+    return -1;
+}
+
+
+Vertex hash_lookup(char *s, Digraph G) {
+    if (G && G->V > 0)
+    {
+        register Vertex v;
+        v = hash_out(s,G);
+        return v;
+    }
+    else return -1;
+}
+
+  FIM DO HASH */
 
 int lookfornome(char *target) {
     int i;
@@ -30,6 +94,7 @@ int lookfornome(char *target) {
     }
     return 0;
 }
+
 
 void readTargets(FILE * MakeFile, Digraph G){
     char line[MAXLN];
@@ -78,7 +143,7 @@ void readTargets(FILE * MakeFile, Digraph G){
         if (fgets(line, MAXLN, MakeFile) == NULL)
             break;
         while (line[0] == '\t'){
-            strcpy(com, line+1);
+            strcpy(com, line);
             com[strlen(com)-1] = ';';
             strcat(comandosaux, com);
             if (fgets(line, MAXLN, MakeFile) == NULL){
@@ -110,53 +175,29 @@ void writeMake(FILE * MakeFiledg, Digraph G){
             aux = comandos[i];
             last = comandos[i];
             while ( last[0] != '\0' ) {
+            	aux += sizeof(char);
                 if( aux[0] == ';' ) {
 					fputc('\t', MakeFiledg);
                     aux[0] = '\0';
                     fputs(last, MakeFiledg);
 					fputc('\n', MakeFiledg);
-                    last = aux + 2*sizeof(char);
+					aux += 1*sizeof(char);
+					last = aux;
                 }
-                aux += sizeof(char);
-            }int           mod_time[maxV];
-Boolean       up_to_date[maxV];
+            }
 			fputc('\n', MakeFiledg);
         }
     }
 }
 
-void writeMake(FILE * MakeFiledg, Digraph G){
-    int i, j;
-    int *Arcs;
-    
-
-    for ( i = 0; i < DIGRAPHGetNumVet( G ); i++ ) {
-        printf("%d \n", i);
-        Arcs = DIGRAPHVertexArcs( i, G );
-        if ( Arcs != NULL ) {
-            fputs(nome[i], MakeFiledg);
-            fputc(':', MakeFiledg);
-            printf("%d %d\n", i, DIGRAPHNumArcs( i, G ));
-            for ( j = 0; j < DIGRAPHNumArcs( i, G ); j++ ) {
-                fputc(' ', MakeFiledg);
-                fputs(nome[Arcs[j]], MakeFiledg);
-                fputc(' ', MakeFiledg);
-            }
-            fputc('\n', MakeFiledg);
-        }   
-    }
-}
-
-int main(){
+int main( int argc, char **argv ){
     FILE * MakeFile, * MakeFiledg;
     Digraph G;
     int i;    
 
     G = DIGRAPHinit(maxV);
     MakeFile = fopen("MakeFile", "r");
-    MakeFiledg = fopen("MakeFile.dg", "w+");
     posnome = 0;
-
     for(i = 0; i < maxV; i++ ) nome[i] = NULL;
     for(i = 0; i < maxV; i++ ) comandos[i] = NULL;
     for(i = 0; i < maxV; i++ ) mod_time[maxV] = -1;
@@ -167,7 +208,11 @@ int main(){
         return 1;
     }
     readTargets(MakeFile, G);
-    writeMake(MakeFiledg, G);
+    if ( argc > 1 )
+    	if (strcmp( argv[1], "-s" )) {
+		    MakeFiledg = fopen("MakeFile.dg", "w+");
+    		writeMake(MakeFiledg, G);
+		}
 
     return 0;
 }

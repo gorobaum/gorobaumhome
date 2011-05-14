@@ -3,14 +3,12 @@
 ############
 
 -> Tarefa 4 para o dia 15/05
--> P2 dia 11/05
 
 #############
 ## Analise ##
 #############
 
--> Lista 5 para o dia 08/05
--> P2 dia 13/05
+-> FESTA DURO
 
 ####################
 ## Banco de Dados ##
@@ -22,7 +20,7 @@
 ## Conceitos ##
 ###############
 
--> EP2 para o dia 08/05 ( Falta fazer lazyness )
+-> P2 para o dia 17/05
 
 ###############
 ## Portugues ##

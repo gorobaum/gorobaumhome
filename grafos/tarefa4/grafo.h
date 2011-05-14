@@ -1,5 +1,3 @@
-/*password rajimema123 */
-/*username Gorobaum */
 /*Nome Thiago de Gouveia Nunes */
 /*nusp 6797289 */
 
