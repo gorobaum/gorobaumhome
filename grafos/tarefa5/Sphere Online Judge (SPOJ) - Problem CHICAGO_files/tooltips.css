@@ -1,0 +1,63 @@
+
+/* context help message */
+.cxitem {
+        display: none;
+}
+
+/* tooltip */
+#tooltip {
+        margin:0;
+        padding:0;
+        background:#F8F8F8;
+        border:1px solid #d2d2d2;
+        line-height:130%;
+        opacity: 0.95;
+        position: absolute;
+        z-index: 3000;
+}
+#tooltip2 {
+        background:#F8F8F8;
+        border:1px solid #d2d2d2;
+        opacity: 0.95;
+        position: absolute;
+        z-index: 3000;
+}
+#tooltip_dyn {
+        margin:0;
+        padding:0;
+        background:#F8F8F8;
+        border:1px solid #d2d2d2;
+        line-height:130%;
+        opacity: 0.95;
+        position: absolute;
+        z-index: 3000;
+}
+
+
+#tooltip div, #tooltip_dyn div {
+        margin-bottom: 10px;
+            padding:3px;
+}
+#tooltip2 div {
+        padding: 3px;
+}
+
+#tooltip div.cxtitle, #tooltip2 div.cxtitle, #tooltip_dyn div.cxtitle{
+        background-color: #000080;
+        color: #F4F4F4;
+        font-weight: bold
+}
+
+/* context help link */
+a.cxhelp {
+        text-decoration: none;
+}
+a.cxhelp img {
+		border: 0;	
+}
+
+
+
+.standardTooltipWidth {
+	width: 350px;
+}

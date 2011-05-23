@@ -1,0 +1,395 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<!-- saved from url=(0037)https://www.spoj.pl/problems/CHICAGO/ -->
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:fb="http://www.facebook.com/2008/fbml"><head><meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-2">
+
+<title>Sphere Online Judge (SPOJ)  - Problem CHICAGO</title>
+
+<meta name="Keywords" content="programming, language, algorithm, spoj, contest, contester, Java, C#, Pascal, C, C++, python, ruby, caml, ocaml, perl, haskell, lisp, prolog, fortran, assembler, asembler, functional, online, judge, problem, problemset, ACM">
+
+<link href="https://www.spoj.pl/gfx/favicon.png" rel="shortcut icon" type="image/x-icon">
+<link href="https://www.spoj.pl/rss/" rel="alternate" type="application/rss+xml" title="RSS Feed">
+<link href="./Sphere Online Judge (SPOJ) - Problem CHICAGO_files/common.css" rel="stylesheet" type="text/css" id="theme">
+<link href="./Sphere Online Judge (SPOJ) - Problem CHICAGO_files/style.css" rel="stylesheet" type="text/css" id="theme">
+<link href="./Sphere Online Judge (SPOJ) - Problem CHICAGO_files/tooltips.css" rel="stylesheet" type="text/css" id="theme">
+<script type="text/javascript" src="./Sphere Online Judge (SPOJ) - Problem CHICAGO_files/jquery.js"></script>
+<script type="text/javascript" src="./Sphere Online Judge (SPOJ) - Problem CHICAGO_files/jquery.timers.js"></script>
+<style type="text/css">
+<!--
+.maintable {width: 755px;} 
+-->
+</style>
+<script type="text/javascript" language="javascript">
+<!--
+function UnCryptMailto(s) {
+	var n=0;
+	var r="";
+	for(var i=0;i<s.length;i++) {		
+		n=s.charCodeAt(i); 
+		if (n>=8364) {n = 128;}
+		r += String.fromCharCode(n+(2));	
+	}
+	return r;
+}
+function linkTo_UnCryptMailto(s)	{
+	location.href=UnCryptMailto(s);
+}
+// -->
+</script>
+
+<script type="text/javascript">
+function recordOutboundLink(link, category, action) {
+  try {
+    var pageTracker=_gat._getTracker("UA-XXXXX-X");
+    pageTracker._trackEvent(category, action);
+    setTimeout('document.location = "' + link.href + '"', 100)
+  }catch(err){}
+}
+</script>
+
+    <script type="text/javascript" src="./Sphere Online Judge (SPOJ) - Problem CHICAGO_files/shCore.js"></script>
+	<script type="text/javascript" src="./Sphere Online Judge (SPOJ) - Problem CHICAGO_files/shBrushCpp.js"></script>
+	<script type="text/javascript" src="./Sphere Online Judge (SPOJ) - Problem CHICAGO_files/shBrushCSharp.js"></script>
+    <script type="text/javascript" src="./Sphere Online Judge (SPOJ) - Problem CHICAGO_files/shBrushJava.js"></script>
+    <script type="text/javascript" src="./Sphere Online Judge (SPOJ) - Problem CHICAGO_files/shBrushPhp.js"></script>
+    <script type="text/javascript" src="./Sphere Online Judge (SPOJ) - Problem CHICAGO_files/shBrushPython.js"></script>
+	<link type="text/css" rel="stylesheet" href="./Sphere Online Judge (SPOJ) - Problem CHICAGO_files/shCore.css">
+	<link type="text/css" rel="stylesheet" href="./Sphere Online Judge (SPOJ) - Problem CHICAGO_files/shThemeDefault.css">
+	
+	<script type="text/javascript">
+		SyntaxHighlighter.all();
+	</script>
+	
+
+</head>
+<body>
+<center>
+<table cellpadding="10" cellspacing="0" class="maintable" id="maintable">
+<tbody><tr>
+    <td colspan="2" class="header">
+        <table width="100%" border="0" cellpadding="0" cellspacing="0">
+        <tbody><tr>
+		<td class="headerleft">
+		</td><td class="headercenter">
+<h1><img alt="Sphere Online Judge" title="Sphere Online Judge" src="./Sphere Online Judge (SPOJ) - Problem CHICAGO_files/sphere-spoj-small.png" border="0" style="margin-top:-4px;margin-bottom:-4px"></h1>
+		</td>
+		<td class="headerright">
+	</td></tr>
+	</tbody></table>
+    </td>
+</tr>
+<tr><td class="menu" width="92" valign="top">
+
+	
+
+<form name="login" action="./Sphere Online Judge (SPOJ) - Problem CHICAGO_files/Sphere Online Judge (SPOJ) - Problem CHICAGO.html" method="post" style="margin-bottom: 18px" class="smallgrey"> 
+User: <input name="login_user" type="text" style="width: 85px;" class="form"><br>
+Password: <input name="password" type="password" style="width: 85px;" class="form"><br>
+<div title="Keep me signed in for today">
+<input type="checkbox" name="autologin" value="1">for today<!--Keep me signed in for today-->
+</div>
+<input name="submit" type="submit" value="Log In" class="button" style="width: 85px;">
+</form>
+<div class="menucmd"><a href="https://www.spoj.pl/register">register</a><br><a href="https://www.spoj.pl/tutorials">tutorials</a><br><br><a href="https://www.spoj.pl/status">status</a><br><a href="https://www.spoj.pl/submit">submit</a><br><a href="https://www.spoj.pl/problems/classical/">problems</a><br><a href="https://www.spoj.pl/search">search</a><br><br><a href="https://www.spoj.pl/">news</a><br><a href="https://www.spoj.pl/contests">contests</a><br><a href="https://www.spoj.pl/ranks/">ranks</a><br><br><a href="https://www.spoj.pl/forum">forum</a><br><a href="https://www.spoj.pl/tools">tools</a><br><a href="https://www.spoj.pl/credits">credits</a><br><hr></div><a href="https://www.spoj.pl/problems/classical/"></a><br>
+
+	<div class="time">
+Server time:</div>
+<div class="time">
+2011-05-23
+<br>
+<b>18 : 49 : 02</b>
+</div>
+
+</td><td style="width: 100%; padding:0px;" valign="top" class="content0">
+        <table width="100%" cellpadding="0" cellspacing="0">
+        <tbody><tr>
+                <td style="padding:0px;" colspan="2"><center>
+                                
+                </center></td>
+        </tr>
+        <tr>
+                <td class="content" width="99%" style="padding: 10px"><script type="text/javascript" src="./Sphere Online Judge (SPOJ) - Problem CHICAGO_files/jquery.bgiframe.js"></script>
+<script type="text/javascript" src="./Sphere Online Judge (SPOJ) - Problem CHICAGO_files/jquery.tooltip.js"></script>
+<script type="text/javascript" src="./Sphere Online Judge (SPOJ) - Problem CHICAGO_files/jquery.cxhelp.js"></script>
+
+
+
+ <!-- wykorzystywane w pcontent.html (by wiele) -->
+
+<table class="problems" width="100%">
+<tbody><tr class="navigation">
+<td><a href="https://www.spoj.pl/submit/CHICAGO/">Submit</a></td>
+<td><a href="https://www.spoj.pl/status/CHICAGO/">All submissions</a></td>
+<td><a href="https://www.spoj.pl/ranks/CHICAGO/">Best solutions</a></td>
+<td><a href="https://www.spoj.pl/problems/CHICAGO.ps">PS</a></td>
+<td><a href="https://www.spoj.pl/problems/CHICAGO.pdf">PDF</a></td>
+<td><a href="https://www.spoj.pl/problems/classical/">Back to list</a></td>
+</tr>
+</tbody></table>
+
+<div class="prob">
+
+
+<!-- plik z pomoca kontekstowa (cxhelp_*) dziedziczony po pindex.html -->
+
+
+<script type="text/javascript" src="./Sphere Online Judge (SPOJ) - Problem CHICAGO_files/ASCIIMathMLwFallback.js"></script>
+<!--script type="text/javascript" src="/gfx/jscripts/tiny_mce/plugins/asciisvg/js/ASCIIsvgPI.js"></script-->
+<script type="text/javascript">
+<!--
+var AScgiloc = 'http://www.imathas.com/imathas/filter/graph/svgimg.php';
+var AMTcgiloc = "/files/gif/";
+-->
+</script>
+
+<table width="100%" style="margin-top:10px">
+<tbody><tr>
+	<td>
+		<h2>SPOJ Problem Set (classical)</h2>
+				<h1>381. 106 miles to Chicago</h1>
+		<h2>Problem code: CHICAGO</h2>
+	</td>
+	</tr>
+</tbody></table>
+
+<p align="justify">
+</p><p>In the movie "Blues Brothers", the orphanage where Elwood and Jack were raised may be sold to the Board of Education if they do not pay 5000 dollars in taxes at the Cook County Assessor's Office in Chicago. After playing a gig in the Palace Hotel ballroom to earn these 5000 dollars, they have to find a way to Chicago. However, this is not so easy as it sounds, since they are chased by the Police, a country band and a group of Nazis. Moreover, it is 106 miles to Chicago, it is dark and they are wearing sunglasses.<br> As they are on a mission from God, you should help them find the safest way to Chicago. In this problem, the safest way is considered to be the route which maximises the probability that they are not caught.</p>
+<h3>Input Specification</h3>
+<p>The input file contains several test cases.<br> Each test case starts with two integers <em>n</em> and <em>m</em> (<em>2 &#8804; n &#8804; 100</em> , <em>1 &#8804; m &#8804; n*(n-1)/2</em>). <em>n</em> is the number of intersections, <em>m</em> is the number of streets to be considered.<br> The next <em>m</em> lines contain the description of the streets. Each street is described by a line containing 3 integers <em>a</em>, <em>b</em> and <em>p</em> (<em>1 &#8804; a, b &#8804; n</em> , <em>a &#8800; b</em>, 1 &#8804; p &amp;le 100): <em>a</em> and <em>b</em> are the two end points of the street and <em>p</em> is the probability in percent that the Blues Brothers will manage to use this street without being caught. Each street can be used in both directions. You may assume that there is at most one street between two end points. <br> The last test case is followed by a zero.</p>
+<h3>Output Specification</h3>
+<p>For each test case, calculate the probability of the safest path from intersection <em>1</em> (the Palace Hotel) to intersection <em>n</em> (the Honorable Richard J. Daley Plaza in Chicago). You can assume that there is at least one path between intersection <em>1</em> and <em>n</em>.<br> Print the probability as a percentage with exactly 6 digits after the decimal point. The percentage value is considered correct if it differs by at most 10<sup>-6</sup> from the judge output. Adhere to the format shown below and print one line for each test case.</p>
+<h3>Sample Input</h3>
+<pre>5 7
+5 2 100
+3 5 80
+2 3 70
+2 1 50
+3 4 90
+4 1 85
+3 1 70
+0
+</pre>
+<h3>Sample Output</h3>
+<pre>61.200000 percent
+</pre>
+<hr>
+<p><em>The safest path for the sample input is 1 -&gt; 4 -&gt; 3 -&gt; 5</em></p>
+
+<hr>
+<table border="0" cellspacing="0" cellpadding="0" align="left" style="margin-bottom:10px" class="probleminfo">
+<tbody><tr><td>Added by:</td><td><a href="https://www.spoj.pl/users/ak15">Adrian Kuegel</a></td></tr>
+<tr><td>Date:</td><td>2005-06-24</td></tr>
+<tr><td>Time limit:</td><td>5s
+</td></tr>
+<tr><td>Source limit:</td><td>50000B</td></tr>
+<tr><td>Languages:</td><td>All except: PERL 6 </td></tr>
+<tr><td>Resource:</td><td>University of Ulm Local Contest 2005</td></tr>	
+</tbody></table>
+<div id="ccontent">
+
+<hr style="clear:both;">
+<a href="https://www.spoj.pl/problems/CHICAGO/#" onclick="toggleComments(); return false;"><span id="comments_sh">hide</span> comments</a><br>
+
+<a id="comments"></a>
+<table id="comments_table" width="100%">
+		<tbody><tr>
+		<td colspan="2">
+				</td>
+	</tr>
+	
+	<script language="JavaScript">
+	<!--
+	$(document).ready(function(){
+        $('.pager_link').bind('click', function(me){
+                var href=$(me.currentTarget).attr('href');
+		$('#ccontent').animate({opacity: 0.5},1);
+                $.ajax({
+                        type: "GET",
+                        url: href+",ajax=1",
+                        contentType: "application/x-www-form-urlencoded;charset=ISO-8859-2",
+                        success: function(data){
+                                $('#ccontent').html(data);
+				$('#ccontent').animate({opacity: 1.0},1);
+                        },
+                        error: function(err){
+                                alert('error');
+                        }
+                });
+                return false;
+        });
+	});
+	-->
+	</script>
+	
+
+			
+	<tr>
+		<td colspan="2" class="comm comm_odd ">
+		<font>
+		2011-03-28 13:33:16 <b><a href="https://www.spoj.pl/users/ak15">Adrian Kuegel</a></b> 
+		</font>
+								<br>
+				thanks, I changed it
+						</td>
+	</tr>
+				
+	<tr>
+		<td colspan="2" class="comm comm_even ">
+		<font>
+		2011-03-28 13:33:01 <b><a href="https://www.spoj.pl/users/nroets">Nic Roets</a></b> 
+		</font>
+								<br>
+				It's Cook County, not "Country".
+<br>
+						</td>
+	</tr>
+				
+	<tr>
+		<td colspan="2" class="comm comm_odd ">
+		<font>
+		2011-03-28 13:33:01 <b><a href="https://www.spoj.pl/users/idainet">abc</a></b> 
+		</font>
+								<br>
+				Don't forget "percent" word :)
+						</td>
+	</tr>
+			
+</tbody></table>
+
+
+<script language="javascript" type="text/javascript">
+<!--
+function getCookieVal (offset) {
+        var endstr = document.cookie.indexOf (";", offset);
+        if (endstr == -1) { 
+                endstr = document.cookie.length; 
+        }
+        return unescape(document.cookie.substring(offset, endstr));
+}
+
+function GetCookie (name) {
+  var arg = name + "=";
+  var alen = arg.length;
+  var clen = document.cookie.length;
+  var i = 0;
+  while (i < clen) {
+    var j = i + alen;
+    if (document.cookie.substring(i, j) == arg) {
+      return getCookieVal (j);
+      }
+    i = document.cookie.indexOf(" ", i) + 1;
+    if (i == 0) break; 
+    }
+  return null;
+}
+
+function toggleComments() {
+        var a = document.getElementById('comments_table');
+        var d = a.style.display;
+        if( d == "" || d == "block" ){
+                d = "none";
+                document.getElementById('comments_sh').innerHTML = 'show';
+        } else {
+                d = "block";
+                document.getElementById('comments_sh').innerHTML = 'hide';
+        }
+        a.style.display = d;
+        document.cookie="comments_table="+d+"; path=/;";
+}
+
+if( GetCookie('comments_table') == 'none' ){
+        document.getElementById('comments_sh').innerHTML = 'show';
+        document.getElementById('comments_table').style.display = 'hide';
+}
+
+-->
+</script>
+
+
+</div>
+<table width="100%">
+        </table>
+
+</div>
+        </td>
+</tr><tr>
+        <td style="padding:0px" colspan="2"><center>
+                
+</center></td>
+</tr>
+</tbody></table>
+</td>
+</tr>
+
+<tr>
+<td colspan="2" class="footer">
+
+<script language="javascript" type="text/javascript">
+<!--
+function swapSheet(sheet, caller) {
+    document.getElementById('theme').href=sheet;
+    document.cookie="css_0="+sheet+"; path=/;";
+    caller.href="#bottom";
+}
+
+function setWidth(w, caller) {
+    document.getElementById('maintable').style.width=w;
+    document.cookie="res="+w+"; path=/;";
+    caller.href="#bottom";
+}
+
+
+
+//-->
+
+</script>
+        <table width="100%">
+    <tbody><tr>
+	<td align="left" width="10%" class="cfooter">
+	<a href="https://www.spoj.pl/info/">About SPOJ</a>
+	</td>
+	<td align="center" class="cfooter">
+	    page size:
+	    <a href="https://www.spoj.pl/?rsl=755px" onclick="setWidth(&#39;755px&#39;, this)">800x600</a>
+	    <a href="https://www.spoj.pl/?rsl=980px" onclick="setWidth(&#39;980px&#39;, this)">1024x768</a>
+	    <a href="https://www.spoj.pl/?rsl=100%" onclick="setWidth(&#39;100%&#39;, this)">Full</a>
+	    &nbsp;&nbsp;
+	    theme:
+	    <a href="https://www.spoj.pl/?css=/themes/skin1.css" onclick="swapSheet(&#39;/themes/skin1.css&#39;, this)">olive</a>
+	    <a href="https://www.spoj.pl/?css=/themes/skin2.css" onclick="swapSheet(&#39;/themes/skin2.css&#39;, this)">banana</a>
+	    <a href="https://www.spoj.pl/?css=/themes/skin3.css" onclick="swapSheet(&#39;/themes/skin3.css&#39;, this)">plum</a>
+	</td>
+		<td align="center" class="cfooter">
+		 <span title="The discussion channel of the Sphere Online Judge community.">
+		 <a href="irc://irc.freenode.net/spoj"><b>#spoj</b> at freenode</a>
+		 </span>
+	</td>
+		<td width="10%" class="cfooter" style="text-align:right">
+		<a href="https://www.spoj.pl/rss/"><img src="./Sphere Online Judge (SPOJ) - Problem CHICAGO_files/rss10x10.gif" border="0">&nbsp;RSS</a>&nbsp;
+	
+	</td>
+    </tr>
+    </tbody></table>
+    </td></tr></tbody></table>
+</center>
+<div style="font-size:10px; margin-top:4px; color: rgb(85,80,95);"><center>
+<a href="http://www.spoj.pl/" style="color:black">SPOJ</a>
+System  2011
+<a href="http://sphere-research.com/" style="color:black">Sphere Research Labs</a>. 
+All Rights Reserved.</center></div>
+
+
+<script type="text/javascript">
+var gaJsHost = (("https:" == document.location.protocol) ? "https://ssl." : "http://www.");
+document.write(unescape("%3Cscript src='" + gaJsHost + "google-analytics.com/ga.js' type='text/javascript'%3E%3C/script%3E"));
+</script><script src="./Sphere Online Judge (SPOJ) - Problem CHICAGO_files/ga.js" type="text/javascript"></script>
+<script type="text/javascript">
+try {
+var pageTracker = _gat._getTracker("UA-10507872-1");
+pageTracker._trackPageview();
+//var pageTracker = _gat._getTracker('UA-XXXXX-X');
+//pageTracker._trackPageview();
+} catch(err) {}</script>
+
+
+
+</body></html>
