@@ -1,12 +1,15 @@
+/*username Gorobaum */
+/*password rajimema123 */
 /*Nome Thiago de Gouveia Nunes */
 /*nusp 6797289 */
 
 #include <stdio.h>
 #include <stdlib.h>
 #include "grafo.h"
+#include "queue.h"
 
 static int cnt, time, conta;
-static int f[maxV], d[maxV], lbl[maxV], parnt[maxV], pos[maxV]; 
+static int f[maxV], d[maxV], lbl[maxV], pos[maxV];
 
 typedef struct {
     Vertex v;
@@ -114,17 +117,17 @@ int DIGRAPHGetNumVet( Digraph G ) {
     return G->V;
 }
 
-void pathR (Digraph G, Vertex v) {
+void pathR (Digraph G, Vertex v, int parnt[]) {
     link p;
     lbl[v] = 0;
     for ( p = G->adj[v]; p != NULL; p = p->next )
         if ( lbl[p->w] == -1 ) {
             parnt[p->w] = v;
-            pathR(G, p->w);
+            pathR(G, p->w, parnt);
         }
 }
 
-int DIGRAPHpath ( Digraph G ) {
+int DIGRAPHpath ( Digraph G, int parnt[]) {
     Vertex v, w;    
     for ( w = 0; w < G->V; w++ ) {
         for ( v = 0; v < G->V; v++ ) {
@@ -132,7 +135,7 @@ int DIGRAPHpath ( Digraph G ) {
             parnt[v] = -1;
         }
         parnt[w] = w;
-		pathR(G, w);
+		pathR(G, w, parnt);
         for ( v = 0; v < G->V; v++ ) {
             if ( parnt[v] == -1 ) return 0;
         }
@@ -140,7 +143,7 @@ int DIGRAPHpath ( Digraph G ) {
     return 1;   
 }
 
-int cycleR (Digraph G,Vertex v,Vertex ts[]) {
+int cycleR (Digraph G,Vertex v,Vertex ts[], int parnt[]) {
 	Vertex w;
 	link p;
 	d[v] = time++;
@@ -148,7 +151,7 @@ int cycleR (Digraph G,Vertex v,Vertex ts[]) {
 	for (p = G->adj[v]; p != NULL; p= p->next) {
 		if (d[w=p->w] == -1) {
 			parnt[w] = v;
-			if(cycleR(G,w,ts)==1) return 1;
+			if(cycleR(G,w,ts, parnt)==1) return 1;
 		}
 		else if (f[w] == -1) return 1;
 	}	
@@ -157,7 +160,7 @@ int cycleR (Digraph G,Vertex v,Vertex ts[]) {
 	return 0;
 }
 
-int DIGRAPHcycle (Digraph G, Vertex s) {
+int DIGRAPHcycle (Digraph G, Vertex s, int parnt[]) {
 	Vertex v;
 	int *ts;
 	time = 0; 
@@ -167,7 +170,7 @@ int DIGRAPHcycle (Digraph G, Vertex s) {
 	
 	for (v = 0; v < G->V; v++) ts[v] = d[v] = f[v] = parnt[v] = -1;
 	parnt[s] = s;
-	if (cycleR(G,s,ts) == 1) return 1;
+	if (cycleR(G,s,ts,parnt) == 1) return 1;
 	return 0;
 }
 
@@ -187,4 +190,34 @@ void DIGRAPHdfs (Digraph G, Vertex s, int *sop) {
    	conta = -1;
    	for (v = 0; v < G->V; v++) lbl[v] = pos[v] = -1; 
  	dfsR(G, s, sop);
+}	
+
+void dijkstra(Graph G, Vertex s, Vertex parnt[], double cst[]) {
+	Vertex v, w; 
+	link p;
+	for (v = 0; v < G->V; v++) {
+		cst[v] = 0;
+		parnt[v] = -1;
+	}
+	
+	PQinit(G->V);
+	cst[s] = 1;
+	parnt[s] = s;
+	PQinsert(s);
+	
+	while (!PQempty()) {
+		v = PQdelmax(cst);
+		for(p=G->adj[v];p!=NULL;p=p->next) {
+			if (cst[w=p->w] == 0) {
+				cst[w]=cst[v]*p->cst;
+				parnt[w]=v;
+				PQinsert(w);
+			}
+			else if(cst[w]<cst[v]*p->cst) {
+				cst[w]=cst[v]*p->cst;
+				parnt[w] = v;
+			}
+		}
+	}
+	PQfree();
 }

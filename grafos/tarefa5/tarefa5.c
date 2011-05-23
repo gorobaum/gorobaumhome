@@ -12,7 +12,8 @@
 #define LINESIZE 20
 
 int main(){
-    int NumVert, NumArcs, i, posLine, tam;
+    int NumVert, NumArcs, i, posLine, tam, *parnt;
+    double *cst;
     char line[LINESIZE], ptr[LINESIZE], arc1[LINESIZE], arc2[LINESIZE], prob[LINESIZE];
     Graph G;
     
@@ -24,16 +25,18 @@ int main(){
     	sscanf(line+posLine, "%s %n", ptr, &tam);
     	NumArcs = atoi(ptr);
     	
-    	printf("Vert = %d\nArcs = %d\n", NumVert, NumArcs);
     	G = DIGRAPHinit(NumVert);
+    	parnt = malloc(NumVert*sizeof(int));
+    	cst = malloc(NumVert*sizeof(double));
     	
     	for ( i = 0; i < NumArcs; i++ ) {
     		fgets(line, LINESIZE, stdin);
     		if ( sscanf(line, "%s %s %s", arc1, arc2, prob) == 3 ) {
-				GRAPHinsertE( G, atoi(arc1)-1, atoi(arc2)-1, atof(prob) );
+				GRAPHinsertE( G, atoi(arc1)-1, atoi(arc2)-1, atof(prob)/100.0 );
 			}
 		}
-		GRAPHshow(G);
+		dijkstra(G, 0, parnt, cst);
+		printf("%f\n", cst[NumVert-1]*100.0);
 	}
 			
         
