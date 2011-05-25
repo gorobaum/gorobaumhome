@@ -9,18 +9,19 @@
 #############
 
 -> 4 problemas de PD para algum dia.
+-> Lista 8 para o dia 03/06.
 
 ####################
 ## Banco de Dados ##
 ####################
 
--> EP2 para 13/06
+-> EP2 para 13/06.
 
 ###############
 ## Conceitos ##
 ###############
 
--> EP2 para 03/06
+-> EP2 para 03/06.
 
 ###############
 ## Portugues ##
