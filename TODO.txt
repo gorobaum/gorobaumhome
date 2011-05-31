@@ -2,14 +2,14 @@
 ## Grafos ##
 ############
 
--> OK!
+-> P3 dia 15/06
 
 #############
 ## Analise ##
 #############
 
 -> 4 problemas de PD para algum dia.
--> Lista 8 para o dia 03/06.
+-> Lista 8 para o dia 03/06, exerc. 3 e 7.
 
 ####################
 ## Banco de Dados ##
@@ -21,13 +21,13 @@
 ## Conceitos ##
 ###############
 
--> EP2 para 03/06.
+-> EP2 para 03/06. Falta fazer os testes.
 
 ###############
 ## Portugues ##
 ###############
 
--> Redação pra algum dia.
+-> Fiesta Dura.
 
 ############
 ## Outros ##
