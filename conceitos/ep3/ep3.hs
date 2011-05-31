@@ -2,28 +2,13 @@ module Laziness (isPrime, primes, buildList, buildTable, lcsLength) where
 
 isPrime :: Integer -> Bool
 
-isPrime n = isPrimeAux n primes
+isPrime n = (takeWhile (\y -> mod n y /= 0) auxprime ) == auxprime
+    where auxprime = (takeWhile (\x -> x*x <= n) primes)
 	
-isPrimeAux :: Integer -> [Integer] -> Bool
-
-isPrimeAux a primes
-	|	a <= 1 = False
-	|	hp == a = True
-	|	(mod a hp) == 0 = False
-	|	otherwise = isPrimeAux a (tail primes)
-	where hp = head primes
-
 primes :: [Integer]
 
-primes = [ x | x <- [2..], mountPrimes x 2 == True]
+primes = 2:[ x | x <- [3,5..], isPrime x == True]
 
-mountPrimes :: Integer -> Integer -> Bool
-
-mountPrimes a b
-	| 	b == a = True
-	| 	mod a b == 0 = False
-	|	otherwise = mountPrimes a (b+1)
-	
 --------------------------
 buildList :: Int -> (Int -> a) -> [a]
 
