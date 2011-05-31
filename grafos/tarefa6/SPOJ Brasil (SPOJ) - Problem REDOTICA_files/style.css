@@ -1,0 +1,482 @@
+@import "/themes/common.css";
+
+/* general esthetics */
+body {
+	background: #EEEEEE;
+	font-family: Verdana, Arial, Helvetica, sans-serif;
+	font-size: 13px;
+	color: #000020;
+}
+
+h3 { 
+	font-size: 17px;
+	font-weight: bold;
+}	
+
+h4 { 
+	font-size: 16px;
+	font-weight: bold;
+}	
+
+td, ul, p, th { 
+	font-size: 13px;
+}	
+
+small {
+	font-size: 12px;
+}
+
+a {
+    text-decoration: none;
+    color: #0000A0;
+}
+
+a:hover, a:active {
+    color: #B01010;
+}
+
+/* comments */
+.comm{
+	padding: 5px;
+	padding-bottom:20px;
+}
+.comm_odd {
+	background: #E8EDD0;
+}
+.comm_even {
+	background: #F6F9E0;
+}
+
+.status_sm {
+	font-size: 11px;
+}
+
+/* news_problems */
+#news_problems {
+        padding-left: 0.5em;
+	margin-left: 0.5em;
+	border-left: 1px dotted grey;
+}
+#news_problems li{
+	list-style: none;
+}
+
+
+.kol {
+	background-color: #F09A24;
+}
+
+.kol0 {
+	background-color: #C0C0C0;
+}
+
+.kol1 {
+	background-color: #BAE0A0;
+}
+
+.kol2 {
+        background-color: #88DE5F;
+}
+
+.kol3 {
+	background-color: #00C030;
+}
+
+.row {
+    background-color: #D0D0D0;
+}
+
+.headerrow {
+	background-color: #000080;
+	color: #FFFFDD;
+}
+
+.headerrow a, .headerrow a:active {
+	color: #DDDDFF;
+}
+
+.headerrow a:hover {
+	color: #FFFFFF;
+}
+
+.headerrowleft {
+	background-image:url(/gfx/sulcorner.png);
+	background-repeat:no-repeat;
+	background-position: top left;
+}
+
+.headerrowright {
+	background-image:url(/gfx/surcorner.png);
+	background-repeat:no-repeat;
+	background-position: top right;
+}
+
+.problemrow {
+    background-color: #D0D0D0;
+}
+
+.lightrow {
+    background-color: #E0E0E0;
+}
+
+.send {
+	text-align: center;
+	vertical-align: top;
+	font-size: 13px;
+}
+
+.form {
+	font-size: 12px;
+}
+
+.formerror {
+	font-size: 13px;
+	color: red;
+}
+
+.button {
+	font-size: 12px;
+}
+
+
+/* elements of the main table */
+.maintable {
+	color: #000020;
+	border: 0px #000000; 
+}
+
+.header {
+	border: 0px; 
+	padding: 0px;
+}
+
+.headerleft {
+	text-align: left;
+	background-image:url(/gfx/ulcorner.png);
+	width: 32px;
+	border: 0px;
+}
+	
+.headerright {
+	text-align: right;
+	background-image:url(/gfx/urcorner.png);
+	width: 32px;
+	border: 0px;
+}
+
+.headercenter {
+	text-align: center;
+	border: 0px;
+	padding-top: 8px;
+	padding-bottom: 8px;
+	background: #000080;
+}
+
+.header H1 {
+	color: #FFFFFF;
+	text-align: center;
+	font-size: 26px;
+	font-weight: normal;
+	margin-top: 0px;
+	margin-bottom: 0px;
+}
+
+.footer {
+	border: 0px;
+	border-bottom: solid 1px #6060A0;
+	text-align: center;
+	font-size: 13px;
+	padding-left: 5px;
+	padding-right: 5px;
+	padding-top: 3px;
+	padding-bottom: 3px;
+}
+
+.cfooter {
+	border: 0px;
+	text-align: center;
+	font-size: 11px;
+}
+
+.footer img {
+	vertical-align: text-bottom;
+	border: 0px;
+}
+
+.menu {
+	border: 0px;
+	padding-left: 12px;
+	padding-right: 10px;
+	background-color: #E8EDD0;
+	vertical-align: top;
+	font-size: 12px;
+	font-weight: normal;
+}
+
+.menu hr {
+	width: 88px;
+	text-align: left;
+	margin-top: 5px;
+	margin-bottom: 5px;
+	
+}
+
+.menucmd {
+	font-size: 13px;
+	font-weight: bold;
+}
+
+.submenucmd {
+	font-size: 12px;
+	padding-left: 5px;
+	margin-left: 5px;
+	margin-top: 3px;
+	margin-bottom: 3px;
+	border-left: 1px #C3C6F8 solid;
+}
+
+.time {
+	font-size: 10px;
+	color: rgb(85, 80, 95);
+}
+
+.smallgrey {
+	font-size: 10px;
+	color: rgb(85, 80, 95);
+}
+
+.grey {
+	font-size: 13px;
+	color: rgb(85, 80, 95);
+}
+
+.newsbody {
+	font-size: 13px;
+	text-align: justify;
+	padding-bottom: 8px;
+}
+
+.newsdate {
+	font-size: 10px;
+	font-weight: normal;
+	text-align: left;
+}
+
+.newstitle {
+	font-size: 13px;
+	font-weight: bold;
+	text-align: center;
+	background-color: #E8EDD0;
+}	
+
+.newsauth {
+	font-size: 10px;
+	font-weight: italic;
+	text-align: right;
+}
+
+.content0 {
+	background-color: #F6F9E0;
+	border-right: 1px solid #E8EDD0;
+}
+.content {
+	border-top: 0px;
+	background-color: #F6F9E0;
+	text-align: center;
+	vertical-align: top;
+	height: 350px;
+	font-size: 13px;
+}
+
+.navigation {
+	vertical-align: top;
+	background-color: #E8EDD0;
+		color: #A0A0A0;
+	margin-bottom: 10px;
+	font-size: 13px;
+}
+
+.navigationcenter {
+	text-align: center;
+	color: #603000;
+	font-size: 12px;
+	font-weight:bold;
+}
+
+.navigationcenter a {
+	font-weight:normal;
+}
+
+.userdetails {
+	text-align: left;
+	vertical-align: top;
+	font-size: 13px;
+}
+
+.accountedit {
+	text-align: left;
+	font-size: 14px;
+}
+
+
+/* problems */
+.problems {
+	color: #000020;
+	text-align: center;
+	vertical-align: top;
+	border: 0px;
+}
+
+.problems td, .problems th {
+	border: 0px;
+}
+
+.problem {
+	text-align: center;
+	vertical-align: top;
+	font-size: 13px;
+	height: 400px;
+	width:100%;
+}
+
+.tekst {
+	text-align: center;
+	vertical-align: top;
+	font-size: 13px;
+}
+
+.mini {
+	font-size: 9px;
+}
+
+
+.slang p {
+	font-size: 13px;
+	margin: 0px;
+}
+.slang p.small{
+	font-size: 9px;
+}
+
+.prob h1 {
+	font-size: 20px;
+	font-weight: normal;
+	text-align: center;
+}
+
+.prob h2 {
+	font-size: 16px;
+	font-weight: normal;
+	text-align: center;
+}
+
+.prob h3 {
+	font-size: 15px;
+}
+
+.prob h4 {
+	font-size: 14px;
+}
+
+.prob p {
+	text-align: justify;
+}
+
+.prob address {
+	font-size: 13px;
+	font-style: italic;
+}
+
+.prob pre {
+	font-size: 13px;
+	text-align:left;
+}
+
+.prob ol, .prob ul {
+	text-align: justify;
+}
+
+/* search */
+.title {
+	font-size: 14px;
+	text-align: justify;
+	font-weight: bold;
+	margin-top: 18px;
+	margin-bottom: 2px;
+	margin-left: 10px;
+	margin-right: 10px;
+}
+
+.description { 
+	text-align: justify;
+	margin-top: 2px;
+	margin-bottom: 2px;
+	margin-left: 10px;
+	margin-right: 10px;
+}
+.metadata {
+	font-size: 10px;
+	color: green;
+	text-align: left;
+	margin-left: 10px;
+	margin-right: 10px;
+}
+.metadata a {
+	color: green;
+}
+
+.highlight {
+	background : #FFFF99;
+}
+
+.searchheader {
+	background-color: navy;
+	color: #FFFFFF;
+	margin-left: 10px;
+	margin-right: 10px;
+}
+
+.searchheader td {
+	color: #FFFFFF;
+}
+
+.searchheader a, .searchheader a:active {
+	color: #DDDDFF;
+}
+
+.searchheader a:hover {
+	color: #FFFFFF;
+}
+
+.searchheader table {
+	width: 95%;
+}
+
+.searchfooter {
+	background-color: navy;
+	color: #FFFFFF;
+	margin-left: 10px;
+	margin-right: 10px;
+	margin-top: 15px;
+	margin-bottom: 5px;
+}
+
+.searchfooter td {
+	color: #FFFFFF;
+}
+
+.searchfooter a, .searchfooter a:active {
+	color: #DDDDFF;
+}
+
+.searchfooter a:hover {
+	color: #FFFFFF;
+}
+
+.searchfooter table {
+	width: 95%;
+}
+
+.searchfooter img {
+	vertical-align: text-bottom
+}

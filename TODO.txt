@@ -2,7 +2,7 @@
 ## Grafos ##
 ############
 
--> P3 dia 15/06
+-> P3 dia 15/06.
 
 #############
 ## Analise ##
@@ -10,24 +10,27 @@
 
 -> 4 problemas de PD para algum dia.
 -> Lista 8 para o dia 03/06, exerc. 3 e 7.
+-> P3 dia 17/06.
 
 ####################
 ## Banco de Dados ##
 ####################
 
 -> EP2 para 13/06.
+-> P2 dia 13/06.
 
 ###############
 ## Conceitos ##
 ###############
 
 -> EP2 para 03/06. Falta fazer os testes.
+-> P3 dia 21/06.
 
 ###############
 ## Portugues ##
 ###############
 
--> Fiesta Dura.
+-> Prova dia 21/06.
 
 ############
 ## Outros ##
