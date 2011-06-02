@@ -1,0 +1,77 @@
+-> 2 metodos de controle de concorrencia
+
+1 - Bloqueio bifasico ( BBF )
+    Tow-Phase lock (TPL)
+
+2 - Marcas de Tempo (MT)
+    Time-Stamping (TS)
+
+            Bloqueio    Usa Aborto      Deadlock    Livelock
+    1           S           N               S           S
+    2           N           S               N           S
+
+OBS: -1 usa aborto e reiniciar para lidar com deadlock.
+     -Livelock = "loop" de deadlocks. Para lidar com isso temos que matar um dos
+      processos e só reinica-lo depois de pelo menos um dos outros terminarem.
+
+Lista de Nivel Fisico
+
+Exercico 1
+(a)
+-> Escalonamento seriavel ( Equivalente a um serial )
+
+Grafo de seriação aciclico.
+
+No BBF a seriação é dada pela ordem dos commits.
+    T1      |   T2
+            |    rl2[x]
+   *wl1[x]  |    r2[x]
+            |
+            |
+   *c1      |
+            |    c2
+            |    ru2[x]
+
+*Esse exemplo não pode ser executado no BBF.
+
+(b)  
+TS ordena por inicios.
+BBF ordena por commits.
+
+Por BBF :
+    T1      |   T2
+    r1[x]   |   rl2[y]
+    wl1[y]  |   r2[y]
+    w1[y]   |   c2
+    c1      |   ru2[y]
+    wu1[x]  |
+
+Por Marcas de Tempo :
+
+T1->MT(T1)=1
+T2->MT(T2)=2
+
+Sequencia das marcas:
+
+r1[x]->MTr[x]=1
+r2[y]->MTr[y]=2
+c2
+w1[y]->MTr[y]=2 > 1 (MTr[y]) GERA ABORTO! 
+a1 = Chegou tarde demais.
+
+(c)
+BBF com deadlock
+
+    T1      T2      T3      T4    
+    r1[x]                         
+            r2[y]                 
+                    r3[z]         
+                            r4[z] 
+    w1[y]                         
+    B       w2[z]                 
+            B                     
+                    w3[x]         
+                    B       w4[x] 
+                            B     
+
+Logo, a resposta é sim.
