@@ -1,4 +1,4 @@
-\-> 2 metodos de controle de concorrencia
+-> 2 metodos de controle de concorrencia
 
 1 - Bloqueio bifasico ( BBF )
     Tow-Phase lock (TPL)
@@ -83,8 +83,6 @@ Logo, a resposta é sim.
 
 Disco Memória secundária, não-volátil, contéudo permanece depois de desligado.
 
-Acesso por blocos de leitura
-        !=
-Acesso aleatório por posição
+Acesso por blocos de leitura != Acesso aleatório por posição
 
 O bloco lido é copiado para a memória. ( cache )
