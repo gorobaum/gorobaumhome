@@ -1,7 +1,10 @@
 Problema da SPT -> Dado um Vertice s de um digrafo com custos possivelmente 
 negativos encontrar uma SPT com raizs. 
 ( SPT = Caminho simples minimo de s para todo vertice v != s )
-Podemos usar o algoritmo de bellman-ford para resolver esse problema.
+Subestrutura otima do programa : 
+	Se o caminho v0-v1-...-vk eh um caminho minimo
+	entaum vi-vi+1-...-vj eh um caminho minimo para 0 <= i <= j <= k.
+Podemos usar o algoritmo de bellman-ford para resolver esse problema, supondo que o digrafo nao tem ciclos negativos.
 Ele usa Programacao dinamica para resolver o problema.
 Sua recorrencia e:
 	Custo[k][w] = Menos custo de um caminho de s a w com <= k arcos.
@@ -12,11 +15,51 @@ Sua recorrencia e:
 	-Se o digrafo nao tem ciclo negativo acessivel a partir de s, entao
 	 Custo[V-1][w] e o menor custo de um caminho de s a w.
 
-Uma boa implementacao do bellman-ford usa filas:
+Uma boa implementacao do bellman-ford usa pilha:
+A principio o programa seta o cst de todos os vertex para maxCST, e coloca o vetor pai de cada um como -1.
+Logo apos ele insere o vertex S na pilha, coloca seu cst como zero e ele e seu proprio pai.
+Ele coloca o sentinela na pilha
+O loop principal funcional assim:
+	1 - Um vertex eh retirado da pilha ( v ).
+	2 - Se o vertex for o sentinela, incrementamos o k ( k = numero de arcos usados para montar os caminhos. )
+		2.a - Se o k for igual a o numero de vertex do digrafo, paramos o algoritmo.
+		2.b - Caso contrario colocamos o sentinela na pilha e recomecamos.
+	3 - Agora um loop passa por todos os vertex que sao alcancados a partir de v, e os chamamos de w.
+		3.a - Se o custo de w for maior que o custo de v + o custo de v-w, atualizamos o custo de w e o pai de w agora eh v, e colocamos w na pilha.
 
-#define SENTINELA G->V
-#define maxV 1000;
-double cst[maxV]
-Vertex parnt[maxV];
+A SPT fica guardada no parnt.
+O algoritmo tem complexidade O(VA).
 
-void bellman-ford(Digraph G, vertex S)
+Problema do caminho minimo entre pares -> Dado dois vertex s e t, achar um caminho minimo de s ate t.
+Esse problema pode ser resolvido aplicando-se V vezes o bellman-ford ( nada eficiente. )
+Supondo que o digrafo nao tem ciclos negativos, o algoritmo de floyd-warshall resolve esse problema.
+Ele usa programacao dinamica, com a seguinte recorrencia:
+	Custo[k][s][t] = menos custo de um caminho s, t usando os vertex em {s, t, 0, 1, ... , k }
+	
+	- Custo[0][s][t] = G->adj[s][t]
+	- Custo[k][s][t] = min{ custo[k-1][s][t], custo[k-1][s][k-1] + custo[k-1][k-1][t] }
+Podemos subistituir a matriz Custo pela matriz cst[s][t] = custo[k][s][t].
+O algoritmo usa a seguinte logica:
+	Os primeiros loops encadiados criam a matriz cst[0..V][0..V] = G->adj[a][b]
+	O segundo loop, de k = 1 ate k < V, usa dois loops encadiados para modificar a matriz cst.
+		Um valor d eh calculado usando os a soma de cst[s][k-1] e cst[k-1][t].
+		Se d for menor que o cst[s][t], ele o subistitui.
+
+A ideia por tras do algoritmo eh a seguinte:
+Ele cria a matriz cst, que a principio tem em suas posicoes infinito se os vertex s, t nao se comunicam e G->adj[s][t] se eles se comunicao.
+	( Que eh na realidade a matriz de adjacencia do digrafo )
+Depois, ele vai da posicao cst[0][0], percorendo a matriz usando k arcos, e encontrando caminhos menores pelo digrafo.
+O k eh usando para olhar as posicoes k-1 da linha e coluna na posicao em que o s e o t se encontram.
+Ex: s = 5, t = 4, k = 3 -> Olharemos a soma das posicoes cst[5][2] + cst[2][4]
+
+Arvores geradoras -> Eh um conjunto de vertex S[0..V], onde existe um caminho de qualquer vertex para qualquer outro.
+Essas arvores podem ser geradas usando algoritmos de busca em profundidade ou busca em largura.
+
+Arvores geradoras minimas (MST) -> Eh uma arvore geradora que tenha a menor soma nos custos de seus arcos.
+Condicao de otimalidade: Se T eh uma MST entaum toda aresta e fora de T tem custo maximo dentre as arestas do uncio ciclo nao trivial T+e.
+	Ou seja, toda vez que colocamos uma aresta extra na MST, no ciclo que lea pertence, ela tem custo maximo.
+Para resolver esse problema usamos o algoritmo de prim, que usa a franja de um conjunto.
+A franja de um conjunto saum os vertex que saum alcancados pelos vertex que estaum no conjunto, usando soh um arco.
+Cada iteracao do algoritmo usa essa ideia:
+	Caso 1 - franja de T esta vazia. Acabou.
+	Caso 2 - Pegar a aresta de custo minimo na franja e adicionar a T. Use o novo T na proxima iteracao.
