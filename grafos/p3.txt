@@ -1,0 +1,22 @@
+Problema da SPT -> Dado um Vertice s de um digrafo com custos possivelmente 
+negativos encontrar uma SPT com raizs. 
+( SPT = Caminho simples minimo de s para todo vertice v != s )
+Podemos usar o algoritmo de bellman-ford para resolver esse problema.
+Ele usa Programacao dinamica para resolver o problema.
+Sua recorrencia e:
+	Custo[k][w] = Menos custo de um caminho de s a w com <= k arcos.
+
+	-Custo[0][s] = 0
+	-Custo[0][w] = Infinito, w != s
+	-Custo[k][w] = min{ Custo[k-1][w], Custo[k-1][v] + G->adj[v][w] }
+	-Se o digrafo nao tem ciclo negativo acessivel a partir de s, entao
+	 Custo[V-1][w] e o menor custo de um caminho de s a w.
+
+Uma boa implementacao do bellman-ford usa filas:
+
+#define SENTINELA G->V
+#define maxV 1000;
+double cst[maxV]
+Vertex parnt[maxV];
+
+void bellman-ford(Digraph G, vertex S)
