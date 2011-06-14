@@ -1,0 +1,125 @@
+====================================================================================================
+Modelo Lógico
+====================================================================================================
+OBS:
+    * Indica chave primaria.
+    + Indica chave estrangeira.
+    Supomos que o bando de dados tem suporte nativo ao tipo Date (tempo).
+    As dependências funcionais estão na forma canônica.
+====================================================================================================
+Usuario :
+NUSP*:Integer, RG:Integer, UNome:String, Curso:CursosDaUSP, Endereço:String
+
+Restrições:
+    NUSP >= 0
+    RG >= 0
+
+Observações:
+    CursosDaUSP = {c | c é um curso da USP}
+
+Dependências funcionais não primárias:
+    RG -> NUSP
+    [Como {RG} é uma superchave, essa relação está na BCNF.]
+====================================================================================================
+Livro :
+IDlivro*:Integer, LNome:String, LAutor:String, LEdição:Integer, LEditora:String
+
+Restrições:
+	IDlivro >= 0
+	LEdição >= 0
+
+Dependências funcionais não primárias:
+    LNome, LAutor, LEdição -> IDlivro
+    [Como {LNome, LAutor, LEdição} é superchave, essa relação está na BCNF.]
+====================================================================================================
+Exemplar :
+IDexemplar*:Integer, IDlivro+:Integeri, NúmeroEmp:Integer
+
+Restrições :
+	IDexemplar >= 0
+	IDlivro >= 0
+	NúmeroEmp >= 0
+
+Dependências funcionais não primárias:
+    [Nenhuma, portanto essa relação está na BCNF.]
+====================================================================================================
+Periódico :
+IDp*:Integer, PNome:String, PEditora:String, Tipo:TiposDePeriódicos
+
+Restrições :
+	IDp >= 0
+
+Observações:
+	TiposDePeriódicos = {Revista, Jornal}
+
+Dependências funcionais não primárias:
+    PNome, PEditora -> IDp
+    [Como {PNome, PEditora} é uma superchave, essa relação está na BCNF.]
+====================================================================================================
+Edição :
+NúmeroEd*:Integer, IDp+:Integer, Dispo:Bool, DispoOnline:String
+
+Restrições :
+	NúmeroEd >= 0
+	IDp >= 0
+	DispoOnline é uma URL caso esteja disponível, e NULL caso contrário.
+
+Dependências funcionais não primárias:
+    [Nenhuma, portanto essa relação está na BCNF.]
+====================================================================================================
+Recadastramento :
+RDataIní*:Date, RDataTerm:Date
+
+Restrições:
+    RDataIní <= RDaraTem
+
+Dependências funcionais não primárias:
+    [Nenhuma, portanto essa relação está na BCNF.]
+====================================================================================================
+Espera :
+EDataInício*:Date, NUSP+:Integer, IDlivro+:Integer, EDataTer:Date
+
+Restrições :
+    EDataInício <= EDataTer
+	NUSP >= 0
+	IDlivro >= 0
+
+Dependências funcionais não primárias:
+    [Nenhuma, portanto essa relação está na BCNF.]
+====================================================================================================
+Reserva :
+DataMáxRetirada*:Date, IDexemplar+:Integer, IDlivro+:Integer
+
+Restrições :
+	IDexemplar >= 0
+	IDlivro >= 0
+
+Dependências funcionais não primárias:
+    [Nenhuma, portanto essa relação está na BCNF.]
+====================================================================================================
+Emprestimo :
+DataIní*:Date, NUSP+:Integer, IDlivro+:Integer, IDexemplar+:Integer, DataRenov:Date,
+NúmeroRenov:Integer
+
+Restrições :
+	NUSP >= 0
+	IDlivro >= 0
+	IDexemplar >= 0
+	NúmeroRenov >= 0
+
+Dependências funcionais não primárias:
+    [Nenhuma, portanto essa relação está na BCNF.]
+====================================================================================================
+Artigo :
+ID*:Integer, IDp+:Integer, PEdição+:Integer, ANome:String, AAutor:String
+
+Restrições :
+	ID >= 0
+	IDp >= 0
+	PEdição >= 0
+
+Dependências funcionais não primárias:
+    IDp, PEdição, ANome, AAutor -> ID
+    [Como {IDp, PEdição, ANome, AAutor} é superchave, essa relação está na BCNF.]
+
+
