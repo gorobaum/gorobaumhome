@@ -1,16 +1,14 @@
-meuprog: meuprog.o  fila.o  etc.o
-	gcc meuprog.o fila.o etc.o -o meuprog
+CFLAGS = -Wall -ansi -pedantic -g
+OBJECTS = Make.o grafo.o
 
-meuprog.o:  meuprog.c  minhasdefs.h  fila.h   etc.h
-	gcc -c -g meuprog.c
+CC = gcc
 
-fila.o:  fila.c minhasdefs.h  fila.h
-	gcc -c -g fila.c
+Make: $(OBJECTS)
+	gcc $(CFLAGS) $(OBJECTS) -o Make
 
-etc.o: etc.c  minhasdefs.h  etc.h
-	gcc -c -g etc.c
+Make.o: Make.c grafo.o
+grafo.o: grafo.c grafo.h
 
+.PHONY: clean
 clean:
-	rm -f meuprog.o fila.o etc.o
-	cp meuprog.c ../ultimo/meuprog-salvo.c
-	cp fila.c  ../ultimo/fila-sava.c
+	rm *.o *~
