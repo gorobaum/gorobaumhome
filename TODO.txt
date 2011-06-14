@@ -8,22 +8,19 @@
 ## Analise ##
 #############
 
--> 4 problemas de PD para algum dia.
--> Lista 8 para o dia 03/06, exerc. 3 e 7.
 -> P3 dia 17/06.
 
 ####################
 ## Banco de Dados ##
 ####################
 
--> EP2 para 13/06.
--> P2 dia 13/06.
+-> PSUB dia 20/06.     
 
 ###############
 ## Conceitos ##
 ###############
 
--> EP2 para 03/06. Falta fazer os testes.
+-> EP4 dia 24/06.
 -> P3 dia 21/06.
 
 ###############
