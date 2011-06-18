@@ -1,0 +1,9 @@
+Analise Amortizada -> Serve para analisar uma sequencia de operacoes onde o 
+pior caso individual nao reflete o pior caso da sequencia. Existem 3 tecnicas
+para calcular a analise amortizada:
+	- Agregado
+	- Creditos
+	- Potencial
+
+Analise Agregada : Na analise agregada, mostramos que para todo n, uma sequencia de n operacoes
+tem tempo de pior caso igual a T(n) no total. 

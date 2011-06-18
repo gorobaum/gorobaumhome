@@ -1,0 +1,15 @@
+Decrementa( A, n )
+1	i <- 0
+2	enquanto i < n e A[i] = 0 faca
+3		A[i] <- 1
+4		i <- i + 1
+5	se i < n
+6		A[i] <- 0
+
+Incrementa( A, n )
+1	i <- 0
+2	enquanto i < n e A[i] = 1 faca
+3		A[i] <- 0
+4		i <- i + 1
+5	se i < n
+6		A[i] <- 1
