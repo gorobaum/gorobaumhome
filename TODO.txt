@@ -35,3 +35,6 @@
 
 -> Ler o Pro Git. ( Lendo cara lendo! )
 -> Ler o CLRS. ( Agora leia )
+-> Fazer o role do grupo de jogos:
+	-> Testar a Engine SprintRTS.	
+	-> Fazer um resuminho do Git. 
