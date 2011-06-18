@@ -1,0 +1,73 @@
+
+<!-- saved from url=(0050)http://uva.onlinejudge.org/external/102/10271.html -->
+<html><head><meta http-equiv="Content-Type" content="text/html; charset=windows-1252">
+
+<title>Problem C - Chopsticks</title>
+
+</head>
+
+<body bgcolor="#ffffff" lang="EN-US">
+
+<center>
+<p>
+<b><font size="5">Problem C</font></b><br>
+<b><font size="6">Chopsticks</font></b><br>
+<b>Input:</b> Standard Input<br>
+<b>Output:</b> Standard Output<br>
+</p>
+
+</center>
+
+<p>
+In China, people use a pair of chopsticks to get food on the table, but Mr. L is a bit different.
+He uses a set of three chopsticks -- one pair, plus an EXTRA long chopstick to get some big food by 
+piercing it through the food.
+As you may guess, the length of the two shorter chopsticks should be as close as possible, but the
+length of the extra one is not important, as long as it's the longest. To make things clearer, 
+for the set of chopsticks with lengths A,B,C(A&lt;=B&lt;=C), (A-B)<sup>2</sup> is called the 'badness' of the set.
+</p><p>
+It's December 2nd, Mr.L's birthday! He invited K people to join his birthday party, and would like to
+introduce his way of using chopsticks. So, he should prepare K+8 sets of chopsticks(for himself,
+his wife, his little son, little daughter, his mother, father, mother-in-law, father-in-law, and
+K other guests). But Mr.L suddenly discovered that his chopsticks are of quite different lengths!
+He should find a way of composing the K+8 sets, so that the total badness of all the sets is minimized.
+
+</p><p><b><font size="5">Input</font></b></p>
+
+<p>
+The first line in the input contains a single integer T, indicating the number of test cases(1&lt;=T&lt;=20).
+Each test case begins with two integers K, N(0&lt;=K&lt;=1000, 3K+24&lt;=N&lt;=5000), the number of guests and the number of chopsticks.
+There are N positive integers L<sub>i</sub> on the next line in non-decreasing order indicating the lengths of the chopsticks.(1&lt;=L<sub>i</sub>&lt;=32000).
+</p>
+
+<p><b><font size="5">Output</font></b></p>
+
+<p>
+For each test case in the input, print a line containing the minimal total badness of all the sets.
+</p>
+
+<p><b><font size="5">Sample Input</font></b></p>
+<font face="Courier" size="3">
+1<br>
+1 40<br>
+1 8 10 16 19 22 27 33 36 40 47 52 56 61 63 71 72 75 81 81 84 88 96 98 103 110 113 118 124 128 129 134 134 139 148 157 157 160 162 164<br>
+</font>
+
+<p><b><font size="5">Sample Output</font></b></p>
+<font face="Courier" size="3">
+23<br>
+</font>
+
+<p><b><font size="5">Note</font></b></p>
+For the sample input, a possible collection of the 9 sets is:<br>
+<font face="Courier" size="3">
+8,10,16; 19,22,27; 61,63,75; 71,72,88; 81,81,84; 96,98,103; 128,129,148; 134,134,139; 157,157,160<br>
+</font>
+
+<font face="Times New Roman" size="3">
+__________________________________________________________________________________________<br>
+Rujia Liu<br>
+
+
+
+</font></body></html>

@@ -2,19 +2,19 @@
 ## Grafos ##
 ############
 
--> P3 dia 15/06.
+-> Fiesta Duro. 
 
 #############
 ## Analise ##
 #############
 
--> P3 dia 17/06.
+-> Exercicio de PD pra hoje ou dia 26/06. (?) 
 
 ####################
 ## Banco de Dados ##
 ####################
 
--> PSUB dia 20/06.     
+-> PASSEI!.
 
 ###############
 ## Conceitos ##
@@ -27,7 +27,7 @@
 ## Portugues ##
 ###############
 
--> Prova dia 21/06.
+-> Prova dia 28/06.
 
 ############
 ## Outros ##
@@ -35,6 +35,6 @@
 
 -> Ler o Pro Git. ( Lendo cara lendo! )
 -> Ler o CLRS. ( Agora leia )
--> Fazer o role do grupo de jogos:
+-> Fazer o role do grupo de jogos (dia 29/06):
 	-> Testar a Engine SprintRTS.	
 	-> Fazer um resuminho do Git. 

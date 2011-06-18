@@ -1,0 +1,140 @@
+
+<!-- saved from url=(0076)http://www.cs.brown.edu/courses/cs173/2008/Assignments/05-laziness-writ.html -->
+<html><head><meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">	
+<title>Brown CS: CSCI 1730: Programming Languages: Laziness (Written)</title>
+<style type="text/css">
+  @import "../style.css";
+</style>
+</head>
+
+<body>
+
+<center>
+<a class="noborderlink" href="http://www.cs.brown.edu/courses/csci1730/2008/"><img src="./Brown CS  CSCI 1730  Programming Languages  Laziness (Written)_files/logo.jpg"><img src="./Brown CS  CSCI 1730  Programming Languages  Laziness (Written)_files/icon.png"></a>
+</center>
+
+<div id="main-text">
+
+<h3>Laziness (Written)</h3>
+
+<p><em>Complete this assignment with the same team you worked with for
+  Substitution (Written).  You and your partner must each understand the
+  answers to all the problems, so don't just split up the work.</em></p>
+
+<hr>
+
+<h3> Problem 1 </h3>
+
+<p> Write a Java program which demonstrates whether Java is eager or
+lazy. The same program, run under the two different regimes, should
+produce different results.  You may use any Java features you want, but
+keep your program relatively short; we will penalize you for programs we
+consider excessively long or obfuscatory.  (Tip: It's possible to solve
+this problem with a program no more than a few dozen lines long, if not
+shorter.) </p>
+
+<p> You must turn in both the source code to your program (in printed or
+written form) as well as an answer to the question of whether Java is
+eager or lazy, and an explanation of how your program determines this.
+That is, you should provide a brief and unambiguous answer (e.g., "Java
+is lazy") followed by a description of what result one would obtain
+under each regime, along with a brief explanation of why that regime
+would generate that result. </p>
+
+<p> In general, it would be a good idea to discuss your plan of attack
+with the course staff. This will help you avoid falling into a trap of
+measuring the wrong entity, and will improve your understanding of
+eagerness and laziness. </p>
+
+<hr>
+
+<h3> Problem 2 </h3>
+
+<p> In our lazy interpreter, we identified three points in the language
+where we need to force evaluation of expression closures (by invoking
+<code>strict</code>): the function position of an application, the test
+expression of a conditional, and arithmetic primitives. Doug Oord, a
+fairly sedentary student, is rather taken with the idea of laziness. He
+suggests that we can reduce the amount of code we need to write by
+replacing all invocations of strict with just one. In the interpreter
+from class, he removes all instances of strict and replaces </p>
+
+<pre> [id (v) (lookup v env)] </pre>
+with
+<pre> [id (v) (strict (lookup v env))] </pre>
+
+<p> Doug's reasoning is that the only time the interpreter returns an
+expression closure is on looking up an identifier in the environment. If
+we force its evaluation right away, we can be sure no other part of the
+interpreter will get an expression closure, so removing those other
+invocations of strict will do no harm. Being lazy himself, however, Doug
+doesn't bother to figure out whether this will result in an overly eager
+interpreter. </p>
+
+<p> Is it possible to write a program that will produce different
+results under the original interpreter and Doug's? You should
+answer this question for two languages:
+
+</p><ol>
+  
+  <li>The first language supports arithmetic, first-class functions,
+  <code>with</code>, <code>if0</code>, and <code>rec</code> (even though
+  these are not in our in-class lazy interpreter).</li>
+
+  <li>The second language supports all of the features of the first
+  language, and also supports <code>cons</code>, <code>first</code>, and
+  <code>rest</code>.
+
+</li></ol>
+  
+<p></p>
+
+<p>If it's possible, hand in two interpreters (one with the strictness
+points used by the class interpreter, and another with Doug's strictness
+point), an example program, and the result under each interpreter. Make
+sure to clearly identify which interpreter will produce each result.
+
+</p><p>If it's not possible, prove (by cases and induction) why such a
+counterexample cannot exist.</p>
+
+<p>Be sure to compare this behavior against that of the lazy interpreter
+of the sort we've written in class rather than the behavior of
+Haskell! Also, keep in mind that the REPL is always a strictness point.
+If you were running your lazy interpreter from DrScheme, you would type
+the following into the interactions pane:</p>
+
+<pre>&gt; (strict (interp '{...} (mtSub)))
+...
+</pre>
+
+<p>Note: it should not be difficult to construct test interpreters from
+your solution to the Extended Interpreter assignment and the code we
+give you in the textbook.</p>
+
+<hr>
+
+<h3> Problem 3 </h3>
+
+<p>It is virtually unheard of for a lazy language to have state
+operations (such as mutating the values in boxes, or assigning values to
+variables). Why is this so?</p>
+
+<p>The best answer to this question would include two things: a short
+program (which we assume will evaluate in a lazy regime) that uses
+state, and a brief explanation of what problem the execution of this
+program illustrates. Please be sure to use the non-caching (ie,
+original) notion of laziness. If you present a sufficiently illustrative
+example (which needn't be very long!), your explanation can be quite
+short.</p>
+
+<hr>
+
+<h3>Handin</h3>
+
+<p>Turn in your answer to each problem in a separate text or PDF file.
+If you hand in any interpreters, include each one in a separate,
+clearly-labeled Scheme file.</p>
+
+</div>
+
+</body></html>
