@@ -1,26 +1,26 @@
 Porque usar controle de versão :
-	O git é um controle de versão. Um controle de versão é um sistema
-que controla todas as mudanças em arquivos pelo tempo. Com ele podemos
+	O git é programa para controle de versão. Um programa de controle 
+de versão que controla todas as mudanças em arquivos pelo tempo. Com ele podemos
 reverter mudanças feitas em arquivos e compartilhar as mudanças com outras
-pessoas que tambem trabalham no projeto. Usaremos o git como controlador de
-versões. As modificações ficam guardadas em repositorios.
+pessoas que também trabalham no projeto. Usaremos o git como controlador de
+versões. As modificações ficam guardadas em repositórios.
 
 Como iniciar um rep no git:
-O github tem um bom tutorial para instalar e iniciar o git nessa página
+	O github tem um bom tutorial para instalar e iniciar o git nessa página
 Windows -> http://help.github.com/win-set-up-git/
 Linux   -> http://help.github.com/linux-set-up-git/
 MacOS   -> http://help.github.com/mac-set-up-git/
 
 Como usar o git :
-	Agora que o git está instalado e o repositorio já está criado, podemos
+	Agora que o git está instalado e o repositório já está criado, podemos
 começar a modificar nosso projeto. Todo arquivo no git tem dois status: Tracked
 e Untracked. Arquivos Tracked serão adicionados no próximo commit. Para verifica
-o status de cada arquivos usamos o comando git status. O comando git commit adic
-iona os arquivos Tracked para o seu repositorio. Toda vez que um arquivo é modificado 
+o status de cada arquivos usamos o comando git status. O comando git commit adic-
+iona os arquivos Tracked para o seu repositório. Toda vez que um arquivo é modificado 
 ele é marcado como Untracked. Para mudar o status de um arquivo para Tracked usamos o 
-comando git add <Nome-do-Arquivo>. O comando git diff mostra a dife-rença entre os 
+comando git add <Nome-do-Arquivo>. O comando git diff mostra a diferença entre os 
 arquivos Untracked e os Tracked. Um arquivo pode estar Tracked e Untracked ao mesmo 
-tempo, se dermos git add nele, modificarmos ele, e executarmos o git status, ele vai mostrar o 
+tempo se dermos git add nele, modificarmos ele, e executarmos o git status, ele vai mostrar o 
 mesmo arquivo nas duas partes, a que mostra os arquivos que serão commitados e os que não serão. 
 Isso quer dizer que a versão não modificada do seu arquivo vai ser commitada, e não a mais nova. 
 Para corrigir isso teriamos que dar git add no mesmo arquivo. Para remover um arquivo do git 
@@ -37,13 +37,13 @@ problema.
 
 Branchs:
 
-	Uma boa prática para isso é criar branchs. Branchs são repositorios do 
-projeto que não alteram o repositorio original. Imagine a seguinte situação: 
-Você está trabalhando no horus eye e decide implementar uma inteligencia 
-artificial melhor para as mumias. Se você fizer isso enquanto está no reposi-
-torio master, o codigo não poderá ser compilado até que você termine as modi-
-ficações. Para isso, é aconcelhavel criar um branche trabalhar nele, e depois 
-que a nova IA das mumias estiver pronta, damos merge do branch com o master.
+	 Branchs são repositorios do projeto que não alteram o repositorio original. 
+Imagine a seguinte situação: Você está trabalhando no horus eye e decide imple-
+mentar uma inteligencia artificial melhor para as mumias. Se você fizer isso en-
+quanto está no repositório master, o codigo não poderá ser compilado até que você
+termine as modificações. Para isso, é aconcelhavel criar um branche trabalhar 
+nele, e depois que a nova IA das mumias estiver pronta, damos merge do branch com 
+o master.
 
 Resumo dos comandos ( e alguns novos ) :
 $ git clone -> Copia um repositorio remoto para a atual localização.
