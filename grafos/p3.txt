@@ -1,5 +1,5 @@
-Problema da SPT -> Dado um Vertice s de um digrafo com custos possivelmente 
-negativos encontrar uma SPT com raizs. 
+Problema da SPT -> Dado um Vertice s de um digrafo com custos possivelmente
+negativos encontrar uma SPT com raiz s. 
 ( SPT = Caminho simples minimo de s para todo vertice v != s )
 Subestrutura otima do programa : 
 	Se o caminho v0-v1-...-vk eh um caminho minimo
@@ -63,3 +63,33 @@ A franja de um conjunto saum os vertex que saum alcancados pelos vertex que esta
 Cada iteracao do algoritmo usa essa ideia:
 	Caso 1 - franja de T esta vazia. Acabou.
 	Caso 2 - Pegar a aresta de custo minimo na franja e adicionar a T. Use o novo T na proxima iteracao.
+O algoritmo de prim usa uma pilha, parecido com o dijkstra:
+	No primeiro passo todos os vertex tem seus cst setados para infinito, e o parnt para -1.
+	partimos do vertex 0. O cst[0] = 0 e fr[0] = 0. Inserimos 0 na pilha.
+	Enquanto a pilha for vazia, retiramos o vertex com menor cst.
+	Seu parnt vira seu fr.
+	Procuramos nos vertex que se comunicao com v os vertex sem parnt.
+	Se o seu custo for infinito, coloque-o na franja e na pilha.
+	Se o seu custo nao for infinito, vemos se podemos diminui-lo.
+	
+O algoritmo funciona por que soh retiramos da pilha o vertex com o menor cst.
+
+O algoritmo de kruskal, que tambem resolve o MST, usa o unionfind. Ele ordena todos os arcos por ordem de cst, pega o menor, e verifica se as suas
+pontas estao no mesmo conjunto. Se sim, ele passa para o proximo arco, se nao, ele junta os conjuntos das duas pontas.
+
+Fluxo em redes -> Uma funcao f que da um valor para algum arco. Influxo eh a soma dos fluxos que chegam em um vertex
+Efluxo eh a soma dos fluxos que saem de um vertex. O saldo eh a diferenca do influxo e do efluxo. Num digrafo, um fluxo
+eh uma funcao que atribui valores aos arcos de tal modo que o saldo de todo vertex diferente de S e T eh nulo.
+S eh a fonte e T o sorvedouro. A intensidade de um fluxo eh o saldo de S.
+O saldo de um conjunto eh o valor de todos os arcos que saem menos os que chegam. Se um conjunto tem o S e naum T, seu saldo eh
+o saldo de S. Uma rede capacitada eh um digrafo que tem valor maximo para f num arco. Um pseudo-caminho num digrafo eh uma sequencia
+de vertex tal que para cada par v,w de vertex consecutivos, v-w ou w-v eh um arco no digrafo. Um caminho de aumento eh um caminho
+onde os arcos diretos naum estao cheios e os inversos naum vazios. Esses caminhos saum usados para aumentar o fluxo do grafo.
+Capacidade residual eh o quanto um arco pode ajudar a aumentar o fluxo de um digrafo. Se o arco eh direto, esse valor eh c(w)-f(w),
+e f(w) cc.
+
+O algoritmo para resolver esse problema usa uma iteracao em f.
+	Caso 1 - Se naum existe caminho de aumento, devolva f.
+	Caso 2 - Se existe, some d a f, sendo d a capasidade residual do caminho.
+	
+Podemos separar o digrafo em st-cortes. Se 	f for igual a capacidade de ST, f eh maximo.

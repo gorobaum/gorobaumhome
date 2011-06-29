@@ -1,0 +1,132 @@
+
+<!-- saved from url=(0076)http://www.cs.brown.edu/courses/cs173/2008/Assignments/08-continuations.html -->
+<html><head><meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">	
+<title>Brown CS: CSCI 1730: Programming Languages: Continuations</title>
+<style type="text/css">
+  @import "../style.css";
+</style>
+</head>
+
+<body>
+
+<center>
+<a class="noborderlink" href="http://www.cs.brown.edu/courses/csci1730/2008/"><img src="./Brown CS  CSCI 1730  Programming Languages  Continuations_files/logo.jpg"><img src="./Brown CS  CSCI 1730  Programming Languages  Continuations_files/icon.png"></a>
+</center>
+
+<div id="main-text">
+<h3>Continuations</h3>
+
+<p><em>You must complete this assignment with a new partner. This must
+  be your second distinct partner for the course. You and your partner
+  must each understand the answers to both problems, so don't just do
+  one each.</em></p>
+ 
+<hr>
+
+<h3>Problem 1</h3>
+
+<p>Any program that consumes some amount of stack, when converted to CPS and
+run, suddenly consumes no stack space at all. Why?</p>
+
+<p>Does this mean that every program should be converted to CPS? Why or
+why not?</p>
+
+<hr>
+
+<h3>Problem 2</h3>
+
+<p> CPS the following Scheme function.  You don't need to CPS
+primitives such as <code>empty?</code>, <code>first</code>,
+<code>rest</code>, <code>cons</code>, <code>cons?</code> and
+<code>&lt;</code>.  You may also assume that the function argument to both
+of the functions is in CPS.  Name the result <code>filter/k</code> as shown
+below.</p>
+
+<pre>;; filter: (x -&gt; bool) (listof x) -&gt; (listof x)
+(define (filter f l)
+  (cond
+    [(empty? l) empty]
+    [else (cond
+            [(f (first l)) (cons (first l)
+                                 (filter f (rest l)))]
+            [else (filter f (rest l))])]))
+
+;; filter/k: (x receiver -&gt; doesn't return) (listof x) receiver -&gt; doesn't return
+(define (filter/k f l k)
+  'fill-me-in)
+</pre>
+
+<p> Now change the following expressions to use <code>filter/k</code>. </p>
+
+<pre>(define (less-than-three x)
+   (&lt; x 3))
+(filter less-than-three
+        (cons 1 (cons 4 empty))) ;; this evaluates to (list 1)
+
+</pre> <br>
+
+<hr>
+
+<h3>Problem 3</h3>
+
+<p>The Java security model uses a primitive called <em>stack
+inspection</em>.  Let us implement a simple version of this.  Assume
+the language had two new primitives:
+</p>
+
+<pre>&lt;E&gt; ::= ...
+    | {bless &lt;E&gt;}
+    | {check}
+</pre>
+
+<p>The <code>bless</code> primitive creates a blessed stack frame for
+the duration of evaluating its sub-expression.  The <code>check</code>
+primitive traverses the run-time stack; if it finds a blessed frame it
+evaluates to <code>0</code> (so you can, for instance, use it inside
+sums without affecting the outcome), otherwise it terminates the
+program's execution.
+</p>
+
+<p>
+Extend the CPSed interpreter presented in the text in Figure 20.2
+with these two new language constructs.  For your convenience, here is a file
+to start with: <a href="http://www.cs.brown.edu/courses/cs173/2008/Assignments/support/stackinspect.ss">stackinspect.ss</a>
+</p>
+
+<p>
+<strong>Note</strong>: Java lacks tail-call optimization ostensibly
+because this hurts the ability to implement stack inspection.  In
+fact, <a href="http://www.ccs.neu.edu/scheme/pubs/cf-toplas04.pdf">this 
+claim is entirely false</a>.  But we're stuck with the result of this
+decision, making the JVM a poor target for other language compilers.
+Unfortunately, .NET has also adopted this mistake, as the paper explains.
+</p>
+
+<hr>
+
+<h3>Handin</h3>
+	
+<p>Turn in four files:
+
+</p><ol>
+  
+  <li><code>whynostack.txt</code>, which contains your solution to
+  Problem 1.</li>
+
+  <li><code>filterk.ss</code>, which contains your solution to
+  Problem 2.</li>
+
+  <li><code>stackinspect.ss</code>, which contains your solution to
+  Problem 3.</li>
+
+  <li>A README file containing the names of the members of your
+  group.</li>
+
+</ol>
+
+<p></p>
+
+</div>
+
+
+</body></html>
