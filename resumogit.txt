@@ -16,34 +16,26 @@ Como usar o git :
 começar a modificar nosso projeto. Todo arquivo no git tem dois status: Tracked
 e Untracked. Arquivos Tracked serão adicionados no próximo commit. Para verifica
 o status de cada arquivos usamos o comando git status. O comando git commit adic-
-iona os arquivos Tracked para o seu repositório. Toda vez que um arquivo é modificado 
-ele é marcado como Untracked. Para mudar o status de um arquivo para Tracked usamos o 
-comando git add <Nome-do-Arquivo>. O comando git diff mostra a diferença entre os 
-arquivos Untracked e os Tracked. Um arquivo pode estar Tracked e Untracked ao mesmo 
-tempo se dermos git add nele, modificarmos ele, e executarmos o git status, ele vai mostrar o 
-mesmo arquivo nas duas partes, a que mostra os arquivos que serão commitados e os que não serão. 
-Isso quer dizer que a versão não modificada do seu arquivo vai ser commitada, e não a mais nova. 
-Para corrigir isso teriamos que dar git add no mesmo arquivo. Para remover um arquivo do git 
-usamos o comando git rm <Nome-do-Arquivo>. O comando git mv file_from file_to move um arquivo.
-	O git commit só modifica os arquivos no seu repositorio local. Precisamos usar 
-o comando git push para mandar as modificações para o repositorio no github. Se
-a sua versão for mais nova que a do repositorio, o seu push será feito e as mo-
-dificações serão feitas. Se não, usamos o comando git pull para pegar a versão
+iona os arquivos Tracked para o seu repositório. Toda vez que um arquivo é modi-
+ficado ele é marcado como Untracked. Para mudar o status de um arquivo para 
+Tracked usamos o comando git add <Nome-do-Arquivo>. O comando git diff mostra a 
+diferença entre os arquivos Untracked e os Tracked. Um arquivo pode estar Tracked
+e Untracked ao mesmo tempo se dermos git add nele, modificarmos ele, e executar-
+mos o git status, ele vai mostrar o mesmo arquivo nas duas partes, a que mostra 
+os arquivos que serão commitados e os que não serão. Isso quer dizer que a versão
+não modificada do seu arquivo vai ser commitada, e não a mais nova. Para corrigir
+isso teriamos que dar git add no mesmo arquivo. Para remover um arquivo do git 
+usamos o comando git rm <Nome-do-Arquivo>. O comando git mv file_from file_to 
+move um arquivo.
+	O git commit só modifica os arquivos no seu repositorio local. Precisamos 
+usar o comando git push para mandar as modificações para o repositorio no github.
+Se a sua versão for mais nova que a do repositorio, o seu push será feito e as 
+modificações serão feitas. Se não, usamos o comando git pull para pegar a versão
 mais nova do repositorio e dar um merge com o nosso repositorio. Se houver
 algum problema com o merge, por exemplo um arquivo que você modificou foi modi-
 ficado no repositorio no github, você terá que abrir o arquivo e modifica-lo
 manualmente para arrumá-lo. Depois disso, o git push poderá ser executado sem
 problema.
-
-Branchs:
-
-	 Branchs são repositorios do projeto que não alteram o repositorio original. 
-Imagine a seguinte situação: Você está trabalhando no horus eye e decide imple-
-mentar uma inteligencia artificial melhor para as mumias. Se você fizer isso en-
-quanto está no repositório master, o codigo não poderá ser compilado até que você
-termine as modificações. Para isso, é aconcelhavel criar um branche trabalhar 
-nele, e depois que a nova IA das mumias estiver pronta, damos merge do branch com 
-o master.
 
 Resumo dos comandos ( e alguns novos ) :
 $ git clone -> Copia um repositorio remoto para a atual localização.
