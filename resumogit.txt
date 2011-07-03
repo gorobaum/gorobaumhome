@@ -51,3 +51,54 @@ $ git status -> Mostra o status de cada arquivo.
 $ git branch <Nome-do-Branch> -> Cria um branch com o nome passado.
 $ git checkout <Nome-di-Branch> -> Vai para o branch com o nome passado. O 
 branch tem que existir.
+
+Git no Windows usando o tortoise git:
+    Primeiro precisamos instalar os seguintes arquivos:
+    - msysgit       http://code.google.com/p/msysgit/
+    - Tortoise Git  http://code.google.com/p/tortoisegit/
+    - PuTTY         http://www.chiark.greenend.org.uk/~sgtatham/putty/download.html
+Baixe as versoes mais novas, e instale tudo normalmente, sem mudar nenhuma opcao,
+a nao ser que seja de sua preferencia.
+
+Agora, precisamos configurar uma chave de ssh para que se computador possa con-
+versar com o repositorio remoto.
+
+Va ate a pasta em que o PuTTY foi instalado e abra o executavel puttygen (IMAGE1)
+Clique em Generate, depois digite uma senha no campo Key passphrase ( essa senha
+sera pedida toda vez que voce fizer um push ou um pull. Nao a esqueca! )
+Clique em save private key, e salve a senha num lugar onde voce possa achar fa-
+cilmente. Copie o conteudo da sua chave e abra o site do github.
+Na secao Account settings, va em SSH Public Keys e adicione o que voce copiou co-
+mo uma nova chave ssh.
+Agora va ate a pasta onde o repositorio Dummy vai ficar, clique com o botao direito
+em qualquer lugar e escolha Git Clone.
+Uma janela ira abrir, coloque os seguindes dados nela:
+Url : git@github.com:gorobaum:DummyRep.git ( isso que dizer que voce vai baixar
+o repositorio DummyRep, que esta no servidor do github, e o "dono" do rep e 
+gorobaum [ eu =D ] )
+Selecione a opcao PuTTY key e aponte a direcao para a o arquivo que geramos que
+contem sua chave SSH.
+Com isso nos clonamos um repositorio.
+Agora, crie uma pasta com o seu nome como nome e dentro da pasta um arquio de texto.
+Escreva qualquer coisa nele. Em qualquer lugar, clique com o botao direito e 
+va em TortoiseGit -> Add... . La, o arquivo que voce acabou de criar vai aparecer.
+Nessa janela vamos escolher o que sera adiconado e o que nao sera no proximo commit.
+Selecione o arquivo e clique em OK. Na proxima janela clique em Commit... e escreva
+uma mensagem curta que diga o que voce esta fazendo. Va ate o menu do tortoise git
+e clique em push. Isso vai mandar as modificacoes pro repositorio remoto. 
+Agora crie outro arquivo chamado TRASH e repita a operacao. Selecione o arquivo
+TRASH, e no menu do tortoise seleciona delete. Isso vai deletar ele localmente e
+fazer com que o proximo commit delete ele tambem. DE outro push. Lembre-se que
+as modificacoes no repositorio remoto so sao feitas apos um push.
+Vamos criar um branch agora. Va no menu do tortoise e clique em Create Branch.
+Nomei-o de teste1. Agora volte para o menu e selecione Switch/Checkout e escolha
+o teste1 entre os Branchs. Modifique o seu arquivo de texto e commite a mudanca.
+Volte para o master. Faca uma modificacao diferente no seu arquivo de texto e de 
+commit. Selecione a opcao merge no menu. No campo Branch selecione o teste1. 
+O merge vai falhar, pois existe um conflito entre os dois arquivos de texto de 
+cada um dos branchs. Abra o arquivo de texto. Para resolver um erro no merge, temos
+que modificar o arquivo manualmente. A parte que estiver entre as marcas <<<<<<HEAD
+e ========= e a que esta no branch HEAD. O que estiver entre ======= e >>>>>>teste1
+e a parte do arquivo que esta no branch teste1. Resolva o merge e de commit. Agora de push.
+Pronto.
+ 
