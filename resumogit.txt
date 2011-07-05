@@ -105,5 +105,7 @@ Key passphrase ( essa senha sera pedida toda vez que voce fizer um push ou um
 pull. Nao a esqueca! ). Clique em save private key, e a salve num lugar onde 
 voce possa achar facilmente. Abra o site do github e na secao Account settings,
 va em SSH Public Keys e adicione a chave de ssh que voce acabou de gerar.
-Quando voce for clonar um repositorio, o tortoise vai pedir o link da chave de
-ssh, sem isso o git clone dara erro.
+Quando voce for clonar um repositorio, o tortoise vai pedir o seu nome e seu email.
+Isso e para que cada commit foito por voce tenha as suas informacoes, assim
+o grupo pode saber quem fez o que. Depois, voce tera que fornecer o link da chave 
+de ssh para o tortoise, sem isso ele nao pode clonar um repositorio.
