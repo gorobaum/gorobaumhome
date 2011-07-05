@@ -99,9 +99,11 @@ branch tem que existir.
 Baixe as versoes mais novas, e instale tudo normalmente, sem mudar nenhuma opcao,
 a nao ser que seja de sua preferencia.
 Agora, precisamos configurar uma chave de ssh para que se computador possa con-
-versar com o repositorio remoto.Va ate a pasta em que o PuTTY foi instalado e 
+versar com o repositorio remoto. Va ate a pasta em que o PuTTY foi instalado e 
 abra o executavel puttygen. Clique em Generate, depois digite uma senha no campo
- Key passphrase ( essa senha sera pedida toda vez que voce fizer um push ou um 
+Key passphrase ( essa senha sera pedida toda vez que voce fizer um push ou um 
 pull. Nao a esqueca! ). Clique em save private key, e a salve num lugar onde 
 voce possa achar facilmente. Abra o site do github e na secao Account settings,
 va em SSH Public Keys e adicione a chave de ssh que voce acabou de gerar.
+Quando voce for clonar um repositorio, o tortoise vai pedir o link da chave de
+ssh, sem isso o git clone dara erro.
