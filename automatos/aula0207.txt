@@ -1,0 +1,116 @@
+(I) Alfabetos, palavras e linguagens :
+
+    - Um alfabeto e um conjunto finito, nao-vazio, de simbolos ( ou letras ou caracteres )
+
+    - Um alfabeto qqe denotado por sigma
+        Ex: {a, b, ..., z, A, ..., Z}
+            {0, 1, ..., 9}
+            {0,1}
+            {a,b}
+
+    - Uma palavra sobre sigma e uma sequncia finita de simbolos de sigma.
+
+        Ex : Algumas palavras sobre sigma = {a, b, c}
+            a
+            b
+            ab
+            cab
+            bc
+            aabac
+
+    - O comprimento de uma palavra x, denotado por |x|, e o numero de simbolos que a palavra
+      x contem.
+
+        Ex: |aabaca| = 6
+
+    - Existe uma unica palavra de comprimento zero, chamada de palavra zero e denotada por lambda.
+      A palavra vazia e uma palavra de qq alfabeto.
+
+    - O numero de ocorrencias de um simbolo sigmam de sigmaM numa palavra x de sigmaM e denotada por |x|(sigmam)
+        
+        Ex: sigmaM = {a, b, c}
+            x = abaaab
+            |x|(a) = 4
+            |x|(b) = 2
+            |x|(c) = 0
+            |x| = |x|(a) + |x|(b) + |x|(c)
+            
+    Notacoes:
+        -> sigmaM^k, para k >= 0, denota o conjunto de todas as palavras sobre sigmaM de comprimento k.
+        -> SigmaM^* denota o conjunto de todas as palavras sobre sigmaM.
+            sigmaM* = sigma0 U sigma U sigma2 U ...
+        -> SigmaM^+ denota o conjunto de todas as palavras nao-vazias sobre sigmaM
+            sigmaM+ = sigmaM* - {lambda}
+    
+    - Concatenacao de duaspalavras :
+       Se x = (lambda)1...(lambda)m ( (lambda)i pertence sigmaM, p/ 1 <= i <= m )
+        e y = (lambda)1...(lambda)n ( (lambda)i pertence sigmaM, p/ 1 <= i <= n )
+       sao palavras sobre sigmaM, a concatenacao de x comy e palavra sobre sigmaM.
+
+    Algumas propriedades :
+        1) Paratodo x pertencente a sigmaM*, lambda x = x = x lambda ( lambda e a identidade )
+        2) Paratodo x, y, z pertencentes a sigmaM*, (xy)z = x(yz)
+        3) Paratodo x, y pertencente a sigmaM*, |xy| = |x| + |y|
+        Obs: sigmaM* e um monoide com a operacao de concatenacao de palavras.
+
+    - Para x em sigmaM* e um inteiro n >= 0, a n-esima potencia de x, denotada por x^n, e definida por :
+        x^0 = lambda.
+        x^n = x^(n-1)x
+
+    Algumas Propriedades :
+        Paratodo x pertencente a sigmaM*,
+        1) Paratodo m >= 0. |x^m| = m*|x|
+        2) Paratodo m, n >= 0, x^mx^n = x^(m+n)
+        3) Paratodo m, n >= 0, (x^m)^n = x^(m*n)
+        4) Paratodo m >= 0, lambda^m = lambda
+
+        Prova 2)
+            Seja x em sigmaM*
+            Vamos provas, por inducao em n, que paratodom, n >= 0, x^nx^m = x^(m+n)
+            Base da inducao: n = 0
+                Logo, Paratodo m >= 0, x^mx^n = x^mx^0 = x^mlambda = x^m = x^(m+0) = x^(m+n)
+            Seja n >= 0
+            Hipotese de inducao:
+                Suponha que paratodo n >= 0, x^nx^m = x^(m+n)
+            Passo de inducao:
+                Paratodo m >= 0, x^mx^(n+1) = x^m(x^nx) = (x^mx^n)x = x^(m+n)x = x^(m+n+1)
+
+    - Sejam x e u em sigmaM*. Dizemos que :
+        -> u e um prefixo de x se existe v em sigmaM* tq x = uv
+        -> u e um sufixo de x se existe v em sigmaM* tq x = vu
+        -> u e um fator ( ou segmento ) de x se existem v e w em sigmaM* tq x = vuw
+
+    Obs: 
+        1) Seja x em sigmaM*
+            Entao, x e lambida sao prefixos, sufixos e fatores de x.
+        2) Se |x| = n, p/ cada k, 0 <= k <= n, x tem exatamente um prefixo e exatamente 
+            um sufixo de comprimento k.
+        
+    Notacoes: Seja x em sigmaM*
+        Pref(x) denota o conjunto de todos os prefixos de x
+        Suf(x)                                sufixos
+        Fat(x)                                fatores
+
+        Ex: sigmaM = {a,b}
+            x = bbab
+            Fat(x) = { lambda, a, b, ab, ba, bb, bab, bba, bbab }
+                       p       p             p        p    p
+                       s       s  s              s         s
+
+    - Dizemos que u e um fator ( ou um prefixo ou um sufixo ) proprio de x se u =/ lambda e u =/ x.
+
+    - Para k >= 1 e x1,...,xk em sigmaM, dizemos que o seg ( x1,...,xk ) e uma fatoracao de x em 
+      k fatores se x = x1x2...xk.
+      A fatoracao e propria se k > 1 e xi=/ lambda p/ 1 <= i <= k
+
+    - O reverso de uma palavra x em sigmaM*, denotada por x^R, e def. por :
+        -> Se |x| = 0 entao x^R = lambda^R = lambda
+        -> Se |x| >= 1 entao existem sigmam em sigmaM e y em sigmaM* tq x = sigmamy
+            Entao, defina x^R = (sigmamy)^R = y^Rsigmam
+
+    - Uma palavra x e um palindromo se x = x^R
+
+    Algumas propriedades:
+    1) Se x = sigmam1...sigmamk, onde sigmami pertence a sigmaM, p/ 1 <= i <= k, entaum x^R = sigmamk...sigmam1
+    2) Paratodo x, y em sigmamM*, (xy)^R = y^Rx^R
+    3) Paratodo x pertencente sigmaM* (x^R)^R = x
