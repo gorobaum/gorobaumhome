@@ -1,0 +1,42 @@
+===========================
+= ʎ pertence a Ʃ*    =
+= ʎ nao pertence a Ʃ =
+===========================
+
+Vamos provar que para todo x, y pertencentes a Ʃ* (xy)^R = y^Rx^R
+
+Provar por inducao no |x|
+
+Seja n >= 0
+
+Base da inducao:
+    |x| = 0
+    Entao x = ʎ
+    Logo, (xy)^R = (ʎy)^R = y^R = y^Rʎ = y^Rʎ^R = y^Rx^R
+
+Hipotese de inducao:
+    Suponha que paratodo x, y pertencente a Ʃ*, com |x| = n,
+    (xy)^R = y^Rx^R
+
+Passo de inducao:
+    Sejam x e y em Ʃ*, com |x| = n +1
+    Entao, existem Ʃ em Ʃ e u em Ʃ* tq x = sigmamu
+    Logo,(xy)^r = ((sigmau)y)^R = (sigma(uy))^R = (uy)^Rsigmam = (y^Ru^R)sigma
+        = y^R(u^Rsigma) = y^R(sigmau^R) = y^Rx^R
+
+-   Uma linguagem (formal) sobre Ʃ e um conjunto de Ʃ*
+    Exemplos:
+    ⌀
+    Ʃ
+    Ʃ*
+    {ʎ} ( {ʎ} =/ 0 )
+    {sigmam}
+    ∀
+
+-   Operacoes sobre linguagens:
+(1) Operacoes booleanas:
+    Sejam A e B ⊆ Ʃ*
+    - Uniao: A ⋃ B = { x ℇ Ʃ* : x ℇ A ou x ℇ B }
+    - Interseccao: A ⋂ B = { x ℇ Ʃ* : x ℇ A e x ℇ B }
+    - Diferenca: A - B = { x ℇ Ʃ* : x ℇ A e x ∉ B }
+    - Complemento: 

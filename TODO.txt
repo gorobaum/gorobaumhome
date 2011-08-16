@@ -1,33 +1,32 @@
-############
-## Grafos ##
-############
+########
+## SO ##
+########
 
--> Fiesta Duro. 
+-> EP1. 
 
-#############
-## Analise ##
-#############
+##############
+## Eng Soft ##
+##############
 
--> Exercicio de PD pra hoje ou dia 26/06. (?) 
+-> Tarefa para o dia 21. 
 
-####################
-## Banco de Dados ##
-####################
+##############
+## Org Comp ##
+##############
 
--> PASSEI!.
-
-###############
-## Conceitos ##
-###############
-
--> EP4 dia 24/06.
--> P3 dia 21/06.
+-> ?
 
 ###############
-## Portugues ##
+## Automatos ##
 ###############
 
--> Prova dia 28/06.
+-> Estudar.
+
+########
+## IA ##
+########
+
+-> ?
 
 ############
 ## Outros ##
@@ -35,6 +34,5 @@
 
 -> Ler o Pro Git. ( Lendo cara lendo! )
 -> Ler o CLRS. ( Agora leia )
--> Fazer o role do grupo de jogos (dia 29/06):
-	-> Testar a Engine SprintRTS.	
-	-> Fazer um resuminho do Git. 
+-> Monitoria.
+-> USPGameDev.
