@@ -1,0 +1,14 @@
+Linguagem Declarativa
+- Baseada em Logica -> Prolog 
+- Funcionais -> LISP, ACL2, Erlang
+
+
+irmao( X, Y ) :-
+    pai( Z, X ),
+    pai( Z, Y ),
+    X @< Y.
+
+primo( X, Y) :-
+    pai( W, X),
+    pai( Z, Y),
+    irmao( Z, W).
