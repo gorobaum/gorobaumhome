@@ -1,12 +1,28 @@
 --->Porque usar controle de versão :
-	Um controle de versão é responsável por gravar as mudanças em um ou mais
-arquivos. Neste tutorial usaremos código fonte de software como arquivos, mas
-qualquer arquivo pode ser usado por um controle de versão, como uma imagem ou
-um arquivo de som.
-    Temos dois tipos de software de controle de versão, os que usão o para-
+Um controle de versão é um sistema responsável por gravar as mudanças em um
+ou mais arquivos.
+Temos dois tipos de software de controle de versão, os que usão o para-
 digma centralizado e o distribuído. O SVN e o CVS são exemplos de sistemas
-centralizados. Eles guardão todos os dados de um projeto em um servidor cent
+centralizados. Eles guardão todos os dados de um projeto em um servidor central,
+online. O git e o mercurial são exemplos de sistemas distribuidos. Eles, além
+de usarem repositórios online, criam um repositório local no seu computador.
 
+
+--->O que é o git?
+Enquanto a maioria dos SCV guardam as informações como um arquivo base e as suas
+modificações, o git guarda uma "foto" das suas modificações. Toda vez que você
+modifica ou salva algo no git, ele tira uma "foto" de todo o seu espaço de tra-
+balho.
+A maioria do trabalho do git é local. O git salva todas as modificações dos arquivos
+localmente, e toda vez que você baixar as atualizações do seu projeto, todo o
+histórico de modificações vem junto.
+O git tem integridade. Isso quer dizer que é impossível modificar arquivos sem o
+git saber que você está fazendo algo. O git usa um mecanismo chamado SHA-1 hash.
+O git quase sempre adiciona dados. Na maioria das vezes, o git só adiciona dados
+no repositório. Assim, você pode sempre resgatar arquivos que já foram deletados
+a muito tempo.
+O git usa uma mecânica de 3 estagios para controlar os arquivos na sua área de
+trabalho.
 --->Como iniciar um rep no git:
 	O github tem um bom tutorial para instalar e iniciar o git:
 Windows -> http://help.github.com/win-set-up-git/ ( Sem o tortoise git. Ha um
