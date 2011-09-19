@@ -1,0 +1,120 @@
+
+        1a Aula. Estruturas de Dados em Prolog.
+
+Termos em lógica de primeira ordem.
+Assinatura S = ( C, F, P )
+    C: constantes.
+    F: funcionais.
+    P: predicados.
+
+Variáveis (?)
+
+O conjunto de termos T[S] é o menor conj. tal que
+    a) Toda constante é um termo (C contido em T[S])
+    b) Toda variável é um termo (V contido em T[S])
+    c) Se f é um símbolo funcional de aridade n, f^n pertencente a F e t[1], ..., t[n] são
+       termos, então
+            f(t[1], ..., t[n]) pertence a T[S]
+
+    <Listas>
+
+lista vazia     []
+lista       [ X | Ys ]
+    X: primeiro item da lista.
+    Ys: p "resto" da lista.
+
+    <Merge Sort de listas em Prolog>
+
+Ver list.pro.
+
+    <<< Gramáticas e Linguagens >>>
+
++ Vocabulário V: conj. de palavras (símbolos terminais).
++ Linguagem L contido em V*: [e um conj. de sentenças, ou seja, seqüências finitas de palavras.
++ E (epselon): é a sentença vazia.
+
+Ex1.)   V = {algarismos}
+        L = nºs inteiros.
+
+Ex2.)   V = {0,1}
+        L = nºs binários divisíveis por 1011
+          = { 0, 1011, 10110, 101100, 1011000, etc }
+
+Ex3.)   V = número U {+,-,*,/,(,)}
+        L = expressões aritméticas
+        Ex: { 0, 23, 23+42, (23+42)*78, 23+42*78 }
+
++ Gramática livre de contexto:
+    + Seja NT um conj. de símbolos fora de V. Seja S em NT um símbolo especial. Seja U = V u NT.
+      Uma gramática livre de contexto é uma 4-upla:
+            G = (V, NT, S, P)
+      Onde P é um conj. de regras de produção da forma
+            X -> Y*, x em NT, y em U
+
+Exemplo:
+    NT = { N, P, F, E }
+    N = números
+    P = parcela
+    F = fator
+    E = expressão
+
+N -> <número>
+P -> N
+P -> (E)
+F -> P
+F = P+P
+F -> P-P
+E -> F
+E -> F*F
+E -> F/F
+
++ Uma árvore sintática é uma árvore que possui as palavras do vocabulário nas folhas, os
+  símbolos não-terminais no nós internos, S na raiz e cada nó interno é "expandido" de acordo
+  com uma regra de produção.
+
+    <<< Grámaticas em Prolog >>>
+
++ Não terminais:
+    + D - determinante (artigo)
+    + N - Nome (substantivo)
+    + P - preposição
+    + V - verbo
+    + A - adjetivo
+    + Adv - advérbio
+
++ Componentes da Sentença: SINTAGMAS (PHRASE).
+
+    + SN (sintagma nominal)
+    + SV (sintagma verbal)
+    + SP (...)
+    + SA (...)
+    + SAdv (...)
+    + ...
+
++ SN -> D N
++ SV -> VT SN
++ S -> SN SV
+
++ Léxico: VT->"comeu", D->"o", N->"menino", N->"bolo"
+
++ Diferença de listas:
+    [1,2,3]
+    X0s = [1,2,3|Xs] - Xs
+    Xs = [4|X1s]
+    X0s - X1s = [1,2,3,4|Xs] - X1s
+
+===============================
+Exercícios:
+
+1)  length(Xs, N) : N é o nº de elementos de Xs.
+2)  del(X, Xs, Ys) : Ys é a lista Xs com uma ocorrência de X apagada.
+3)  del_todas(X, Xs, Ys) : Ys é a lista Xs, com TODAS as ocorrências de X apagadas.
+4)  igual(Xs, Ys) : Xs e Ys são conjuntos com os mesmos elementos.
+5)  união(Xs, Ys, Zs) : Zs = Xs U Ys.
+6)  intersecção(Xs, Ys, Zs) : Zs = Xs ^ Ys.
+7)  diferença(Xs, Ys, Zs) : Zs = Xs \ Ys.
+8)  prefixo(Xs, Ys) : Xs é prefixo de Ys.
+9)  sufixo(Xs, Ys) : Xs é sufixo de Ys.
+10) sublista(Xs, Ys).
+11) subl(Xs, Ys) : os elementos de Xs ocorrem em Ys nesta ordem { subl([1,2,3], [1,a,2,b,3,c]) }
+

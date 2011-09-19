@@ -1,0 +1,88 @@
+
+        Linguagem Declarativa
+
+- Baseadas em Lógica (prolog) ==> Baseada em lógica de primeira ordem.
+- Funcionais (Lisp, ACL2, Erlang, Scala, Scheme, Haskell) ==> Baseadas em cálculo lambda.
+
+Cláusulas de Horn:
+
+- Fatos
+>> Predicados sobre constantes.
+- Consultas
+>> Lista de predicados, com variáveis em comum.
+- Regras
+>> Um predicado na cabeça, e vários predicados no corpo.
+
+EMEIO DU BRUNU MANOLO DAZORA: dahora@ime.usp.br
+
+    
+    Unificação e Retrocesso em Prolog.
+
+Prolog executa uma busca em profundidade com ordem pré-definida.
+- Ordem computacional: as cláusulas são ordenadas na ordem em que estão escritas.
+- Ordem de escolha: da esquerda para a direita.
+
+Meta:
+1) ?- neto( abraao, X )
+
+Programa ==> neto( abraao, X )
+Programa U { ¬ neto( abraao, X ) } ==> FALSO
+
+Expande para:
+
+2) ?- pai( abraao, X1 ), pai( X1, X )
+" ¬pai( abraao, X1 ) ou ¬pai( X1, X ) "
+
+Quando acha o fato "pai( abraao, isac )", a primeira condição é falsa (pois X1=isac),
+logo o que imporat é a segunda:
+
+3) ?- pai(isac, X)
+
+Unifica com o fato "pai( isac, jaco )"
+Chega numa contradição (pois X-jaco).
+Faz um backtrack para 3) e olha o próximo fato.
+Unifica com o fato "pai( isac, esau )"
+Outra contradição.
+Faz outro backtrack para 3) e continua procurando outros.
+Não acha, desempilha outro nível de volta para 2).
+Procura o que falta e não acha mais nada. Backtrack para 1).
+Não achou nada, devolve false.
+
+Vejamos o fatorial ingênuo!
+
+Simulação de "fatorial( 4, F )":
+
+?- fat(4, F).
+?- N1_1 is 4-1, fat(N1_1, F1_1), F is F1_1 * 4.
+    ?- fat(3, F1_1), F is F1_1 * 4.
+    ?- N1_2 is 3-1, fat(N1_2, F1_2), F1_1 is F1_2 * 3, F is F1_1 * 4.
+        ?- fat(2, F1_2), F1_1, is F1_2 * 3, F is F1_1 is F1_f * 4.
+        ...
+            ?- fat(1, F1_3), f1_2 is f1_3 * 2, (...).
+            ...
+                ?- fat(0, F1_4), F1_3 is F1_4 * 1, (...).
+                ... e depois entra em loop.
+
+Simulando a fat-smart:
+
+?- fat(4,F)
+?- fat(4,1,F)
+?- N1_1 is 4-1, Ret1_1 is 1 * 4, fat(N1_1, Ret1_1, F)
+    ?- fat(3, 4, F)
+    ?- N1_2 is 3-1, Ret1_2 is 4 * 3, fat(N1_2, Ret1_2, F)
+        ?- fat(2, 12, F)
+        ?- N1_3 is 2-1, Ret1_3 is 12 * 2, fat(N1_3, Ret1_3, F)
+            ?- fat(1, 24, F)
+            ?- N1_4 is 1-1, Ret1_4 is 24 * 1, fat(N1_4, Ret1_4, F)
+                ?- fat(0, 24, F)
+                ==> F = 24.
+
+
+        Modelo de depuração do Prolog.
+
+?- p( X, ..., Z ), ... .
+CALL    ->  [       ]   -> SUCCESS
+FAIL    <-  [_______]   <- REDO
+
+
+
