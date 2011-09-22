@@ -2,19 +2,18 @@
 ## SO ##
 ########
 
--> EP2. 
 
 ##############
 ## Eng Soft ##
 ##############
 
--> Projeto para o dia 09. 
+-> Projeto para algum dia.
 
 ##############
 ## Org Comp ##
 ##############
 
--> 
+-> Prova dia 30.
 
 ###############
 ## Automatos ##
@@ -26,7 +25,8 @@
 ## IA ##
 ########
 
--> ?
+-> EP dia 3.
+-> Prova dia 2.
 
 ############
 ## Outros ##

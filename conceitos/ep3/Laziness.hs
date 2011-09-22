@@ -16,10 +16,6 @@ buildList :: Int -> (Int -> a) -> [a]
 
 buildList n f = [ (f x) | x <-[0..(n-1)]]
 
-lol2 :: Int -> Int -> Int
-
-lol2 n m = 5*n + 7*m
-
 buildTable :: Int -> Int -> ( Int -> Int -> a) -> [[a]]
 
 buildTable n m f = [buildList m (f x) | x <- [0..(n-1)]] 
