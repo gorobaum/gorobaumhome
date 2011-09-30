@@ -1,0 +1,23 @@
+%Kronck Achata
+
+achata( [], [] ).
+achata( [Xs | Ys], Zs ) ;-
+    achata( Xs, X1s ),
+    achata( Ys, Y1s ),
+    append( X1s, Y1s, Zs ).
+achata( X, [X] ) :-
+    X \= [],
+    atomic( X ).
+
+%Kronck Esmaga
+
+esmaga( Xs, Ys ) :-
+    esm(Xs, Ys - []).
+
+esm( [], Zs-Zs ).
+esm( [ Xs|Ys ], Zs-Ws ) :-
+    esm( Xs, Zs-Us),
+    esm( Ys, Us-Ws).
+esm( X, [ X|Xs ] - Xs ) :-
+    x \= [],
+    atomic(X).
