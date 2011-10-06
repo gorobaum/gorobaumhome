@@ -27,4 +27,19 @@
     
     Note que o tipo e obrigatorio para o LaTeX, por isso ele esta entra {}.
 
-    --> 
+    --> Tamanho da Fonte
+        Podemos mudar o tamanho da fonte de um arquivo com as opcoes
+            10pt    11pt    12pt
+        Ou seja,
+            \documentclass[10pt]{article}
+        vai criar um artigo com 11pt de tamanho para as letras. O tamanho padrao do LaTeX e 10pt.
+    --> Tamanho do Papel
+        O LaTeX formata o seu texto baseando-se no papel no qual ele vai ser impresso. Para configurar isso, mudamos o 
+        tipo de papel no qual ele sera impresso. As opcoes sao:
+            letterpaper         11X8.5 in
+            legalpaper          14X8.5 in
+            executivepaper      10.5X7.25 in
+            a4paper             20.7X21 in
+            a5paper             21X14.8 in
+            b5paper             25X17.6 in
+        
