@@ -133,3 +133,12 @@
             \section*
         {EXEMPLO NA PAGINA 22}
 
+==> Tabelas de conteudo, Indice e Glossario
+    --> Tabela de conteudo
+        O LaTex consegue fazer uma tabela com o conteudo de seus documentos. Ela contêm o nome do capítulo e a página que ele
+        aparece. Temos 3 tabelas, a que contêm os capítulos, a que contêm as figuras e a que contêm as tabelas. Para criar
+        cada tabela, usamos os seguintes comandos
+             \tableofcontens \listoffigures \listoftables.
+    --> 
+        Para gerar índices no LaTeX, usamos os comandos \makeindex e \index  
+
