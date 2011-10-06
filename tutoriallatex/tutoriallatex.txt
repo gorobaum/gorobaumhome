@@ -17,8 +17,12 @@
        \documentclass{article}
        \begin{document}
        Esse e meu \emph{primeiro} texto formatado pelo LaTeX.
-       \end{document}
---> Estrutura de um .tex
+       \end{documenti}
+
+       
+== >Estrutura de um .tex
+
+--> Opcoes de um documento
     Vamos estudar a estrutura de um arquivo do LaTeX. Todo arquivo deve comecar com o comando \documentclass{...},
     assim especificando qual tipo de documento estamos fazendo. O LaTeX tem varios tipos de documentos, como livros,
     artigos e cartas.
@@ -42,4 +46,26 @@
             a4paper             20.7X21 in
             a5paper             21X14.8 in
             b5paper             25X17.6 in
+       
+    --> Formato da Pagina
+        Existe uma opcao para setar quantas colunas seu texto vai usar. A primeira seta para uma coluna, e a segunda para duas
+        ( como a maioriados dicionarios ). Essas opcoes sao
+            onecolumn ou twocolumn
+        o padrao e a onecolumn.
+
+        Outra opcao e usada para especificar se o documento vai ser impresso somente em um lado da folha ou nos dois. Essa opcao
+        e
+            oneside ou twoside
+        o padrao e oneside para article, report e letter, e twoside para book.
+
+        Quando comecamos um novo capitulo, o LaTeX sempre comeca ele numa nova pagina. Em book, um capitulo sempre comeca em paginas
+        impares. Podemos controlar isso usando a opcao
+            openany ou openright
+        o padrao e openright para livros e openany para o resto.
+
+        O LaTeX pode criar uma pagina em branco somente com o titulo do documento. Para controlar isso, usamos a opcao
+            notitlepage ou titlepage
+        o padrao e notitle para artigo e titlepage para o resto.
+
+--> Estilo da Pagina
         
