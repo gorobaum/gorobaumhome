@@ -1,0 +1,30 @@
+--> O que é LaTeX
+    LaTeX é um programa de formatação de texto e uma expansão do programa TeX, criado por Donald Knuth.
+    Mas o que é um programa de formatação de texto?
+    
+    A maioria dos processadores de texto cuidam de 4 estágios para preparar um texto: 
+    1. O texto entra no computador.
+    2. O texto é formatado em linhas, paragráfos e páginas.
+    3. O texto é impresso na tela.
+    4. O texto é impresso.
+    
+    O LaTeX e o TeX se preocupao somente com o segundo estagio do processamento.
+    Para formatar um texto usando o LaTeX, escrevemos o texto em um editor de texto e compilamos.
+
+    As funcionalidades do LaTeX podem ser expandidas usando packages, discutiremos isso mais pra frente.
+--> Um pequeno exemplo
+    Vamos ver como o LaTeX funciona com um pequeno exemplo. Digite o texto abaixo em qualquer editor de texto:
+       \documentclass{article}
+       \begin{document}
+       Esse e meu \emph{primeiro} texto formatado pelo LaTeX.
+       \end{document}
+--> Estrutura de um .tex
+    Vamos estudar a estrutura de um arquivo do LaTeX. Todo arquivo deve comecar com o comando \documentclass{...},
+    assim especificando qual tipo de documento estamos fazendo. O LaTeX tem varios tipos de documentos, como livros,
+    artigos e cartas.
+
+    Podemos dar opcoes para o tipo de documento, usando \documentclasse[opcoes]{tipo}.
+    
+    Note que o tipo e obrigatorio para o LaTeX, por isso ele esta entra {}.
+
+    --> 
