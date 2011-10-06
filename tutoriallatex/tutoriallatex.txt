@@ -20,7 +20,7 @@
        \end{documenti}
 
        
-== >Estrutura de um .tex
+==>Estrutura de um .tex
 
 --> Opcoes de um documento
     Vamos estudar a estrutura de um arquivo do LaTeX. Todo arquivo deve comecar com o comando \documentclass{...},
@@ -68,4 +68,68 @@
         o padrao e notitle para artigo e titlepage para o resto.
 
 --> Estilo da Pagina
+        Agora que o documento esta configurado, podemos configurar cada pagina individualmente se necessario. Cada pagina tem um cabecario e um
+        rodape. Para isso usamos o comando, que configura todas as paginas do documento,
+        \pagestyle{...}. O argumento obrigatorio pode ser 
+            plain   empty   headings    myheadings
+        que fazem:
+
+        plain - O cabecario fica vazio e o rodape contem o numero da pagina. Esse e o padrao para o article.
+
+        empty - Tanto o cabecario como o rodape ficam vazios.
+
+        headings - O rodape fica vazio e o cabecario contem o numero da pagina e o nome do capito ou secao ou subsecao.
         
+        myheadings - Igual ao headings, mas o que e mostrando no lugar do nome do capitulo pode ser configurado.
+
+        Para modificar uma pagina expecifica, usamos o comandos \thispagestyle{...}
+
+--> Numeracao da pagina
+        A numeracao da pagina pode ser configurada usando o comando \pagenumbering{..} que recebe os argumentos
+            arabic - Numerais arabicos
+            roman - Numerais romanos em minusculo
+            Roman - Numerais romanos em maiusculo
+            alph - Numerais por extenso em ingles em minusculo
+            Alph - Numerais por extenso em ingles em maiusculo
+
+        O padrao e arabic. Esse comando reseta a contagem de paginas, entao se usarmos o comando \pagenumbering{roman}
+        na pagina que seria a 43 ela passa a ser a i.
+
+--> Partes de um documento
+        Documentos sao, normalmente, divididos em capitulos, secoes e por ai vai. Temos um titulo e um resumo, dependendo
+        do documento.
+        --> Titulo
+            O titulo do documento usamos os comandos
+                \title{titulo}
+                \author{autor}
+                \date{data}
+
+                \maketitle
+
+            O ultimo comando e necessario.
+
+            Por padrao, tudo que foi colocado nesses comandos sao centralizados nas linhas. Podemos separar os autores usando o 
+            comando \and. Exemplo: ( PAGINA 21 )
+
+        --> Resumo
+            Nos documentos article e report, normalmente temos um resumo. Os comandos
+                \begin{abstract}
+                \end{abstract}
+            No documento article o abstract aparece na pagina depois do titulo, e no report, na pagina especial do titulo.
+
+--> Dividindo o documento
+        Podemos separar o nosso texto em capitulos, secoes, subsecoes, etc... usando os comandos
+            \chapter
+            \section
+            \subsection
+            \subsubsection
+            \paragraph
+            \subparagraph
+        Esse comandos seguem uma ordem hierarquica, onde o \chapter e o maior.
+
+        Esses comandos sao usaveis somente em book e article, e o \chapter somente em book.
+        Esses comandos colocam, automaticamente, o numero do capitulo ou secao. Subsubsecoes e subparagrafos nao sao numerados.
+        Para fazer umasecao sem numeracao usamos o comando
+            \section*
+        {EXEMPLO NA PAGINA 22}
+
