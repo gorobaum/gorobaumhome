@@ -49,16 +49,3 @@ ama( X, filha( Y ) ) :-
 interesseiro( ze ).
 rico( mane ).
 
-
-
-
-
-
-
-
-
-
-
-
-
-

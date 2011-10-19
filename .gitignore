@@ -2,3 +2,7 @@
 *.[ao]
 *.*~
 teste*
+*.aux
+*.log
+*.pdf
+*.toc

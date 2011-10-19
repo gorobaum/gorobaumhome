@@ -1,0 +1,40 @@
+\documentclass{article}
+\usepackage{amsmath}
+\begin{document}
+
+\section{4 - Lema do Bombeamento (ou Lema da iteracao) para linguagens reconheciveis}
+
+Quais das linguagens a seguir sao reconheciveis?
+
+\begin{align*}
+A = \{a^ib^i : i \geq 0\} \\
+B = \{\omega \in  \{a,b\}^* \colon |\omega|_a = |\omega|_b\} \\
+C = \{\omega \in  \{a,b\}^* \colon O n de ocorrencias do fator \emph{ab} em \omega e 
+        igual ao n de ocorrencias do fator \emph{ba} em \omega \}
+\end{align*}
+
+\begin{itemize}
+\item A linguagem A nao e reconhecivel. \\
+    Suponha que A seja reconhecivel. \\
+    Entao, existe um \emph{afd} $\mathcal{A} = (Q, \Sigma, \delta, s, F)$ tq $L(\mathcal{A}) = A.$ \\
+    Seja $ n = |Q| $ a ocorrencia 
+
+    ----TODO OMI----
+
+
+\subsection{Lema do Bombeamento}
+    Seja L uma linguagem reconhecivel.\\
+    Entao, existe um inteiro $n \ge 1$ tq para cada palavra $\omega \in L$, com 
+    $|\omega| \ge n$, existem palavras $x$, $y$ e $z$ tq $x = xyz$, $y \neq \lambda$,
+    $|xy| \le n$ e para todo $k \ge 0$, $xy^kz \in L$.
+
+    Prova: \\
+    Seja L uma linguagem reconhecivel.\\
+    Entao, existe um \emph{afd} $ \mathcal{A} = (Q, \Sigma, \delta, s, F)$ tq $L(\mathcal{A}) = L.$\\
+    Considere $n = |Q|$.\\
+    Seja em L nao existem palavras de comprimento $\ge n$, nada ha para provar.\\
+    Caso contrario, seja $\omega \in L$, com $|\omega| \ge n$.\\
+    Entao, $w = \sigma_1\sigma_2\dots\sigma_n\omega`$, com $\sigma_i \in \Sigma$ ( para $1 \le i \le n$ )
+    e $\omega \in \Sigma^+$
+\end{itemize}
+\end{document}

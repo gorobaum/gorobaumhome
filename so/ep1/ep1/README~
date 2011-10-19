@@ -1,0 +1,30 @@
+
+MAC0422 - Sistemas Operacionais
+2o Semestre de 2011
+
+Alunos:                         NUSP:
+    Thiago de Gouveia Nunes         6797289
+    Wilson Kazuo Mizutani           6797230
+
+Parte 1: Visual Shell
+
+    Se encontra na pasta shell/. É só usar o comando
+
+        $ make
+
+    ou
+
+        $ make debug
+
+    para compilar nosso shell. Ele será compilado como shell/bin/ep1.
+    Como especificado no enunciado, ele recebe o número de linhas a ser
+    mostrado:
+
+        $ bin/ep1 10 (por exemplo)
+
+    Por padrão, se nenhum número for especificado, ele usa o valor 20.
+
+Parte 2:
+
+    // TODO.
+
