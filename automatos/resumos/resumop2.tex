@@ -1,0 +1,40 @@
+\documentclass{article}
+\usepackage[brazilian]{babel}
+\usepackage[utf8]{inputenc}
+\usepackage{amsmath}
+\title{Resumo para a P2}
+\author{Thiago de Gouveia Nunes}
+\begin{document}
+\maketitle
+
+% Comandos
+\newcommand{\afd}{(\mathcal{Q},\Sigma,\delta,i,f)}
+\newcommand{\afndn}{(\mathcal{Q} \cup \{i,f\},\Sigma,\delta_\mathcal{B},i,\{f\})}
+% End_of_comandos
+
+\section{\emph{afnd} Normalizado}
+
+    Um \emph{afnd} $\mathcal{A} = \afd$ é normalizado se:
+    \begin{enumerate}
+        \item $ F = \{f\} $ e $ f \neq i $ ( para algum $ f \in \mathcal{Q} $)
+        \item $ \forall \sigma \in (\Sigma \cup \{\sigma\}), \delta(f, \sigma) = \emptyset$ 
+            (Não existem transições com \textbf{origem} em f)
+        \item $ \forall $ q $ \in \mathcal{Q}, \forall \sigma \in (\Sigma \cup \{\sigma\})$, i $\notin \delta(q,\sigma)$
+            (Não exisem transições com \textbf{término} em i) 
+    \end{enumerate}
+    
+\subsection{Lema 7}
+  Para cada \emph{afnd} $\mathcal{A}$ existe um \emph{afnd} normalizado $\mathcal{B}$ tal que $L(\mathcal{A}) = L(\mathcal{B}).$\\
+  \underline{Dem.} Seja $\mathcal{A} = \afd $ um \emph{afnd}. \\
+  Considere o \emph{afnd} $\mathcal{B} = \afndn$, onde $ \{i,j\} \cap \mathcal{Q} = \notin$ e $\delta_\mathcal{B}$ é definida por:
+  
+\begin{tabbing}
+    \hspace{1cm}    \= $ \delta_\mathcal{B}(i,\lambda) = \{S\} $ \\[3pt]
+                    \> $ \forall \sigma \in \Sigma, \delta_\mathcal{B}(i,\sigma) = \emptyset $ \\ [3pt]
+                    \> $ \forall q \in \mathcal{Q}, \forall \sigma \in \Sigma, \delta_\mathcal{B}(q,\sigma) = \delta(q,\sigma) $ \\[3pt]
+                    \> $ \forall q \in (\mathcal{Q}\setminus F), \delta_\mathcal{B}(q,\lambda) = \delta(q,\lambda) $ \\[3pt]
+                    \> 
+                    
+\end{tabbing}
+
+\end{document}
