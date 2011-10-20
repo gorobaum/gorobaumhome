@@ -1,0 +1,89 @@
+\documentclass{article}
+\usepackage[brazilian]{babel}
+\usepackage[utf8]{inputenc}
+\usepackage{amsmath}
+\usepackage{amsthm}
+\begin{document}
+\section{Lema do Bombeamento}
+    Seja L uma linguagem reconhecível.\\
+    Então, existe um inteiro $n \ge 1$ tal que para cada palavra $\omega \in L$, com 
+    $|\omega| \ge n$, existem palavras $x$, $y$ e $z$ tal que $x = xyz$, $y \neq \lambda$,
+    $|xy| \le n$ e para todo $k \ge 0$, $xy^kz \in L$.
+
+    \begin{proof}
+        Seja L uma linguagem reconhecível.
+        Então, existe um \emph{afd} $ \mathcal{A} = (Q, \Sigma, \delta, s, F)$ tal que $L(\mathcal{A}) = L.$
+        Considere $n = |Q|$.
+        Seja em L não existem palavras de comprimento $\ge n$, nada ha para provar.
+        Caso contrario, seja $\omega \in L$, com $|\omega| \ge n$.
+        Então, $w = \sigma_1\sigma_2\dots\sigma_n\omega`$, com $\sigma_i \in \Sigma$ ( para $1 \le i \le n$ )
+        e $\omega \in \Sigma^+$ TERMINAR
+    \end{proof}
+    
+\subsection{Exemplos}
+    \begin{itemize}
+        \item $B = \{w \in \{a,b\}^* : |w|_a = |w|_b \}$\\
+        Suponha que B seja reconhecível. \\
+        Então, $ B \cap L(a^*b^*) $ deveria ser reconhecível, pois $ L(a^*b^*) $ e rec. e $ Rec(\Sigma) $ e fechada
+        para a interseccao. \\
+        Mas, $ B \cap L(a^*b^*) = A $ que ja provamos que não e rec. Logo, obtemos uma contradição. Portanto, B não e rec.
+    \end{itemize}
+    
+    
+    
+\subsection{Mostre que as seg. ling. não são reconhecíveis}
+    \begin{enumerate}
+        \item $ L1 = \{xx: x \in \{a,b\}^* \} $\\
+                Suponha que L1 seja rec.\\
+                Seja n o inteiro fornecido pelo L.B. para L1.\\
+                Considere a palavra $w = a^nba^nb $.\\
+                Como $ w \in L1 $ e $ |w| > n $, o L.B. garante que existem palavras $x$, $y$ e $z$, tal que $ w = xyz $, $ y \neq \lambda $, $ |xy| \leq n $ e para todo $ k \geq 0 $, $ xy^kz \in L1 $.\\
+                Como $ y \neq \lambda $ e $ |xy| \leq n $, existem inteiros $ r \geq 0 $ e $ s > 0 $ ( $ r + s \leq n ) $ tal que $ x = a^r $, $ y = a^s $ e $ z = a^{n-r-s}ba^nb $.\\
+                Considere a palavra $ t = xy^3z = a^r(a^s)^3a^{n-r-s}ba^nb = a^{n+2s}ba^nb.$ Pelo L.B., $ t \in L1$.\\
+                Como $ |t| = 2(n+s+1) $ e $ s > 0 $, segue que o prefixo de $ t $ de comprimento $ \frac{|t|}{2} $ é $t_1 = a^{n+s+1} $ e o sufixo de $ t $ de comprimento $ \frac{|t|}{2} $ é $ t_2 = a^{s-1}ba^nb$.\\
+                Mas, como $ t_1 = t_2 $ e $ |t_1| = |t_2| $, resulta que $ t = t_1t_2 \notin L1 $.\\
+                O que é uma contradição. Portanto, $ L1 $ não é reconhecível.i
+        \item $ L2 = \{ {a^i}^2 : i \geq 0 \} $ \\
+                Suponha que L2 seja rec.\\
+                Seja n o inteiro fornecido pelo L.B. para L2.\\
+                Considere a palavra $w = {a^n}^2 $. \\
+                Como $ w \in L2 $ e $ |w| > n $,  o L.B. garante que existem palavras $x$, $y$ e $z$, tal que $ w = xyz $, $ y \neq \lambda $, $ |xy| \leq n $ e para todo $ k \geq 0 $, $ xy^kz \in L2 $.\\
+                Como $ y \neq \lambda $ e $ |xy| \leq n $, existem inteiros $ r \geq 0 $ e $s > 0 (r+s \leq n)$ tal que $ x = a^r $, $ y = a^s $ e $ z = a^{n^2-r-s} $.\\
+                Mas, $ n^2 < |t| = n^2+s \leq n^2 + n < n^2 + 2n +1 = (n+1)^2$.\\
+                Logo, $ |t| $ não pode ser quadrado perfeito.\\
+                Então, $ t \in L2 $. O que é uma contradição.\\
+                Portanto, L2 não é reconhecível.
+        \item $ L3 = \{ a^ib^j : i > j \geq 0 \} $\\
+                Suponha que L3 seja rec.\\
+                Seja n o inteiro fornecido pelo L.B. para L3.\\
+                Considere a palavra $w = a^{n+1}b^n $.\\
+                FAZER EM CASA?!?!
+        \item $ L4 = \{ a^ib^i : i,j \geq 0$ e $ i \neq j \} $ \\
+                PENSAR EM CASA?!?!?!?!?!\\
+                Sem usar o L.B. ...\\
+                Vimos que $ A = \{ a^ib^i : i \geq 0 \} $ não é rec.\\
+                $ \bar{L} = \{ a^ib^i : i,j \geq 0 $ e $ i = j \} \cup \{ w \in \{a,b\}^* : $ w tem pelo menos um fator $ ba \} $.\\
+                Suponha que $ L4 $ seja rec.\\
+                Então, $ \bar{L} $ também seria rec.\\
+                $ A $ não e rec.\\
+                Logo, $ \bar{L} \cap L(a^*b^*) $ também não e rec.\\
+                Mas, $ \bar{L} \cap L(a^*b^*) = A$ que não é rec. Chegamos a uma contradição.\\
+                Portanto, $ \bar{L} $ e $ L $ não são rec.\\
+    \end{enumerate}
+    
+    \textit{Obs:} $ L = \{ a^ib^jc^k : i, j, k \geq 0$ e $( i = 0$ ou $ j = k ) \} $.
+    \begin{itemize}
+        \item Prove que $ L $ satisfaz o L.B. $ ( n = 1 ) $
+        \item Vamos provar que $ L $ não é rec.\\
+        $ L = \{b\}^*\{c\}^* \cup \{a\}^+\{b^jc^k : j,k \geq 0 $ e $ j=k \} $.\\
+        Mostrar que $ L^R$ não é rec.\\
+        "Esboço:"\\
+        Suponha que $L$ é rec.\\
+        Então, $ L \cap \{a\}^+\{b\}^*\{c\}^* $ seja rec. Mas $ L \cap \{a\}^+\{b\}^*\{c\}^* = L^{'} $.\\
+        Prove que $ L^{'} = \{a\}^+\{b^jc^j : j \geq 0\} $ não é rec.\\
+        ( Use o L.B. para provar que Rec e fechada para inverso ).
+    \end{itemize}
+    \begin{enumerate}
+        \item[5.] $ L5 = \{a^p : p e primo \} $
+    \end{enumerate}
+ \end{document}

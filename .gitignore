@@ -4,5 +4,6 @@
 teste*
 *.aux
 *.log
-*.pdf
 *.toc
+*.dvi
+*.ps
