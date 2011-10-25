@@ -1,0 +1,125 @@
+\documentclass{article}
+\usepackage[brazilian]{babel}
+\usepackage[utf8]{inputenc}
+\usepackage{amsmath}
+\begin{document}
+
+\section{5 - Gramáticas e linguagens livres de contexto}
+    Uma gramática livre de contexto é $ G = ( V, \Sigma, \mathcal{P}, \mathcal{S} ) $, onde
+$ V $ é um alfabeto finito;\\
+$\Sigma$ ( conjunto de símbolos não terminais ) é um subconjunto não-vazio de V;\\
+$\mathcal{P}$ ( conjunto de produções ou regras de substituição ) é um subconunto 
+        finito de $ ( V - \Sigma )\times V^* $;\\
+e $ \mathcal{S} $ ( símbolo inicial ) é um elemento de $ ( V - \Sigma ) $.
+
+\underline{Obs}:
+\begin{enumerate}
+    \item $ ( V - \Sigma ) $é o conjunto de símbolosnão-terminais.
+    \item Para todo $ A \in ( V - \Sigma ) $ e $ \alpha \in V^* $, escrevemos $ A \rightarrow \alpha $, sempre que 
+            $ (A,\alpha) \in \mathcal{P} $.
+    \item Convencionamos que letras maiúsculas são símbolos não-terminais e que letras minúsculas são símbolos terminais.
+\end{enumerate}    
+\begin{itemize}
+    \item Para palavras $ \alpha $ e $ \beta $ em $ V^+ $, escrevemos $ \alpha \Longrightarrow_G \beta $, e dizemos
+            que $ \beta $ é \underline{derivável} de $ \alpha $ em um passo ( ou que $ \alpha $ deriva de $ \beta $ 
+            em um passo ) sse existem palavras $ \alpha_1, \alpha_2 $ e $ \gamma $ em $ V^* $ e $ A \in (V-\Sigma) $ tq\\
+            $ \alpha = \alpha_1A\alpha_2 $, $ \beta = \alpha_1\gamma\alpha_2 $ e $ A \rightarrow \gamma \in \mathcal{P} $.
+    \item Denotamos por $ \Rightarrow_G^* $ o fecho reflexivo e transitivo de $ \Rightarrow_G $.
+    \item Todo seq. da forma $ \alpha_0 \Rightarrow_G \alpha_1 \Rightarrow_g \dots \Rightarrow_g \alpha_n $,
+            para $ 0 \leq i \leq n $, é uma derivação de $ \alpha_n $ em $ G $, a partir de $ \alpha_0 $
+    \item Toda palavra de $ V^+ $ derivável a partir de $ \mathcal{S} $ ( símbolo inicial ) é 
+            chamada de forma sentencial.\\
+            Uma sentença é uma forma sentencial em $ \Sigma^* $.
+    \item A linguagem gerada por uma gramática G, denotada por $ L(G) $, é:
+        \begin{tabbing}
+            \hspace{1cm}\= $ L(G) = \{ x \in \Sigma^* : \mathcal{S} \Rightarrow_G^* x \} $
+        \end{tabbing}
+        Dizemos também que G gera cada palavra em $ L(G) $.
+    \item Uma linguagem $ L $ é livre de contexto se $ L = L(G) $, para alguma gramática livre de contexto G. 
+\end{itemize}
+
+\subsection{Exemplos}
+
+\begin{enumerate}
+    \item Seja $ G = ( V, \Sigma, \mathcal{P}, \mathcal{S} ) $ uma glc, onde:
+        \begin{tabbing}
+            \hspace{0.5cm}\= $ V = \{a,b,c\} $, $ \Sigma = \{a,b\} $ e\\
+                        \> $ \mathcal{P} = \{ \mathcal{S} \rightarrow_1 \lambda, 
+                                \mathcal{S} \rightarrow_2 a\mathcal{S}b \} $.\\[5pt]
+                        \> $ \mathcal{S} \Rightarrow_1 \lambda $\\
+                        \> $ \mathcal{S} \Rightarrow_2 a\mathcal{S}b $\\
+                        \> $ \mathcal{S} \Rightarrow_2 aa\mathcal{S}bb $ \\
+                        \> $ \mathcal{S} \Rightarrow_2 aaa\mathcal{S}bbb $ \\
+                        \> $ \mathcal{S} \Rightarrow_1 aaabbb $ \\
+        \end{tabbing}
+        $ L(G) = \{a^nb^n : n \geq 0 \} = L$
+        \begin{itemize}
+            \item[(a)] Para provar que $ L \subseteq L(G) $, vamos provar que:
+                \begin{tabbing}
+                    \hspace{0.5cm}\= $ \forall n \geq 0 $, $ \mathcal{S} \Rightarrow_G^* a^nb^n $, 
+                                        por indução em n.\\[5pt]
+                                \> \underline{Base}: $n = 0$, então $ a^0b^0 = \lambda $ e\\
+                                \> $ \mathcal{S} \Rightarrow \lambda $ ( pois $ \mathcal{S} \rightarrow 
+                                            \lambda \in \mathcal{P} ) $\\[5pt]
+                                \> Seja $ n \geq 0 $.\\[5pt]
+                                \> \underline{Hipótese de indução}: Suponha que $ \mathcal{S} 
+                                        \Rightarrow_G^* a^nb^n $\\[5pt]
+                                \> \underline{Passo da indução}: \\
+                                \> Seja $ \alpha = a^{n+1}b^{n+1} $\\
+                                \>  Então, $ \mathcal{S} \Rightarrow_2 a\mathcal{S}b 
+                                        \Rightarrow^* aa^nb^nb = a^{n+1}b^{n+1} = x $.\\
+                                \> \emph{h.i.} 
+                \end{tabbing}
+            \item[(b)] Para provar que $ L(G) \subseteq L $, vamos provar que:\\
+                        se  $ \mathcal{S} \Rightarrow_G^* x $ em $ n > 0 $ passos e $ x \in \Sigma^* $,\\
+                        então $ x = a^{n-1}b^{n-1} $. ( Por indução no número $n$ de passos da derivação )
+                    \begin{tabbing}
+                        \hspace{0.5cm}\= \underline{Base}:\\
+                                    \> Se $ \mathcal{S} \Rightarrow x $ em 1 passo e $ x \in \Sigma^* $, então só
+                                        podemos utilizar a produção $ \mathcal{S} \rightarrow \lambda $ em $\mathcal{P}.$\\
+                                    \> Logo, $ x = \lambda = a^0b^0 $.\\[5pt]
+                                    \> Seja $ n \geq 1 $.\\[5pt]
+                                    \> \underline{H.I.}: Suponha que se $ \mathcal{S} 
+                                        \Rightarrow_G^* x $ em $n$ passos e $ x \in \Sigma^* $,
+                                        então $ x = a^{n-1}b^{n-1} $.\\[5pt]
+                                    \> \underline{Passo da indução}: Então, $ \mathcal{S} \Rightarrow 
+                                        a\mathcal{S}b \Rightarrow^* x $.\\
+                                    \> Logo, existe $ y \in \Sigma^* $ tq $ x = ayb $ e $ \mathcal{S} \Rightarrow^* y $
+                                        em $n$ passos.\\
+                                    \> Pela \emph{h.i.}, segue que $ y = a^{n-1}b^{n-1}. $
+                    \end{tabbing}
+        \end{itemize}
+    \item $ L = \{ x \in \{a,b\}^* : x = x^R \} $ ( Exercício: Prove que L não é rec. )\\
+        glc $  G = ( V, \Sigma, \mathcal{P}, \mathcal{S} ) $, onde:
+        \begin{tabbing}
+            \hspace{0.5cm}\= $ V = \Sigma \cup \{\mathcal{S}\} $, $ \Sigma = \{a,b\} $ e\\
+                        \> $ \mathcal{P} = \{   \mathcal{S} \rightarrow_1 \lambda | a | b, 
+                                                \mathcal{S} \rightarrow_2 a\mathcal{S}b,
+                                                \mathcal{S} \rightarrow_2 b\mathcal{S}b \} $.\\
+        \end{tabbing}
+    \item $ L = \{a^ib^i : i \neq j \} $\\
+            $ L_1 = \{a^ib^i : i > j \} $\\
+            glc $ G_1 = ( V_1, \Sigma, \mathcal{P}_1, \mathcal{S}_1 ) $, onde:
+            \begin{tabbing}
+                \hspace{0.5cm}\= $ V_1 = \Sigma \cup \{\mathcal{S}_1,A,X\}, $\\
+                            \> $ \mathcal{P}_1 = \{ \mathcal{S}_1 \rightarrow AX,
+                                                    A \rightarrow a | aA,
+                                                    X \rightarrow \lambda | aXb \} $ \\ 
+            \end{tabbing}
+            $ L(G_1) = L_1 $.\\[5pt]
+            $ L_2 = \{a^ib^i : i < j \} $\\
+            glc $ G_2 = ( V_2, \Sigma, \mathcal{P}_2, \mathcal{S}_2 ) $, onde:
+            \begin{tabbing}
+                \hspace{0.5cm}\= $ V_2 = \Sigma \cup \{\mathcal{S}_2,B,X\}, $\\
+                            \> $ \mathcal{P}_2 = \{ \mathcal{S}_2 \rightarrow XB,
+                                                    B \rightarrow b | bB,
+                                                    X \rightarrow \lambda | aXb \} $ \\ 
+            \end{tabbing}
+            glc $ G = ( V, \Sigma, \mathcal{P}, \mathcal{S} ) $, onde:
+            \begin{tabbing}
+                \hspace{0.5cm}\= $ V = \Sigma \cup \{\mathcal{S},A,X,B\}, $\\
+                            \> $ \mathcal{P} = \mathcal{P}_1 \cup \mathcal{P}_2$ \\ 
+            \end{tabbing}
+
+\end{enumerate}
+\end{document}
