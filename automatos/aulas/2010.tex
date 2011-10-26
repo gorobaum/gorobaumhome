@@ -42,16 +42,19 @@
                 Considere a palavra $ t = xy^3z = a^r(a^s)^3a^{n-r-s}ba^nb = a^{n+2s}ba^nb.$ Pelo L.B., $ t \in L1$.\\
                 Como $ |t| = 2(n+s+1) $ e $ s > 0 $, segue que o prefixo de $ t $ de comprimento $ \frac{|t|}{2} $ é $t_1 = a^{n+s+1} $ e o sufixo de $ t $ de comprimento $ \frac{|t|}{2} $ é $ t_2 = a^{s-1}ba^nb$.\\
                 Mas, como $ t_1 = t_2 $ e $ |t_1| = |t_2| $, resulta que $ t = t_1t_2 \notin L1 $.\\
-                O que é uma contradição. Portanto, $ L1 $ não é reconhecível.i
+                O que é uma contradição. Portanto, $ L1 $ não é reconhecível.
         \item $ L2 = \{ {a^i}^2 : i \geq 0 \} $ \\
                 Suponha que L2 seja rec.\\
                 Seja n o inteiro fornecido pelo L.B. para L2.\\
                 Considere a palavra $w = {a^n}^2 $. \\
                 Como $ w \in L2 $ e $ |w| > n $,  o L.B. garante que existem palavras $x$, $y$ e $z$, tal que $ w = xyz $, $ y \neq \lambda $, $ |xy| \leq n $ e para todo $ k \geq 0 $, $ xy^kz \in L2 $.\\
-                Como $ y \neq \lambda $ e $ |xy| \leq n $, existem inteiros $ r \geq 0 $ e $s > 0 (r+s \leq n)$ tal que $ x = a^r $, $ y = a^s $ e $ z = a^{n^2-r-s} $.\\
-                Mas, $ n^2 < |t| = n^2+s \leq n^2 + n < n^2 + 2n +1 = (n+1)^2$.\\
-                Logo, $ |t| $ não pode ser quadrado perfeito.\\
-                Então, $ t \in L2 $. O que é uma contradição.\\
+                Como $ y \neq \lambda $ e $ |xy| \leq n $, existem inteiros $ r \geq 0 $ e 
+                    $s > 0 (r+s \leq n)$ tal que $ x = a^r $, $ y = a^s $ e $ z = a^{n^2-r-s} $.\\
+                Considere a palavra $ t = xy^2z = a^r(a^s)^2a^{n^2-r-s} = a^{n^2+s} $\\
+                Pelo L.B., $ t \in L2 $.\\
+                Mas, $ n^2 < |t| = n^2 + s \leq n^2 + n < n^2 + 2n + 1 = (n+1)^2 $\\
+                Logo, $ |t| $ não pode ser um quadrado perfeito.\\
+                Então, $ t \notin L2 $. O que é uma contradição.\\
                 Portanto, L2 não é reconhecível.
         \item $ L3 = \{ a^ib^j : i > j \geq 0 \} $\\
                 Suponha que L3 seja rec.\\
