@@ -1,0 +1,64 @@
+\documentclass{article}
+\usepackage[brazilian]{babel}
+\usepackage[utf8]{inputenc}
+\usepackage{amsmath}
+\usepackage{amssymb}
+\usepackage{hyperref}
+\begin{document}
+
+\underline{Teorema 1}: Classe das l. reconhecidas por \emph{a.p.n-det} = \\
+                        Classe das l. livres de contexto.
+\vspace{0.5cm}\\
+\underline{Lema 2}: Toda ling. livre de contexto é reconhecida por um \emph{a.p.n-det}.\\
+\underline{Prova}: Seja \emph{L} uma glc $ G = (V,\Sigma,\mathcal{P},\mathcal{S}) $ tq $ L(G) = L $.\\
+Considere \emph{a.p.n-det} estendido $ \mathcal{A} = (\mathcal{Q}, \Sigma, \Gamma, \delta, s, F) $, onde 
+$ \mathcal{Q} = \{p,q\} $, $\Gamma = V $, $ s = p $, $ F = \{q\} $ e a função de transição
+$ \delta : \mathcal{Q} \times (\Sigma \cup \{\lambda\}) \times (\Gamma \cup \{\lambda\} ) \rightarrow $ 
+    \{subconj. finitos de $ \mathcal{Q} \times \Gamma^+ $\}. definida por:
+    
+    \begin{enumerate}
+        \item $ \delta(p, \lambda, \lambda) = \{(q,S)\} $.
+        \item p/ cada $ A \in (V-\Sigma) $, $\delta(q, \lambda, A ) = \{ (q,\alpha) : A \rightarrow \alpha \in P \} $.
+        \item p/ cada $ a \in \Sigma $, $\delta(q, a, a ) = \{ (q,\lambda)\} $.
+    \end{enumerate}
+    
+    Prova-se que $ L(\mathcal{A}) = L(G) $.
+    
+\underline{Exemplo}: $ L = \{ a^ib^j : i > j \geq 0 \} $, glc $ G = (V,\Sigma, \mathcal{P}, \mathcal{S}) $,
+    onde $ \Sigma = \{a,b\} $, $ V = \{S,A\} \cup \Sigma $ e $ p = \{ S \rightarrow aSb | aA, A \rightarrow \lambda |aA\}$.
+    
+    %%IMAGENS DE AUTOMATOS E TABELAS LOUCAS CARA.
+\vspace{0.5cm}
+\underline{Lema 3}: Toda ling. reconhecida por um \emph{a.p.n-det} é uma ling. livre de contexto.
+\vspace{0.5cm}\\
+\underline{Teorema 4}: A intenscção de uma ling. livre de contexto com uma ling. reconhecivel é livre de contexto.\\
+\underline{Prova}: Sejam $L$ uma ling. l.c. e $R$ uma ling. rec.\\
+Então, existem uma \emph{a.p.n-det}, $ \mathcal{A} = (\mathcal{Q}_1,\Sigma,\Gamma,\delta_1,s_1,F_1) $, e
+    um \emph{a.f.det}, $ \mathcal{B} = (\mathcal{Q}_2,\Sigma,\delta_2,s_2,F_2) $, tq $L(\mathcal{A}) = L$ e 
+    $L(\mathcal{B}) = R$.\\
+Considere o \emph{a.p.n-det} $\mathcal{C} = (\mathcal{Q},\Sigma,\Gamma,\delta,s,F)$, onde 
+    $ \mathcal{Q} = \mathcal{Q}_1 \times \mathcal{Q}_2 $, $ s = (s_1,s_2) $, $ F = F_1 \times F_2 $ e 
+    a função de transição $ \delta : \mathcal{Q} \times (\Sigma \cup \{\lambda\}) \times (\Gamma \cup \{\lambda\} ) 
+        \rightarrow 2^{\mathcal{Q} \times (\Gamma \cup \{\lambda\}) } $ 
+    é definida por:\\
+$ \forall(p,q) \in \mathcal{Q}$, $ \forall \sigma \in \Sigma$, $\forall A \in (\Gamma \cup\{\lambda\})$,\\
+    $\delta((p,q), \sigma, A) = \{((p\prime,q\prime), B) \in \mathcal{Q} \times (\Gamma \cup\{\lambda\}): 
+        (p\prime,\mathcal{B}) \in \delta_1(p,\sigma,A)$ e $ q\prime = \delta_2(q,\sigma) \}$\\
+    $\delta((p,q), \lambda, A) = \{((p\prime,q\prime), B) \in \mathcal{Q} \times (\Gamma \cup\{\lambda\}): 
+        (p\prime,\mathcal{B}) \in \delta_1(p,\lambda,A)\}$.
+\vspace{0.3cm}\\
+Prova que $ L(\mathcal{C}) = L(\mathcal{A}) \cup L(\mathcal{B}) $.
+
+\section{\underline{Teorema do bombeamento p/ ling. livres de contexto}}
+\begin{itemize}
+    \item Sejam $ G = (V,\Sigma,\mathcal{P},\mathcal{S}) $, uma glc e $ \varphi(G) = max\{ |\alpha|: A \rightarrow \alpha
+        \in \mathcal{P} \}. $
+    \item A altura de uma árvore de derivação de $G$ é o comprimento do caminho de maior comprimento da raiz até uma folha.
+\end{itemize}
+
+\underline{Lema}: O resultado de qq árvore de derivação de $G$ com altura $h$ tem comprimento no máximo $\varphi(G)^h$.
+\vspace{0.3cm}\\
+\underline{Teorema do Bombeamento}: Seja $L$ uma ling. livre de contexto. Então, existe um inteiro $N$ tq para cada
+palavra $ w \in L$, com $ |w| \geq N $, existem palavras $ u, v, x, y e z $ tq $w = uvxyz$, $ vy \neq \lambda $,
+$ |vxy| \leq N$ e p/ todo $ k \geq 0$, $uv^kxy^kz \in L $.
+\end{document}

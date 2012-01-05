@@ -1,0 +1,125 @@
+\documentclass{article}
+\usepackage[brazilian]{babel}
+\usepackage[utf8]{inputenc}
+\usepackage{amsmath}
+\usepackage{amsthm}
+\usepackage{amssymb}
+% Comandos
+\newcommand{\gram}[1]{G_{#1} = (V_{#1},\Sigma,\mathcal{P}_{#1},\mathcal{S})}
+\newcommand{\afnd}{\mathcal{A} = (\mathcal{Q},\Sigma, \delta, s, F)}
+\begin{document}
+    \begin{enumerate}
+        \item[Exemplo 4.] Seja $\gram{1}$ uma glc, onde:
+            \begin{tabbing}
+                \hspace{0.5cm}  \= $ \Sigma = \{a,b\} $\\
+                                \> $ V = \Sigma \cup \{\mathcal{S}, A, B \} $\\
+                                \> e $ \mathcal{P}_1 = \{   \mathcal{S} \rightarrow AB,
+                                                            A \rightarrow a | aA,
+                                                            B \rightarrow \lambda|bB \} $.
+            \end{tabbing}
+            \underline{Obs}:
+            \begin{tabbing}
+                \hspace{0.5cm}  \= $ A \Rightarrow_G^* x \in \{a\}^+ $ \\
+                                \> $ B \Rightarrow_G^* x \in \{b\}^* $ \\
+                                \> $ S \Rightarrow_G^* w \in \{a\}^+\{b\}^* $
+            \end{tabbing}
+            $ L(G_1) = \{a\}^+\{b\}^* $.\\
+            Seja $\gram{2}$ uma glc, onde:
+            \begin{tabbing}
+                \hspace{0.5cm}  \= $ \Sigma = \{a,b\} $\\
+                                \> $ V = \Sigma \cup \{\mathcal{S}, B \} $\\
+                                \> e $ \mathcal{P}_2 = \{   \mathcal{S} \rightarrow aS | aB,
+                                                            B \rightarrow \lambda|bB \} $.
+            \end{tabbing}
+            $ L(G_1) = L(G_2) $??
+        \item[Exemplo 5.] $ L = \{ x \in \{a,b\}^* : |x|_b = 2 \} $ \\
+            glc $ \gram{1} $, onde :
+            \begin{tabbing}
+                \hspace{0.5cm}  \= $ \Sigma = \{a,b\} $\\
+                                \> $ V = \Sigma \cup \{ \mathcal{S}, A \} $\\
+                                \> $ \mathcal{P}_1 = \{ \mathcal{S} \rightarrow AbAbA,
+                                                        A \rightarrow \lambda | aA \} $.
+            \end{tabbing}
+            $L(G_1) = L $??\\
+            glc $ \gram{2} $, onde :
+            \begin{tabbing}
+                \hspace{0.5cm}  \= $ \Sigma = \{a,b\} $\\
+                                \> $ V = \Sigma \cup \{ \mathcal{S}, X, Y \} $\\
+                                \> $ \mathcal{P}_2 = \{ \mathcal{S} \rightarrow aS | bX,
+                                                        X \rightarrow aX | bY,
+                                                        Y \rightarrow \lambda|aY \} $.
+            \end{tabbing}
+            $L(G_2) = L $??\\
+        \item [Exemplo 6.] $ L = \{ x \in \{a,b\}^* : |x|_a $ é par $ \} $ \\
+            glc $\gram{}$, onde:
+            \begin{tabbing}
+                \hspace{0.5cm}  \= $ \Sigma\{a,b\} $\\
+                                \> $ V = \{\mathcal{S}, X \} $\\
+                                \> $ \mathcal{P} = \{  \mathcal{S} \rightarrow \lambda | bS | aX,
+                                                    X \rightarrow bX | aS \} $.
+            \end{tabbing}
+    \end{enumerate}
+
+\subsection{Gramática Regular}
+    Uma gramática regular é uma glc em que cada produção pode ser de uma das formas:
+    \begin{itemize}
+        \item $ A \rightarrow \lambda $ ou
+        \item $ A \rightarrow a $ ou
+        \item $ A \rightarrow aB $
+    \end{itemize}
+    onde $A$ e $B \in (V-\Sigma)$ e $ a \in \Sigma $. \\
+    \underline{Lema1} : \\
+    Uma linguagem L é reconhecível sse $ L = L(G) $ para alguma gramática regular G. \\
+    \underline{Prova}: \\[10pt]
+    $ ( \Rightarrow ) $ Seja $L$ uma ling. reconhecível.\\
+    Então, existe um \emph{afd} e acessível $\afnd$ tq $ L(\mathcal{A}) = L $. \\
+    Considere uma gramática regular $\gram{}$, onde:
+    \begin{tabbing}
+        \hspace{1cm}\= $ V = \Sigma \cup \{ X_q : q \in \mathcal{Q} \}$ , \\
+                    \> $ \mathcal{S} = X_s $, \\
+                    \> $ \mathcal{P} = \{ X_q \rightarrow aX_p : \delta(q,a) = p \} $ \\
+                    \> $\qquad \cup \{ X_q \rightarrow \lambda : q \in F \} $. 
+    \end{tabbing}
+    Usando a propriedade:
+    \begin{tabbing}
+        \hspace{1cm}\= $ \forall q \in \mathcal{Q}$, $ \forall x \in \Sigma* $, \\
+                    \> $ \delta(q,x) = p $ \\
+                    \> sse \\
+                    \> $ X_q \Rightarrow_G^* xX_p $
+    \end{tabbing}
+    Temos que $ L(G) = L(\mathcal{A}) $. \\[10pt]
+    $ ( \Leftarrow ) $ Seja $L$ uma ling. sobre $\Sigma$. \\
+    Suponha que exista uma g. reg. $\gram{}$ tq $ L = L(G) $.\\
+    Considere o afnd $\afnd$, onde $ \mathcal{Q} = (V-\Sigma) \cup \{\mathcal{Z}\}$, onde $ \mathcal{Z} \notin V $, \\
+    $ s = \mathcal{S}, $ \\
+    $ F = \{\mathcal{Z}\} $,
+    e $ \forall X \in (V-\Sigma)$, $ \forall \sigma \in ( \Sigma \cup \{\lambda\} )$, \\
+    $ \delta(X, \sigma ) =  \{ Y: X \rightarrow \sigma Y \in \mathcal{P} \} \cup 
+                            \{ \mathcal{Z} : X \rightarrow \sigma \in \mathcal{P} \}. $  
+    \begin{enumerate}
+        \item $ L = \{a\}^+\{b\}^* $ \\
+            afd acessível ENTOXAR IMAGEM \\
+            g. reg. $\gram{}$, onde:
+            \begin{tabbing}
+                \hspace{1cm}\= $ V = \Sigma \cup \{ X_{q_0},X_{q_1},X_{q_2},X_{q_3} \}$, \\
+                            \> $ \mathcal{S} = X_{q_0} $, \\
+                            \> $ \mathcal{P} = \{ X_{q_0} \rightarrow aX_{q_1} | bX_{q_3}$, \\
+                            \> $ \qquad X_{q_1} \rightarrow aX_{q_1} | bX_{q_2} | \lambda$, \\
+                            \> $ \qquad X_{q_2} \rightarrow bX_{q_2} | aX_{q_3} | \lambda$, \\
+                            \> $ \qquad X_{q_3} \rightarrow aX_{q_3} | bX_{q_3} \} $.
+            \end{tabbing}
+        \item   Gramática do Exemplo 4. \\
+                afnd $\afnd$, onde $ \mathcal{Q} = \{ S, B, \mathcal{Z} \} $, $ s = S $, $ F = \{\mathcal{Z}\} $. \\
+                ENTOXAR IMAGEM2.\\
+    \end{enumerate}
+    \underline{Corolário 2}: $ GReg(\Sigma) = Rec(\Sigma) $\\
+    \underline{Corolário 3}: $ Reg(\Sigma) \subsetneq LC(\Sigma) $\\
+    \begin{enumerate}
+        \item [Exemplo 7.] $ L = \{ $ palavras balanceadas de ('s e )'s $ \} $. \\
+        ( Exercício : $L$ não é reconhecível )\\
+        Para cada $x$ em $ \{ (, ) \} ^* $, definimos:
+        \begin{tabbing}
+            \hspace{0.5cm}  \=
+        \end{tabbing}    
+    \end{enumerate}
+\end{document}

@@ -1,0 +1,95 @@
+\documentclass{article}
+\usepackage[brazilian]{babel}
+\usepackage[utf8]{inputenc}
+\usepackage{amsmath}
+\usepackage{amssymb}
+\usepackage{hyperref}
+\begin{document}
+
+\newtheorem{thm}{Theorem}
+
+\begin{itemize}
+    \item Uma linguagem l.c. $L$ é não-ambígua se existe uma glc não-ambígua $G$ tq $ L = L(G) $.
+    \item Uma linguagem l.c. $L$ é inerentemente ambígua se toda glc que gera $L$ é ambígua.\\
+            \underline{Exemplo}: $ L = \{ a^ib^jc^k : i,j,k \geq 0 $ e $ ( i = j $ ou $ j = k ) \} $
+\end{itemize}
+    
+    \underline{Obs}: As palavras $ a^nb^nc^n $, para $ n \geq 0 $, são deriváveis de duas maneiras diferentes.
+    
+    \underline{Exercício}: Escreva uma glc que gera $L$.
+    
+    \underline{Teorema}: Não existe um algoritmo para decidir se uma linguagem livre de contexto é
+                            inerentemente ambígua ou não.\\
+                            
+    \underline{Teorema 4}: A classe das ling. l.c. é fechada para as operações de união, concatenação
+                            e estrela.
+                            
+    \underline{Prova}: Sejam $L_1$ e $L_2$ ling. l.c. sobre $\Sigma$. \\
+        Então, existem glc $ G_1 = (V_1, \Sigma, \mathcal{P}_1, \mathcal{S}_1 ) $, e 
+                            $ G_2 = (V_2, \Sigma, \mathcal{P}_2, \mathcal{S}_2 ) $, com $ V_1 \cap V_2 = \Sigma $
+                            tq  $ L(G_1) = L_1 $ e $ L(G_2) = L_2 $.
+    \begin{itemize}
+        \item União: \\ 
+                Considere a glc $ G = ( V, \Sigma, \mathcal{P}, \mathcal{S} ) $, onde \\
+                $ V = V_1 \cup V_2 \cup \{\mathcal{S}\} $ ( onde $ \mathcal{S} \notin V_1 \cup V_2 ) $ \\
+                e $ \mathcal{P} = \{ \mathcal{S} \rightarrow \mathcal{S}_1 | \mathcal{S}_2 \} \cup \mathcal{P}_1 \cup 
+                                    \mathcal{P}_2 $.\\
+                Prove que $ L(G) = L(G_1) \cup L(G_2) $.
+        \item Concatenação: \\
+                Considere a glc $ G = ( V, \Sigma, \mathcal{P}, \mathcal{S} ) $, onde \\
+                $ V = V_1 \cup V_2 \cup \{\mathcal{S}\} $ ( onde $ \mathcal{S} \notin V_1 \cup V_2 ) $ \\
+                e $ \mathcal{P} = \{ \mathcal{S} \rightarrow \mathcal{S}_1\mathcal{S}_2 \} \cup \mathcal{P}_1 \cup 
+                                    \mathcal{P}_2 $. \\
+                Prove que $ L(G) = L(G_1)L(G_2) $.
+        \item Estrela: \\
+                Considere a glc $ G = ( V, \Sigma, \mathcal{P}, \mathcal{S} ) $, onde \\
+                $ V = V_1 \cup \{\mathcal{S}\} $ ( onde $ \mathcal{S} \notin V_1 ) $ \\
+                e $ \mathcal{P} = \{ \mathcal{S} \rightarrow \lambda|\mathcal{S}_1\mathcal{S} \} \cup \mathcal{P}_1 $.\\
+                Prove que $ L(G) = (L(G_1))^* $.
+    \end{itemize}
+
+\section{Autômatos com pilha}
+    \begin{itemize}
+        \item Um autômato com pilha não-determinístico é um sistema
+                $\mathcal{A} = ( \mathcal{Q}, \Sigma, \Gamma, \delta, s, F ) $:
+                \begin{itemize}
+                    \item $\mathcal{Q}$ é o conjunto finito de \underline{estados};
+                    \item $\Sigma$ é o alfabeto dos \underline{símbolos de entrada};
+                    \item $\Gamma$ é o alfabeto dos \underline{símbolos da pilha};
+                    \item $ s \in \mathcal{Q} $ é o \underline{estado inicial};
+                    \item $ F \subseteq \mathcal{Q} $ é o conjunto de \underline{estados finais};
+                    \item $ \delta : \mathcal{Q} \times ( \Sigma \cup \{\lambda\} ) \times ( \Gamma \cup \{\lambda\} ) 
+                            \longrightarrow 2^{\mathcal{Q} \times ( \Gamma \cup \{\lambda\} ) } $ é a 
+                            \underline{função de transição}.
+                \end{itemize}
+    \item Uma computação num a.p.n-det. começa no estado inicial, com a entrada na fita e a pilha vazia.
+    \item Seja $ \mathcal{A} = ( \mathcal{Q}, \Sigma, \Gamma, \delta, s, F ) $ um a.p.n-det.\\
+            Se $(q, \mathcal{B} ) \in \delta(p,a,\mathcal{A}) $ 
+            ( $q =$ próximo estado, $\mathcal{B} =$ símbolo a ser empilhado ou $\lambda$,
+              $p =$ estado atual, $a =$ simbolo da entrada ou $\lambda$, $A =$ simbolo no topo da pilha ou $\lambda$ ).
+    \item Uma configuração de $\mathcal{A}$ é um elemento de $ \mathcal{Q} \times \Sigma^* \times \Gamma^* $ descrevendo:
+        \begin{itemize}
+            \item O estado inicial;
+            \item A parte não lida da entrada;
+            \item O conteúdo atual da pilha ( topo..base).
+        \end{itemize}
+    \item A configuração inicial para uma entrada $x$ deve ser $(s,x,\lambda)$.
+    \end{itemize}
+    
+    $\vdash_\mathcal{A}$ relaciona duas configurações consecutivas de $\mathcal{A}$.\\
+    Ex: se $ (q,B) \in \delta(p,a,A)$, com $ a \in (\Sigma \cup \{\lambda\} ) $ e $ A, B \in (\Gamma \cup \{\lambda\} ) $,
+        então para qualquer $y \in \Sigma^* $ e $ \gamma \in \Gamma^* $, $ ( p, ay, A\gamma ) \vdash_\mathcal{A} (q, y, B
+        \gamma )$.
+    
+    \begin{itemize}
+        \item $\vdash_\mathcal{A}^*$ denota o fecho reflexivo e transitivo de $\vdash_\mathcal{A}$.
+        \item Uma palavra $x \in \Sigma^*$ é aceita por $\mathcal{A}$ se existe uma computação tq\\
+            $ ( s, x, \lambda ) \vdash_\mathcal{A}^* ( q, \lambda, \lambda ) $ para algum $ q \in F$
+        \item A linguagem reconhecida por $\mathcal{A}$ por estado final e pilha vazia é:\\
+            $ L(\mathcal{A}) = \{ x \in \Sigma^* : x $ é aceita por $ \mathcal{A} \} $.
+    \end{itemize}
+    
+    \begin{itemize}
+        \item [\underline{Exemplo 1}:] $ L = \{ a^nb^n: n \geq 0 \} $
+    \end{itemize}
+\end{document}
